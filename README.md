@@ -14,7 +14,7 @@ REST API for Mensa Zürich Website + App
 ``python run.py``
 ### Common used API Links
 
-> **PATH**: /api/getMensaForTimespan?start=\<start>&end=\<end>
+**PATH**: /api/getMensaForTimespan?start=\<start>&end=\<end>
 >  
 > **Request Type**: GET
 >
