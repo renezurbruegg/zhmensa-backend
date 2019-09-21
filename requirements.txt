@@ -5,3 +5,4 @@ git+https://github.com/ansrivas/pylogging.git
 flask-jwt-simple[asymmetric_crypto]
 requests
 feedparser
+pymongo
