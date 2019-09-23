@@ -243,7 +243,8 @@ def loadUZHMensaForDay(uzhConnectionInfo, date, day, db):
 
     pos = 0
     for menu in parser.parseAndGetMenus(htmlConent):
-        print("inserting menu: " + menu.name + "in db")
+        menuName = menu.name.encode('utf-8').strip()
+        print("inserting menu: " + menuName + "in db")
         insert(
             {
                 "id": getUniqueIdForMenu(mensaName, menu.name, pos, uzhConnectionInfo["mealType"]),
