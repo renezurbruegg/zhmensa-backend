@@ -165,7 +165,7 @@ def loadUZHMensa(baseDate, uzhConnectionInfo, db):
 
     mensaCollection = db["mensas"]
     if(mensaCollection.count_documents({"name": name}, limit=1) == 0):
-        print("Found new mensa - " + str(name))
+        print("Found new mensa - " + str(name.encode('utf-8')))
         mensaCollection.insert_one({"name": name, "category": uzhConnectionInfo["category"], "openings": uzhConnectionInfo["opening"]})
 
     for day in range(1, 6):
@@ -243,7 +243,7 @@ def loadUZHMensaForDay(uzhConnectionInfo, date, day, db):
 
     pos = 0
     for menu in parser.parseAndGetMenus(htmlConent):
-        menuName = menu.name.encode('utf-8').strip()
+        menuName = str(menu.name.encode('utf-8'))
         print("inserting menu: " + menuName + "in db")
         insert(
             {
@@ -269,13 +269,14 @@ def main():
     mydb = client["zhmensa"]
 
     today = date.today()
+    print("-----------------starting script at: " + str(today) + "----------------------------")
     # Gets the start of the actual week.
     if (today.weekday() < 5):
         startOfWeek = today - timedelta(days=today.weekday())
         # Load all UZH Mensas. We can not get UZH Menus for next week
         i = 1
         for connDef in UZHConnectionDefinitions:
-            print("Collecting Mensa (" + str(i) + "/" + str(len(UZHConnectionDefinitions)) + ") : " + connDef["mensa"])
+            print("Collecting Mensa (" + str(i) + "/" + str(len(UZHConnectionDefinitions)) + ") : " + str(connDef["mensa"].encode('utf-8')))
             i = i + 1
             try:
                 loadUZHMensa(startOfWeek, connDef, mydb)

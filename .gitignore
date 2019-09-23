@@ -1,3 +1,4 @@
 
 *.log
-logs/all.log
+*.pyc
+logs/
