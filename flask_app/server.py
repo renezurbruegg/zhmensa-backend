@@ -200,6 +200,7 @@ def getPollsForPayload():
     list = []
 
     for res in collection.find({"_id" : {"$in":idFilter}}):
+        res["id"] = str(res["_id"])
         del res["_id"]
         list.append(res);
         #return  json.dumps(res ,indent=2, sort_keys=False), Status.HTTP_OK_BASIC
