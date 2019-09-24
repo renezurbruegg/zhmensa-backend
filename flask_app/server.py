@@ -173,36 +173,7 @@ class CustomJsonEncoder(json.JSONEncoder):
 
 
 
-
-
-@app.route('/api/getMensaForTimespan', methods=['GET', 'OPTIONS'])
-@crossdomain(origin = '*')
-def getMensaForTimespan():
-    """
-    ### API Path   `/api/getAllMensas`
-    ### Request Type: `GET`
-    Returns all mensas for the actual week
-    """
-    startDay = request.args.get('start')
-    endDay = request.args.get('end')
-
-
-    startTimeDate = datetime.strptime(startDay, '%Y-%m-%d').date()
-    endTimeDate = datetime.strptime(endDay, '%Y-%m-%d').date()
-
-    json_data = json.dumps( loadMensaFromDateToDate(mydb, startTimeDate, endTimeDate), cls=CustomJsonEncoder,indent=2, sort_keys=False)
-    return json_data, Status.HTTP_OK_BASIC;
-
-@app.route('/api/getMensaForCurrentWeek', methods=['GET', 'OPTIONS'])
-@crossdomain(origin = '*')
-def getMensaForCurrentWeek():
-    """
-    ### API Path   `/api/getAllMensas`
-    ### Request Type: `GET`
-    Returns all mensas for the actual week
-    """
-    json_data = json.dumps( loadMensaMapForCurrentWeek(mydb), cls=CustomJsonEncoder,indent=2, sort_keys=False)
-    return json_data, Status.HTTP_OK_BASIC;
+# -------- POLL API ROUTES -----------------------
 
 
 @app.route('/api/polls', methods=['POST', 'OPTIONS'])
@@ -254,24 +225,39 @@ def getPollForId(id):
     return "ID not found", Status.HTTP_BAD_NOTFOUND
 
 
+
+
+
+
 @app.route('/api/polls/vote/<id>', methods=['POST', 'OPTIONS'])
 @crossdomain(origin = '*')
 def addVoteForId(id):
     """
-    ### API Path   `/api/poll/<id>`
-    ### Request Type: `GET`
-    Returns the poll for the given id
+    ### API Path   `/api/polls/vote/<id>`
+    ### Request Type: `POST`
+    Performs a vote action on the given Poll.
+    ### Request Body:
+        "votes" : [
+            {
+                "mensaId": "<mensaId>",
+                "menuId": "<menuId>",
+                "voteType": "<positive/negative>"
+            } ,
+            { ... }
+        ],
+        "update": <true/false>`
     """
 
     if(request.json is None):
         return "Payload missing", Status.HTTP_BAD_REQUEST
 
     try:
-        mensaIds = request.json["mensaIds"]
+        votes = request.json["votes"]
+        update = request.json["update"]
     except KeyError as e:
         return "Payload corrupt", Status.HTTP_BAD_REQUEST
 
-    if(mensaIds is None):
+    if(votes is None):
         return "Payload corrupt", Status.HTTP_BAD_REQUEST
 
 
@@ -287,14 +273,101 @@ def addVoteForId(id):
         return "ID not found", Status.HTTP_BAD_NOTFOUND
 
     for option in result["options"]:
-        if(option["mensaId"]  in mensaIds):
-            option["votes"] = option["votes"] + 1
-
-    result["votecount"] = result["votecount"] + 1
+        for vote in votes:
+            if (vote["mensaId"] == option["mensaId"] and vote["menuId"] == option["menuId"]):
+                if(vote["voteType"] == "positive"):
+                    option["votes"] = option["votes"] + 1
+                elif(vote["voteType"] == "negative"):
+                    option["votes"] = max(0, option["votes"] - 1)
+    if (not update):
+        result["votecount"] = result["votecount"] + 1
 
     collection.update_one({"_id" : id}, {"$set" : result}, upsert = False)
 
     return getPollForId(str(id))
+
+
+
+
+@app.route('/api/polls/update/<id>', methods=['POST', 'OPTIONS'])
+@crossdomain(origin = '*')
+def updatePoll(id):
+    """
+    ### API Path   `/api/polls/update/<id>`
+    ### Request Type: `POST`
+    Updates a given Poll.
+
+    Payload Example:
+
+        {
+	       "title": "new Vote",
+	       "weekday":0,
+	       "mealType":"lunch",
+
+	       "options": [
+	       {
+	       "mensaId": "testMensa", "menuId": "testMenu"
+
+	       },
+	       {
+	          "mensaId": "testMensa", "menuId": "testMenu2"
+	       }
+	       ]
+        }
+    """
+
+
+    if(request.json is None):
+        return "Payload missing", Status.HTTP_BAD_REQUEST
+    payload = request.json
+
+    try:
+        title = str(payload["title"])
+        options = payload["options"]
+        weekday = payload["weekday"]
+        mealType = payload["mealType"]
+    except KeyError as e:
+        return "Payload corrupt", Status.HTTP_BAD_REQUEST
+
+    if(options is None):
+        return "Payload corrupt", Status.HTTP_BAD_REQUEST
+
+
+    collection = pollsDb["polls"]
+    result = None
+
+    id = ObjectId(str(id))
+
+    for res in collection.find({"_id" : id}):
+        result = res
+
+    if result is None:
+        return "ID not found", Status.HTTP_BAD_NOTFOUND
+
+    result["title"] = title
+    result["weekday"] = weekday
+    result["mealType"] = mealType
+
+    newOptions = []
+
+    for option in options:
+        foundOption = False
+
+        for storedOpt in result["options"]:
+            if(storedOpt["mensaId"] == option["mensaId"] and storedOpt["menuId"] == option["menuId"]):
+                newOptions.append(storedOpt)
+                foundOption = True
+                break
+
+        if(not foundOption):
+            newOptions.append({"mensaId" : option["mensaId"], "menuId" : option["menuId"], "votes" : 0});
+
+    result["options"] = newOptions
+
+    collection.update_one({"_id" : id}, {"$set" : result}, upsert = False)
+
+    return getPollForId(str(id))
+
 
 
 @app.route('/api/polls/create', methods=['POST', 'OPTIONS'])
@@ -302,8 +375,23 @@ def addVoteForId(id):
 def createNewPoll():
     """
     ### API Path   `/api/polls/create`
-    ### Request Type: `GET`
+    ### Request Type: `POST`
     Creates a new Poll for the given mensa id's
+    Payload Example:
+        {
+    	"title": "new Vote",
+    	"weekday":0,
+    	"mealType":"lunch",
+    	"options": [
+    		{
+    			"mensaId": "testMensa", "menuId": "testMenu"
+
+    		},
+    		{
+    			"mensaId": "testMensa", "menuId": "testMenu2"
+    		}
+    		]
+        }
     """
     # TODO saniitaze inputs
     payload = request.json;
@@ -323,8 +411,10 @@ def createNewPoll():
     if(title is None or options is None):
         return "Payload corrupt", Status.HTTP_BAD_REQUEST
     #{"ids" : ["5d56d4eb3d073cd0be878449","5d5ac35dcf51f20dbf43b2a8", "5d5ac367cf51f20dbf43b2a9"]}
+
+    optionsToStore = []
     for option in options:
-        option = {"mensaId" : option["mensaId"], "menuId" : option["menuId"], "votes" : 0}
+        optionsToStore.append({"mensaId" : option["mensaId"], "menuId" : option["menuId"], "votes" : 0})
         # try:
         #     option["votes"] = 0;
         #     if("mensaId" not in option):
@@ -334,11 +424,44 @@ def createNewPoll():
 
 
     collection = pollsDb["polls"]
-    id = collection.insert_one({"title" : title, "mealType" : mealType, "weekday" : weekday, "votecount" : 0,  "options": options})
+    id = collection.insert_one({"title" : title, "mealType" : mealType, "weekday" : weekday, "votecount" : 0,  "options": optionsToStore})
 
     json_data = json.dumps(payload ,indent=2, sort_keys=False)
     print(json_data)
     return "{ \"id\":\"" + str(id.inserted_id)+"\"}", Status.HTTP_OK_BASIC;
+
+
+# -------- END POLL API ROUTES -----------------------
+
+@app.route('/api/getMensaForTimespan', methods=['GET', 'OPTIONS'])
+@crossdomain(origin = '*')
+def getMensaForTimespan():
+    """
+    ### API Path   `/api/getAllMensas`
+    ### Request Type: `GET`
+    Returns all mensas for the actual week
+    """
+    startDay = request.args.get('start')
+    endDay = request.args.get('end')
+
+
+    startTimeDate = datetime.strptime(startDay, '%Y-%m-%d').date()
+    endTimeDate = datetime.strptime(endDay, '%Y-%m-%d').date()
+
+    json_data = json.dumps( loadMensaFromDateToDate(mydb, startTimeDate, endTimeDate), cls=CustomJsonEncoder,indent=2, sort_keys=False)
+    return json_data, Status.HTTP_OK_BASIC;
+
+@app.route('/api/getMensaForCurrentWeek', methods=['GET', 'OPTIONS'])
+@crossdomain(origin = '*')
+def getMensaForCurrentWeek():
+    """
+    ### API Path   `/api/getAllMensas`
+    ### Request Type: `GET`
+    Returns all mensas for the actual week
+    """
+    json_data = json.dumps( loadMensaMapForCurrentWeek(mydb), cls=CustomJsonEncoder,indent=2, sort_keys=False)
+    return json_data, Status.HTTP_OK_BASIC;
+
 
 
 
