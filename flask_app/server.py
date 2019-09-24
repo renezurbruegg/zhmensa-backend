@@ -377,7 +377,9 @@ def createNewPoll():
     ### API Path   `/api/polls/create`
     ### Request Type: `POST`
     Creates a new Poll for the given mensa id's
+
     Payload Example:
+
         {
     	"title": "new Vote",
     	"weekday":0,
