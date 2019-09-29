@@ -219,9 +219,9 @@ def getPollForId(id):
 
     collection = pollsDb["polls"]
 
-    for res in collection.find({"_id" :  ObjectId(id)}):res["id"] = str(res["_id"])
+    for res in collection.find({"_id" :  ObjectId(id)}):
+        res["id"] = str(res["_id"])
         del res["_id"]
-        list.append(res);
         return  json.dumps(res ,indent=2, sort_keys=False), Status.HTTP_OK_BASIC
 
     return "ID not found", Status.HTTP_BAD_NOTFOUND
