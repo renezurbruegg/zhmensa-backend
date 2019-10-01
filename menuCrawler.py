@@ -48,7 +48,14 @@ class MyHTMLParser(HTMLParser):
         None
 
     def parsePriceString(self, priceStr):
-        self.menu.prices = priceStr.replace("|", "").replace("CHF", "").strip().split("/")
+        print(priceStr)
+        priceHolder = priceStr.replace("\n","").replace("|", "").replace("CHF", "").strip().split("/");
+        print(priceHolder)
+        if(len(priceHolder) == 3):
+            self.menu.prices = {"student" : priceHolder[0], "staff": priceHolder[1] , "extern": priceHolder[2]}
+        else:
+            print("unknown price format" + str(priceStr) + " menu " + self.menu.name)
+            self.menu.prices = {}
 
     def handle_data(self, data):
         if(not self.h3TagReached):
@@ -62,13 +69,15 @@ class MyHTMLParser(HTMLParser):
 
         elif(self.currentTag == "span"):
             if(self.spanCounter == 1):
-                # first span object contains prices
+                # first span object contains price
                 self.parsePriceString(data)
+                self.spanCounter = self.spanCounter + 1
 
         elif(self.currentTag == "p"):
             if(self.pCounter == 1):
                 # first <p> contains description
-                self.menu.description = self.menu.description + data
+                if(data.strip() != ""):
+                    self.menu.description.append(data.replace("\n", "").strip())
 
             elif(self.pCounter == 2):
                 # second <p> contains allergene
@@ -394,11 +403,11 @@ class Menu:
         self.mensa = ""
         self.name = name
         self.id = ""
-        self.prices = []
+        self.prices = {}
         self.isVegi = False
         self.allergene = ""
         self.date = None
-        self.description = ""
+        self.description = []
 
 
 if __name__ == '__main__':
