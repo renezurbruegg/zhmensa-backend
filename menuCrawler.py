@@ -38,6 +38,11 @@ class MyHTMLParser(HTMLParser):
             self.pCounter = self.pCounter + 1
         elif(tag == "span"):
             self.spanCounter = self.spanCounter + 1
+        elif(tag=="img"):
+            for attName, attValue in attrs:
+                if(self.menu != None and attName == "alt" and (attValue == "vegetarian" or attValue == "vegan") ):
+                    print(self.menu.name +" : set to vegi" )
+                    self.menu.isVegi = True
 
     def parseAndGetMenus(self, htmlToParse):
         self.clearState()
@@ -82,6 +87,7 @@ class MyHTMLParser(HTMLParser):
             elif(self.pCounter == 2):
                 # second <p> contains allergene
                 self.menu.allergene = self.menu.allergene + data.replace("Allergikerinformationen:\n", "").replace("Allergikerinformationen:", "").strip()
+
 
 
 parser = MyHTMLParser()
@@ -373,7 +379,7 @@ def loadEthMensaForParams(lang, basedate, dayOffset, type, dayOfWeek, db):
                     "mensaName": name,
                     "prices": meal["prices"],
                     "description": meal["description"],
-                    "isVegi": False,
+                    "isVegi": isEthVegiMenu(meal),
                     "allergen": meal["allergens"],
                     "date": str(day),
                     "mealType": type,
@@ -383,6 +389,25 @@ def loadEthMensaForParams(lang, basedate, dayOffset, type, dayOfWeek, db):
             )
             pos = pos + 1;
 
+def isEthVegiMenu(meal):
+    isVegi = True; # Innocent until proven guilty ;)
+    if("grill" in meal["label"]):
+        return False;
+
+    type = meal["type"]
+    if(type != None):
+        type = type.lower();
+        if("vegan" in type or "vegetarian" in type or "vegetarisch" in type):
+            print("found vegi type in meal " + meal["label"])
+            return True;
+        if("fish" in type or "fisch" in type or "fleisch" in type or "meat" in type):
+            print("found meat type in meal " + meal["label"])
+            return False;
+
+    #print("could not decide vegi for menu " + meal["label"] + " going to analyze origins")
+    #print(meal)
+    origins= meal["origins"]
+    return len(origins) == 0;
 
 def loadEthMensa(startOfWeek, db):
     """ Loads all mensas for a week starting at startOfWeek. <br>
