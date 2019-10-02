@@ -359,8 +359,14 @@ def loadEthMensaForParams(lang, basedate, dayOffset, type, dayOfWeek, db):
 
 
         pos = 0
-        for meal in meals:
+        #if(name != "Tannenbar"):
+        #    continue;
 
+        #print("mensa: " + str(name))
+        for meal in meals:
+            #print("pos" + str(pos))
+            #print("meal:")
+            #print(meal)
             insert(
                 {
                     "id": getUniqueIdForMenu(name, meal["label"], pos, type),
@@ -375,6 +381,7 @@ def loadEthMensaForParams(lang, basedate, dayOffset, type, dayOfWeek, db):
                     "origin": "ETH"
                 }, db
             )
+            pos = pos + 1;
 
 
 def loadEthMensa(startOfWeek, db):
@@ -392,8 +399,9 @@ def hasDynamicMenuNames(mensaName):
 
 def getUniqueIdForMenu(mensa, menuName, position, mealType):
     """ Creates a unique ID for a given menu """
+
     if(hasDynamicMenuNames(str(mensa))):
-        return "'uni:" + mensa + "' pos: " + str(position) + " mealtype:" + mealType
+        return "'uni:" + mensa + "' pos: " + str(position) + " mealtype:" + mealType.upper()
     else:
         return "mensa:" + mensa + ",Menu:" + menuName
 
