@@ -398,10 +398,10 @@ def isEthVegiMenu(meal):
     if(type != None):
         type = type.lower();
         if("vegan" in type or "vegetarian" in type or "vegetarisch" in type):
-            print("found vegi type in meal " + meal["label"])
+            #print("found vegi type in meal " + meal["label"])
             return True;
         if("fish" in type or "fisch" in type or "fleisch" in type or "meat" in type):
-            print("found meat type in meal " + meal["label"])
+            #print("found meat type in meal " + meal["label"])
             return False;
 
     #print("could not decide vegi for menu " + meal["label"] + " going to analyze origins")
