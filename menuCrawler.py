@@ -41,7 +41,7 @@ class MyHTMLParser(HTMLParser):
         elif(tag=="img"):
             for attName, attValue in attrs:
                 if(self.menu != None and attName == "alt" and (attValue == "vegetarian" or attValue == "vegan") ):
-                    print(self.menu.name +" : set to vegi" )
+                    #print(self.menu.name +" : set to vegi" )
                     self.menu.isVegi = True
 
     def parseAndGetMenus(self, htmlToParse):
