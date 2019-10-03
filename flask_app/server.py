@@ -466,6 +466,20 @@ def getMensaForCurrentWeek():
     json_data = json.dumps( loadMensaMapForCurrentWeek(mydb), cls=CustomJsonEncoder,indent=2, sort_keys=False)
     return json_data, Status.HTTP_OK_BASIC;
 
+@app.route('/api/<lang>/<category>/getMensaForCurrentWeek',  methods=['GET', 'OPTIONS'])
+@crossdomain(origin = '*')
+def getMensaForLangCatCurrWeek(lang, category):
+    """
+    ### API Path   `/api/<lang>/<category>/getMensaForCurrentWeek`
+    ### Request Type: `GET`
+    Returns all mensas for the actual week that match a given category and contain menus in the given language.
+
+    if all is used as category, all categories are returned
+    """
+
+    json_data = json.dumps(loadMensaMapForCurrentWeek(mydb, lang, category), cls=CustomJsonEncoder,indent=2, sort_keys=False)
+
+    return json_data, Status.HTTP_OK_BASIC;
 
 
 
@@ -553,21 +567,27 @@ class Menu:
 
 
 
-def loadDayIntoMensaMap(date, db, mensaMap):
+def loadDayIntoMensaMap(date, db, mensaMap, lang):
     """Adds all Menus for the given date to the mensa Map"""
     collection = db["menus"]
     mensa = None
+    filterObj = {"date": str(date), "lang": lang}
+    print("loadDayIntoMensaMap lang" + lang)
 
-    for menu in collection.find({"date": str(date)}).sort("mensaName"):
+    for menu in collection.find(filterObj).sort("mensaName"):
         if((mensa is None or mensa.name != menu["mensaName"]) and menu["mensaName"] in mensaMap):
             mensa = mensaMap[menu["mensaName"]]
-        mensa.addMenuFromDb(menu, date, db)
+        if(mensa != None):
+            mensa.addMenuFromDb(menu, date, db)
 
 
-def getEmptyMensaMapFromDb(db):
+def getEmptyMensaMapFromDb(db,category):
     """ creates an empty mensa map containing empty mensa objects for each menesa"""
     mensaMap = {}
-    for mensa in db["mensas"].find():
+    filter = {}
+    if(category != "all"):
+        filter= {"category": category}
+    for mensa in db["mensas"].find(filter):
         mensaMap[mensa["name"]] = Mensa(mensa)
 
     return mensaMap
@@ -592,7 +612,7 @@ def loadMensaFromDateToDate(db, startDate, endDate):
     return loadMensaMapForGivenDatesFromDb(db, dates , None)
 
 
-def loadMensaMapForCurrentWeek(db):
+def loadMensaMapForCurrentWeek(db, lang = "de", category = "all"):
     """ Loads all Menus for the current week into a mensa map [mensaName <=> MensaObject] and returns it"""
     today = date.today()
 
@@ -604,15 +624,15 @@ def loadMensaMapForCurrentWeek(db):
 
     dates = [startOfWeek + timedelta(days=i) for i in range(5)]
 
-    return loadMensaMapForGivenDatesFromDb(db, dates , None)
+    return loadMensaMapForGivenDatesFromDb(db, dates , None, lang, category)
 
 
-def loadMensaMapForGivenDatesFromDb(db, datesList, mensaMap):
+def loadMensaMapForGivenDatesFromDb(db, datesList, mensaMap, lang="de", category="all"):
     """ Loads all menus for the given dates inside the given mensamap and returns it. If mensaMap is None a new one will be returned"""
     if(mensaMap is None):
-        mensaMap = getEmptyMensaMapFromDb(db)
+        mensaMap = getEmptyMensaMapFromDb(db, category)
 
     for mDate in datesList:
         print("loading menus for date:" + str(mDate))
-        loadDayIntoMensaMap(mDate, db, mensaMap)
+        loadDayIntoMensaMap(mDate, db, mensaMap, lang)
     return mensaMap

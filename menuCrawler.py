@@ -20,9 +20,14 @@ class MyHTMLParser(HTMLParser):
 
     def clearState(self):
         self.h3TagReached = False
+        self.inNutritionTable = False
         self.currentTag = ""
+        self.tdCounter = 0;
         self.spanCounter = 0
         self.pCounter = 0
+
+        self.currentNutritionFact = None;
+
         self.menuList = []
 
     def handle_starttag(self, tag, attrs):
@@ -40,17 +45,24 @@ class MyHTMLParser(HTMLParser):
             self.spanCounter = self.spanCounter + 1
         elif(tag=="img"):
             for attName, attValue in attrs:
-                if(self.menu != None and attName == "alt" and (attValue == "vegetarian" or attValue == "vegan") ):
+                if(self.menu != None and attName == "alt" and (attValue == "vegetarian" or attValue == "vegan" or attValue =="vegetarisch") ):
                     #print(self.menu.name +" : set to vegi" )
                     self.menu.isVegi = True
+        elif(tag=="tr"):
+            self.inNutritionTable = True
 
     def parseAndGetMenus(self, htmlToParse):
         self.clearState()
         self.feed(htmlToParse)
+
         return self.menuList
 
     def handle_endtag(self, tag):
-        None
+        if(tag=="tr"):
+            self.inNutritionTable = False
+
+        elif(tag =="td"):
+            self.tdCounter = self.tdCounter + 1;
 
     def parsePriceString(self, priceStr):
         print(priceStr)
@@ -88,6 +100,24 @@ class MyHTMLParser(HTMLParser):
                 # second <p> contains allergene
                 self.menu.allergene = self.menu.allergene + data.replace("Allergikerinformationen:\n", "").replace("Allergikerinformationen:", "").strip()
 
+        elif(self.currentTag == "td" and self.inNutritionTable):
+            data = self.trimData(data)
+            if(data != ""):
+                if(self.tdCounter % 2 == 0):
+                    self.currentNutritionFact = {"label" : data}
+                    self.menu.nutritionFacts.append(self.currentNutritionFact)
+                    # -> Name of nut fact
+                elif(self.currentNutritionFact != None):
+                    self.currentNutritionFact["value"] = data
+            #    None
+            #print("in table.")
+            #print(data)
+
+    def trimData(self, data):
+        if(data == None):
+            return data
+        else:
+            return data.replace("\n", "").strip()
 
 
 parser = MyHTMLParser()
@@ -184,7 +214,8 @@ def loadUZHMensa(baseDate, uzhConnectionInfo, db):
         mensaCollection.insert_one({"name": name, "category": uzhConnectionInfo["category"], "openings": uzhConnectionInfo["opening"]})
 
     for day in range(1, 6):
-        loadUZHMensaForDay(uzhConnectionInfo, baseDate + timedelta(days=day - 1), day, db)
+        loadUZHMensaForDay(uzhConnectionInfo, baseDate + timedelta(days=day - 1), day, "de", db)
+        loadUZHMensaForDay(uzhConnectionInfo, baseDate + timedelta(days=day - 1), day, "en", db)
 
 def bruteforce():
     print("bruteforce started")
@@ -224,10 +255,10 @@ def strawpoll():
     print(poll.json())
     # {'multi': False, 'title': 'Question', 'votes': [0, 0, 0], 'id': 16578754,
     #  'captcha': False, 'dupcheck': 'normal', 'options': ['option1', 'option2', 'option3']}
-def loadUZHMensaForDay(uzhConnectionInfo, date, day, db):
+def loadUZHMensaForDay(uzhConnectionInfo, date, day, lang, db):
     """ Loads all menus from a given uzhConnectionInfo and day and adds id to the mensa object."""
 
-    apiUrl = "https://zfv.ch/de/menus/rssMenuPlan?type=uzh2&menuId=" + str(uzhConnectionInfo["id"]) + "&dayOfWeek="+str(day)
+    apiUrl = "https://zfv.ch/" + lang +"/menus/rssMenuPlan?type=uzh2&menuId=" + str(uzhConnectionInfo["id"]) + "&dayOfWeek="+str(day)
     print("Day: " + str(day) + "/5")
 
     mensaName = uzhConnectionInfo["mensa"]
@@ -271,7 +302,9 @@ def loadUZHMensaForDay(uzhConnectionInfo, date, day, db):
                 "date": str(date),
                 "mealType": mealType,
                 "menuName": menu.name,
-                "origin": "UZH"
+                "origin": "UZH",
+                "nutritionFacts": menu.nutritionFacts,
+                "lang": lang
             }, db
         )
         pos = pos + 1
@@ -285,9 +318,11 @@ def main():
 
     today = date.today()
     print("-----------------starting script at: " + str(today) + "----------------------------")
+
     # Gets the start of the actual week.
     if (today.weekday() < 5):
         startOfWeek = today - timedelta(days=today.weekday())
+
         # Load all UZH Mensas. We can not get UZH Menus for next week
         i = 1
         for connDef in UZHConnectionDefinitions:
@@ -298,8 +333,12 @@ def main():
             except RuntimeError as e:
                 logger.error(e)
     else:
+        # It is a weeked. Lets clean up old menus from the db
+        lastWeek = today + timedelta(days= - today.weekday())
+        deleteMenusBeforeGivenDate(str(lastWeek), mydb)
         # It is saturday or sunday, load menus for next week.
         startOfWeek = today + timedelta(days=7 - today.weekday())
+
     # ETH Mensa can be loaded for next week
     loadEthMensa(startOfWeek, mydb)
 
@@ -384,7 +423,9 @@ def loadEthMensaForParams(lang, basedate, dayOffset, type, dayOfWeek, db):
                     "date": str(day),
                     "mealType": type,
                     "menuName": meal["label"],
-                    "origin": "ETH"
+                    "origin": "ETH",
+                    "nutritionFacts": [],
+                    "lang": lang
                 }, db
             )
             pos = pos + 1;
@@ -415,6 +456,8 @@ def loadEthMensa(startOfWeek, db):
     for i in range(0, 5):
         loadEthMensaForParams("de", startOfWeek,  i, "lunch", i, db)
         loadEthMensaForParams("de", startOfWeek,  i, "dinner", i, db)
+        loadEthMensaForParams("en", startOfWeek,  i, "lunch", i, db)
+        loadEthMensaForParams("en", startOfWeek,  i, "dinner", i, db)
 
 
 def hasDynamicMenuNames(mensaName):
@@ -431,6 +474,11 @@ def getUniqueIdForMenu(mensa, menuName, position, mealType):
         return "mensa:" + mensa + ",Menu:" + menuName
 
 
+def deleteMenusBeforeGivenDate(date, db):
+    print("date: " + date)
+    info = db["menus"].delete_many({"date": {"$lt": date}})
+    print("deleted: " + str(info.deleted_count))
+
 class Menu:
     def __init__(self, name):
         self.mensa = ""
@@ -441,6 +489,7 @@ class Menu:
         self.allergene = ""
         self.date = None
         self.description = []
+        self.nutritionFacts = []
 
 
 if __name__ == '__main__':
