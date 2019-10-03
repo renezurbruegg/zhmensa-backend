@@ -197,7 +197,8 @@ def insert(dictObject, db):
         {
             "id": dictObject["id"],
             "date": dictObject["date"],
-            "mensaName":dictObject["mensaName"]
+            "mensaName":dictObject["mensaName"],
+            "lang": dictObject["lang"]
         },
         {"$set" : dictObject},
          upsert = True
