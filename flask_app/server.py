@@ -573,6 +573,7 @@ def loadDayIntoMensaMap(date, db, mensaMap, lang):
     mensa = None
     filterObj = {"date": str(date), "lang": lang}
     print("loadDayIntoMensaMap lang" + lang)
+    print(filterObj)
 
     for menu in collection.find(filterObj).sort("mensaName"):
         if((mensa is None or mensa.name != menu["mensaName"]) and menu["mensaName"] in mensaMap):
