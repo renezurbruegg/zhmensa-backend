@@ -173,6 +173,22 @@ class CustomJsonEncoder(json.JSONEncoder):
 
 
 
+
+"""
+@app.route('/api/debug', methods=['POST', 'OPTIONS'])
+def debug():
+    filter = request.json;
+
+    list = []
+    for menu in mydb["menus"].find(filter):
+        del menu["_id"]
+        list.append(menu)
+
+    json_data = json.dumps(list, indent=2, sort_keys=False)
+    return json_data, Status.HTTP_OK_BASIC;
+"""
+
+
 # -------- POLL API ROUTES -----------------------
 
 
@@ -372,6 +388,7 @@ def updatePoll(id):
 
 
 
+
 @app.route('/api/polls/create', methods=['POST', 'OPTIONS'])
 @crossdomain(origin = '*')
 def createNewPoll():
@@ -454,6 +471,9 @@ def getMensaForTimespan():
 
     json_data = json.dumps( loadMensaFromDateToDate(mydb, startTimeDate, endTimeDate), cls=CustomJsonEncoder,indent=2, sort_keys=False)
     return json_data, Status.HTTP_OK_BASIC;
+
+
+
 
 @app.route('/api/getMensaForCurrentWeek', methods=['GET', 'OPTIONS'])
 @crossdomain(origin = '*')

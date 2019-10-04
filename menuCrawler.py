@@ -65,13 +65,13 @@ class MyHTMLParser(HTMLParser):
             self.tdCounter = self.tdCounter + 1;
 
     def parsePriceString(self, priceStr):
-        print(priceStr)
+        #print(priceStr)
         priceHolder = priceStr.replace("\n","").replace("|", "").replace("CHF", "").strip().split("/");
-        print(priceHolder)
+        #print(priceHolder)
         if(len(priceHolder) == 3):
             self.menu.prices = {"student" : priceHolder[0], "staff": priceHolder[1] , "extern": priceHolder[2]}
         else:
-            print("unknown price format" + str(priceStr) + " menu " + self.menu.name)
+            #print("unknown price format" + str(priceStr) + " menu " + self.menu.name)
             self.menu.prices = {}
 
     def handle_data(self, data):
@@ -203,6 +203,13 @@ def insert(dictObject, db):
         {"$set" : dictObject},
          upsert = True
     )
+    print("modifed: id: " + dictObject["id"] + " Date: " +  dictObject["date"] + " lang: " + dictObject["lang"])
+    if(res.upserted_id == None):
+        print("res: modified: " + str(res.modified_count) + " matched: " + str(res.matched_count))
+#        mod = mod + 1
+    else:
+#        ins = ins + 1
+        print("res: inserted")
 
 def loadUZHMensa(baseDate, uzhConnectionInfo, db):
     """ Loads all meals for all days of the given uzh connection info. <br>
@@ -260,7 +267,9 @@ def loadUZHMensaForDay(uzhConnectionInfo, date, day, lang, db):
     """ Loads all menus from a given uzhConnectionInfo and day and adds id to the mensa object."""
 
     apiUrl = "https://zfv.ch/" + lang +"/menus/rssMenuPlan?type=uzh2&menuId=" + str(uzhConnectionInfo["id"]) + "&dayOfWeek="+str(day)
+
     print("Day: " + str(day) + "/5")
+    print("Url: " + str(apiUrl))
 
     mensaName = uzhConnectionInfo["mensa"]
     mealType = uzhConnectionInfo["mealType"]
@@ -291,7 +300,6 @@ def loadUZHMensaForDay(uzhConnectionInfo, date, day, lang, db):
     pos = 0
     for menu in parser.parseAndGetMenus(htmlConent):
         menuName = str(menu.name.encode('utf-8'))
-        print("inserting menu: " + menuName + "in db")
         insert(
             {
                 "id": getUniqueIdForMenu(mensaName, menu.name, pos, uzhConnectionInfo["mealType"]),
@@ -314,9 +322,9 @@ def loadUZHMensaForDay(uzhConnectionInfo, date, day, lang, db):
 def main():
     """Main entry point of the app. """
     #
+
     client = MongoClient("localhost", 27017)
     mydb = client["zhmensa"]
-
     today = date.today()
     print("-----------------starting script at: " + str(today) + "----------------------------")
 
@@ -342,6 +350,8 @@ def main():
 
     # ETH Mensa can be loaded for next week
     loadEthMensa(startOfWeek, mydb)
+
+    #print("inserted: " + str(ins) + " modified: " + str(mod))
 
 
 def loadDayIntoMensaMap(date, db, mensaMap):
@@ -392,7 +402,6 @@ def loadEthMensaForParams(lang, basedate, dayOffset, type, dayOfWeek, db):
     #    for key in hours:
         for entry in  hours["mealtime"]:
             entry["mensa"] = name
-            print(entry)
             db["mealtypes"].update_one(
                 {
                     "type": entry["type"],
