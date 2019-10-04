@@ -202,8 +202,8 @@ def insert(dictObject, db):
         },
         {"$set" : dictObject},
          upsert = True
-    ) 
-    print("modifed: id: " + (dictObject["id"].encode('utf-8')) + " Date: " +  dictObject["date"] + " lang: " + dictObject["lang"])
+    )
+    print("modifed: id: " + str(dictObject["id"].encode('utf-8')) + " Date: " +  dictObject["date"] + " lang: " + dictObject["lang"])
     if(res.upserted_id == None):
         print("res: modified: " + str(res.modified_count) + " matched: " + str(res.matched_count))
 #        mod = mod + 1
