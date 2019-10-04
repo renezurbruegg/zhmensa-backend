@@ -594,12 +594,16 @@ def loadDayIntoMensaMap(date, db, mensaMap, lang):
     filterObj = {"date": str(date), "lang": lang}
     print("loadDayIntoMensaMap lang" + lang)
     print(filterObj)
+    print(mensaMap)
 
     for menu in collection.find(filterObj).sort("mensaName"):
-        if((mensa is None or mensa.name != menu["mensaName"]) and menu["mensaName"] in mensaMap):
-            mensa = mensaMap[menu["mensaName"]]
-        if(mensa != None):
-            mensa.addMenuFromDb(menu, date, db)
+        print("menu mensa Name: " + str( menu["mensaName"]))
+
+        if(menu["mensaName"] in mensaMap):
+            if(mensa is None or mensa.name != menu["mensaName"]):
+                mensa = mensaMap[menu["mensaName"]]
+            if(mensa != None):
+                mensa.addMenuFromDb(menu, date, db)
 
 
 def getEmptyMensaMapFromDb(db,category):
