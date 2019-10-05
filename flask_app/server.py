@@ -642,7 +642,7 @@ def loadMensaMapForCurrentWeek(db, lang = "de", category = "all"):
         startOfWeek = today - timedelta(days=today.weekday())
     else:
         # It is saturday or sunday, load menus for next weekl
-        startOfWeek = today + timedelta(days=-today.weekday())
+        startOfWeek = today + timedelta(days=-today.weekday() + 7)
 
     dates = [startOfWeek + timedelta(days=i) for i in range(5)]
 
