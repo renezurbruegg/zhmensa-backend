@@ -422,6 +422,12 @@ def loadEthMensaForParams(lang, basedate, dayOffset, type, dayOfWeek, db):
             #print("pos" + str(pos))
             #print("meal:")
             #print(meal)
+            allergens = meal["allergens"]
+            allergen_arr = []
+            for allergen in allergens:
+                allergen_arr.append(allergen["label"])
+
+
             insert(
                 {
                     "id": getUniqueIdForMenu(name, meal["label"], pos, type),
@@ -429,7 +435,7 @@ def loadEthMensaForParams(lang, basedate, dayOffset, type, dayOfWeek, db):
                     "prices": meal["prices"],
                     "description": meal["description"],
                     "isVegi": isEthVegiMenu(meal),
-                    "allergen": meal["allergens"],
+                    "allergen": allergen_arr,
                     "date": str(day),
                     "mealType": type,
                     "menuName": meal["label"],
