@@ -9,6 +9,7 @@ from html.parser import HTMLParser
 import feedparser
 from pymongo import MongoClient
 from datetime import timedelta
+import pickle
 
 logger = logging.getLogger(__name__)
 
@@ -120,6 +121,11 @@ class MyHTMLParser(HTMLParser):
             return data.replace("\n", "").strip()
 
 
+
+
+vegiList_de = []
+meatList_de = []
+meatmatch = []
 parser = MyHTMLParser()
 
 """ Mapping that maps each ETH Mensa to a given category """
@@ -326,6 +332,16 @@ def main():
     client = MongoClient("localhost", 27017)
     mydb = client["zhmensa"]
     today = date.today()
+
+    global vegiList_de
+    global meatList_de
+    with open ('vegilist.pickle', 'rb') as fp:
+        vegiList_de = pickle.load(fp)
+
+    with open ('meatlist.pickle', 'rb') as fp:
+        meatList_de = pickle.load(fp)
+
+
     print("-----------------starting script at: " + str(today) + "----------------------------")
 
     # Gets the start of the actual week.
@@ -348,8 +364,15 @@ def main():
         # It is saturday or sunday, load menus for next week.
         startOfWeek = today + timedelta(days=7 - today.weekday())
 
-    # ETH Mensa can be loaded for next week
-    loadEthMensa(startOfWeek, mydb)
+    for i in range(0,10):
+        # ETH Mensa can be loaded for next week
+        loadEthMensa(startOfWeek, mydb)
+        startOfWeek =startOfWeek + timedelta(days = -7)
+        meatmatch.sort()
+        with open ('meat.log', 'a+', encoding="utf-8") as fp:
+            for line in meatmatch:
+                fp.write(line + "\n");
+
 
     #print("inserted: " + str(ins) + " modified: " + str(mod))
 
@@ -448,12 +471,13 @@ def loadEthMensaForParams(lang, basedate, dayOffset, type, dayOfWeek, db):
 
 def isEthVegiMenu(meal):
     isVegi = True; # Innocent until proven guilty ;)
+
     if("grill" in meal["label"]):
         return False;
 
     type = meal["type"]
     if(type != None):
-        type = type.lower();
+        type = type.lower()
         if("vegan" in type or "vegetarian" in type or "vegetarisch" in type):
             #print("found vegi type in meal " + meal["label"])
             return True;
@@ -464,7 +488,32 @@ def isEthVegiMenu(meal):
     #print("could not decide vegi for menu " + meal["label"] + " going to analyze origins")
     #print(meal)
     origins= meal["origins"]
-    return len(origins) == 0;
+    if(len(origins) != 0):
+        return False
+
+    print("Vegi or not is unsure for meal: " + str(meal["label"]))
+    wordList = []
+    for line in meal["description"]:
+        wordList.extend(line.replace("  "," ").replace(","," ").replace("'","").replace('"',"").replace("&","").lower().split(" "))
+    print("wordlist")
+    print(wordList)
+
+    global meatmatch
+    v = 0
+    m = 0
+    for word in wordList:
+        if(word ==""):
+            continue
+        elif(word in meatList_de):
+            m += 1
+            if(not word in meatmatch):
+                meatmatch.append(word)
+
+        elif(word in vegiList_de):
+            v += 1
+    print("score: (m/v) : (" + str(m) + "/"+str(v)+")")
+    print("deciding for: " + str(v>=m))
+    return v >= m
 
 def loadEthMensa(startOfWeek, db):
     """ Loads all mensas for a week starting at startOfWeek. <br>
