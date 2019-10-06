@@ -493,9 +493,7 @@ def isEthVegiMenu(meal):
     wordList = []
     for line in meal["description"]:
         wordList.extend(line.replace("  "," ").replace(","," ").replace("'","").replace('"',"").replace("&","").lower().split(" "))
-    print("wordlist")
-    print(wordList)
-
+    
     global meatmatch
     v = 0
     m = 0
