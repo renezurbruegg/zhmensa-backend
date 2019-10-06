@@ -364,14 +364,12 @@ def main():
         # It is saturday or sunday, load menus for next week.
         startOfWeek = today + timedelta(days=7 - today.weekday())
 
-    for i in range(0,10):
-        # ETH Mensa can be loaded for next week
-        loadEthMensa(startOfWeek, mydb)
-        startOfWeek =startOfWeek + timedelta(days = -7)
-        meatmatch.sort()
-        with open ('meat.log', 'a+', encoding="utf-8") as fp:
-            for line in meatmatch:
-                fp.write(line + "\n");
+    # ETH Mensa can be loaded for next week
+    loadEthMensa(startOfWeek, mydb)
+    meatmatch.sort()
+    with open ('meat.log', 'a+', encoding="utf-8") as fp:
+        for line in meatmatch:
+            fp.write(line + "\n");
 
 
     #print("inserted: " + str(ins) + " modified: " + str(mod))
