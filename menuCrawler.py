@@ -489,11 +489,11 @@ def isEthVegiMenu(meal):
     if(len(origins) != 0):
         return False
 
-    print("Vegi or not is unsure for meal: " + str(meal["label"]))
+    print("Vegi or not is unsure for meal: " + str(meal["label"].encode('utf-8')))
     wordList = []
     for line in meal["description"]:
         wordList.extend(line.replace("  "," ").replace(","," ").replace("'","").replace('"',"").replace("&","").lower().split(" "))
-    
+
     global meatmatch
     v = 0
     m = 0
