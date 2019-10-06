@@ -7,6 +7,7 @@ import json
 import logging
 from pylogging import HandlerType, setup_logger
 import time
+from datetime import date
 import os
 import requests
 import sys
@@ -445,7 +446,9 @@ def createNewPoll():
 
 
     collection = pollsDb["polls"]
-    id = collection.insert_one({"title" : title, "mealType" : mealType, "weekday" : weekday, "votecount" : 0,  "options": optionsToStore})
+    today = date.today()
+
+    id = collection.insert_one({"title" : title, "mealType" : mealType, "weekday" : weekday, "votecount" : 0,  "options": optionsToStore, "creationdate": str(today)})
 
     json_data = json.dumps(payload ,indent=2, sort_keys=False)
     print(json_data)
