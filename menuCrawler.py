@@ -81,6 +81,7 @@ class MyHTMLParser(HTMLParser):
 
         if (self.currentTag == "h3"):
             self.menu = Menu(data)
+            self.menu.allergene = []
             self.menuList.append(self.menu)
             self.spanCounter = 0
             self.pCounter = 0
@@ -99,7 +100,7 @@ class MyHTMLParser(HTMLParser):
 
             elif(self.pCounter == 2):
                 # second <p> contains allergene
-                self.menu.allergene = self.menu.allergene + data.replace("Allergikerinformationen:\n", "").replace("Allergikerinformationen:", "").strip()
+                self.menu.allergene.extend(data.replace("Allergikerinformationen:\n", "").replace("Allergikerinformationen:", "").strip().split(","))
 
         elif(self.currentTag == "td" and self.inNutritionTable):
             data = self.trimData(data)
@@ -547,7 +548,7 @@ class Menu:
         self.id = ""
         self.prices = {}
         self.isVegi = False
-        self.allergene = ""
+        self.allergene = []
         self.date = None
         self.description = []
         self.nutritionFacts = []
