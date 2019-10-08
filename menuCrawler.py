@@ -141,60 +141,126 @@ mensaToCategoryMapping = {
 
 """ Contains all known API Endpoints """
 UZHConnectionDefinitions = [
-   {
-      "id": 148,
-      "mensa": "Obere Mensa B",
-      "mealType": "lunch",
-      "category": "UZH-Zentrum",
-      "meal_openings": None,"opening": None },
-   {
-      "id": 150,
-      "mensa": "Lichthof",
-      "mealType": "lunch",
-      "category": "UZH-Zentrum"
-      ,"meal_openings": None, "opening": None},
-   {
-      "id": 146,
-      "mensa": "Tierspital",
-      "mealType": "lunch",
-      "category": "UZH-Irchel"
-      ,"meal_openings": None,"opening": None },
-   {
-      "id": 180,
-      "mensa": "Irchel",
-      "mealType": "lunch",
-      "category": "UZH-Irchel"
-      ,"meal_openings": None,"opening": None },
-   {
-      "id": 151,
-      "mensa": "Zentrum Für Zahnmedizin",
-      "mealType": "lunch",
-      "category": "UZH-Zentrum"
-      ,"meal_openings": None,"opening": None },
-   {
-      "id": 143,
-      "mensa": "Platte",
-      "mealType": "lunch",
-      "category": "UZH-Zentrum"
-      ,"meal_openings": None,"opening": None },
-   {
-      "id": 346,
-      "mensa": "Rämi 59 (vegan)",
-      "mealType": "lunch",
-      "category": "UZH-Zentrum"
-      ,"meal_openings": None, "opening": None},
-   {
-      "id": 149,
-      "mensa": "Untere Mensa A",
-      "mealType": "dinner",
-      "category": "UZH-Zentrum"
-      ,"meal_openings": None,"opening": None },
-   {
-      "id": 256,
-      "mensa": "Irchel",
-      "mealType": "dinner",
-      "category": "UZH-Irchel"
-      ,"meal_openings": None, "opening": None}
+    {
+    "id": 148,
+    "mensa": "Obere Mensa B",
+    "mealType": "lunch",
+    "category": "UZH-Zentrum",
+    "meal_openings": None,
+    "opening": None
+  },
+  {
+    "id": 150,
+    "mensa": "Lichthof",
+    "mealType": "lunch",
+    "category": "UZH-Zentrum",
+    "meal_openings": None,
+    "opening": None
+  },
+  {
+    "id": 146,
+    "mensa": "Tierspital",
+    "mealType": "lunch",
+    "category": "UZH-Irchel",
+    "meal_openings": None,
+    "opening": None
+  },
+  {
+    "id": 147,
+    "mensa": "Untere Mensa A",
+    "mealType": "lunch",
+    "category": "UZH-Zentrum",
+    "meal_openings": None,
+    "opening": None
+  },
+  {
+    "id": 180,
+    "mensa": "Irchel",
+    "mealType": "lunch",
+    "category": "UZH-Irchel",
+    "meal_openings": None,
+    "opening": None
+  },
+  {
+    "id": 151,
+    "mensa": "Zentrum Für Zahnmedizin",
+    "mealType": "lunch",
+    "category": "UZH-Zentrum",
+    "meal_openings": None,
+    "opening": None
+  },
+  {
+    "id": 143,
+    "mensa": "Platte",
+    "mealType": "lunch",
+    "category": "UZH-Zentrum",
+    "meal_openings": None,
+    "opening": None
+  },
+  {
+    "id": 176,
+    "mensa": "Cafeteria Atrium",
+    "mealType": "all_day",
+    "category": "UZH-Irchel",
+    "meal_openings": None,
+    "opening": None
+  },
+  {
+    "id": 144,
+    "mensa": "Platte",
+    "mealType": "all_day",
+    "category": "UZH-Oerlikon",
+    "meal_openings": None,
+    "opening": None
+  },
+  {
+    "id": 346,
+    "mensa": "Rämi 59 (vegan)",
+    "mealType": "lunch",
+    "category": "UZH-Zentrum",
+    "meal_openings": None,
+    "opening": None
+  },
+  {
+    "id": 149,
+    "mensa": "Untere Mensa A",
+    "mealType": "dinner",
+    "category": "UZH-Zentrum",
+    "meal_openings": None,
+    "opening": None
+  },
+  {
+    "id": 184,
+    "mensa": "Binzmühle",
+    "mealType": "lunch",
+    "category": "UZH-Oerlikon",
+    "meal_openings": None,
+    "opening": None
+  },
+  {
+    "id": 241,
+    "mensa": "Cafeteria Seerose",
+    "mealType": "lunch",
+    "category": "UZH-Irchel",
+    "meal_openings": None,
+    "opening": None
+  },
+  {
+    "id": 256,
+    "mensa": "Cafeteria Seerose",
+    "mealType": "dinner",
+    "category": "UZH-Irchel",
+    "meal_openings": None,
+    "opening": None
+  },
+  {
+    "id": 391,
+    "mensa": "Cafeteria Cityport",
+    "mealType": "all_day",
+    "category": "UZH-Oerlikon",
+    "meal_openings": None,
+    "opening": None
+  }
 ]
 
 
