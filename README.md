@@ -10,9 +10,27 @@ REST API for Mensa Zürich Website + App
 
   ``pip install -r requirements.txt``
 
-## Run REST Server
+3. Make sure MongoDB is running on Port 27017.
+
+## Menu Crawler
+The file menuCrawler.py contains the logic to crawl every Menu from every Mensa for the current week. 
+
+It will store all parsed menus in the collection "menus" inside the "zhmensa" database. 
+
+This script should be run periodically to keep updating the stored menus.
+
+Execute it by typing:
+
+``python menuCrawler.py``
+
+## REST Server
+  The REST server gets started by executing the run.py script.
+  
 ``python run.py``
 
-## API 
-[Documentation](./api.md)
-  
+It provides different routes that will return Menus and Polls in JSON format. 
+
+For further information check out the 
+
+[API Documentation](./api.md)
+
