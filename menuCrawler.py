@@ -16,6 +16,10 @@ logger = logging.getLogger(__name__)
 setup_logger(log_directory='./logs', file_handler_type=HandlerType.ROTATING_FILE_HANDLER, allow_console_logging = True, console_log_level  = logging.DEBUG, max_file_size_bytes = 1000000)
 
 
+class MensaClosedException(Exception):
+   """Raised when parsing of a Uni mensa fails because it is closed"""
+   pass
+
 class MyHTMLParser(HTMLParser):
     """ Simple HTML Parser that parses the content of the RSS Feed obtained from UZH API """
 
@@ -55,6 +59,9 @@ class MyHTMLParser(HTMLParser):
     def parseAndGetMenus(self, htmlToParse):
         self.clearState()
         self.feed(htmlToParse)
+
+        if(len(self.menuList) == 0):
+            raise MensaClosedException
 
         return self.menuList
 
@@ -292,11 +299,20 @@ def loadUZHMensa(baseDate, uzhConnectionInfo, db):
     mensaCollection = db["mensas"]
     if(mensaCollection.count_documents({"name": name}, limit=1) == 0):
         print("Found new mensa - " + str(name.encode('utf-8')))
-        mensaCollection.insert_one({"name": name, "category": uzhConnectionInfo["category"], "openings": uzhConnectionInfo["opening"]})
+        mensaCollection.insert_one({"name": name, "category": uzhConnectionInfo["category"], "openings": uzhConnectionInfo["opening"], "isClosed" : True})
 
-    for day in range(1, 6):
-        loadUZHMensaForDay(uzhConnectionInfo, baseDate + timedelta(days=day - 1), day, "de", db)
-        loadUZHMensaForDay(uzhConnectionInfo, baseDate + timedelta(days=day - 1), day, "en", db)
+    try:
+        for day in range(1, 6):
+            loadUZHMensaForDay(uzhConnectionInfo, baseDate + timedelta(days=day - 1), day, "de", db)
+            loadUZHMensaForDay(uzhConnectionInfo, baseDate + timedelta(days=day - 1), day, "en", db)
+
+        mensaCollection.update_one({"name" : name}, {"$set" : {"name": name, "category":  uzhConnectionInfo["category"], "openings": uzhConnectionInfo["opening"], "isClosed" : False} }, upsert = True)
+
+    except MensaClosedException:
+        mensaCollection.update_one({"name" : name}, {"$set" : {"name": name, "category":  uzhConnectionInfo["category"], "openings": uzhConnectionInfo["opening"], "isClosed" : True} }, upsert = True)
+        print("Got Mensa Closed exception for Mensa: " + str(name.encode('utf-8')))
+
+
 
 def bruteforce():
     print("bruteforce started")
@@ -433,6 +449,7 @@ def main():
 
     # ETH Mensa can be loaded for next week
     loadEthMensa(startOfWeek, mydb)
+
     meatmatch.sort()
     with open ('meat.log', 'a+', encoding="utf-8") as fp:
         for line in meatmatch:
@@ -457,7 +474,7 @@ def loadEthMensaForParams(lang, basedate, dayOffset, type, dayOfWeek, db):
     day = basedate + timedelta(days=dayOffset)
     URL = "https://www.webservices.ethz.ch/gastro/v1/RVRI/Q1E1/meals/" + lang + "/" + str(day) + "/" + type
 
-    logger.info("Call url: " + URL)
+    print("Call url: " + URL)
     r = requests.get(url=URL)
     data = r.json()
 
@@ -587,16 +604,24 @@ def loadEthMensa(startOfWeek, db):
         loadEthMensaForParams("en", startOfWeek,  i, "lunch", i, db)
         loadEthMensaForParams("en", startOfWeek,  i, "dinner", i, db)
 
+    mensaNamesWithMeals = db["menus"].distinct("mensaName", {"origin":"ETH", "date" : {"$gte": str(startOfWeek)}})
+    allEthMenasList = db["mensas"].distinct("name", {"category": {"$in" : ["ETH-Zentrum","ETH-Hönggerberg"]}})
+
+    for mensa in allEthMenasList:
+        closed = not mensa in mensaNamesWithMeals
+        db["mensas"].update_one({"name" : mensa}, {"$set" : {"isClosed" : closed} }, upsert = True)
+
+
 
 def hasDynamicMenuNames(mensaName):
     """ Returns true if the given mensa changes the name of its menüs. (e.g. Tannebar always renames it's menus)"""
-    return mensaName in ["Tannenbar"]
+    return mensaName in ["Tannenbar", "Foodtrailer ETZ"]
 
 
 def getUniqueIdForMenu(mensa, menuName, position, mealType):
     """ Creates a unique ID for a given menu """
-
-    if(hasDynamicMenuNames(str(mensa))):
+    # sometimes ETH menus do not have a label if they stored it wrong in the database -.-
+    if(menuName == "" or hasDynamicMenuNames(str(mensa))):
         return "'uni:" + mensa + "' pos: " + str(position) + " mealtype:" + mealType.upper()
     else:
         return "mensa:" + mensa + ",Menu:" + menuName

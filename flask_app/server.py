@@ -513,6 +513,7 @@ class Mensa:
         self.weekdays = {}
         self.openings = jsonObject["openings"]
         self.category = jsonObject["category"]
+        self.isClosed = jsonObject["isClosed"]
 
 
     def setWeek(self, date):
@@ -612,6 +613,7 @@ def getEmptyMensaMapFromDb(db,category):
     filter = {}
     if(category != "all"):
         filter= {"category": category}
+
     for mensa in db["mensas"].find(filter):
         mensaMap[mensa["name"]] = Mensa(mensa)
 
