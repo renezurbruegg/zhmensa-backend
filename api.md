@@ -72,3 +72,9 @@ Returns all mensas for the actual week
 ### Request Type: `GET`
 Returns all mensas for the actual week
 ***
+### API Path   `/api/<lang>/<category>/getMensaForCurrentWeek`
+### Request Type: `GET`
+Returns all mensas for the actual week that match a given category and contain menus in the given language.
+
+if all is used as category, all categories are returned
+***
