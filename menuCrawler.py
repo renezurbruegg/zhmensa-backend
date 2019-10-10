@@ -352,6 +352,8 @@ def strawpoll():
     print(poll.json())
     # {'multi': False, 'title': 'Question', 'votes': [0, 0, 0], 'id': 16578754,
     #  'captcha': False, 'dupcheck': 'normal', 'options': ['option1', 'option2', 'option3']}
+
+
 def loadUZHMensaForDay(uzhConnectionInfo, date, day, lang, db):
     """ Loads all menus from a given uzhConnectionInfo and day and adds id to the mensa object."""
 
@@ -360,6 +362,10 @@ def loadUZHMensaForDay(uzhConnectionInfo, date, day, lang, db):
     print("Day: " + str(day) + "/5")
     print("Url: " + str(apiUrl))
 
+    loadUZHMensaForUrl(uzhConnectionInfo, apiUrl, db, lang, date)
+
+
+def loadUZHMensaForUrl(uzhConnectionInfo, apiUrl, db, lang, date):
     mensaName = uzhConnectionInfo["mensa"]
     mealType = uzhConnectionInfo["mealType"]
 
