@@ -214,7 +214,7 @@ UZHConnectionDefinitions = [
   },
   {
     "id": 144,
-    "mensa": "Platte",
+    "mensa": "Botanischer Garten",
     "mealType": "all_day",
     "category": "UZH-Oerlikon",
     "meal_openings": None,
@@ -273,6 +273,9 @@ UZHConnectionDefinitions = [
 
 def insert(dictObject, db):
     #Update entry if exists
+    print("inserting: ")
+    print(dictObject)
+
     res = db["menus"].update_one(
         {
             "id": dictObject["id"],
@@ -414,14 +417,7 @@ def loadUZHMensaForUrl(uzhConnectionInfo, apiUrl, db, lang, date):
         pos = pos + 1
 
 
-def main():
-    """Main entry point of the app. """
-    #
-
-    client = MongoClient("localhost", 27017)
-    mydb = client["zhmensa"]
-    today = date.today()
-
+def loadWordLists():
     global vegiList_de
     global meatList_de
     with open ('vegilist.pickle', 'rb') as fp:
@@ -430,6 +426,9 @@ def main():
     with open ('meatlist.pickle', 'rb') as fp:
         meatList_de = pickle.load(fp)
 
+def loadAllMensasForWeek(mydb, today):
+
+    loadWordLists()
 
     print("-----------------starting script at: " + str(today) + "----------------------------")
 
@@ -463,6 +462,15 @@ def main():
 
 
     #print("inserted: " + str(ins) + " modified: " + str(mod))
+def main():
+    """Main entry point of the app. """
+    #
+
+    client = MongoClient("localhost", 27017)
+    mydb = client["zhmensa"]
+    today = date.today()
+
+    loadAllMensasForWeek(mydb, today)
 
 
 def loadDayIntoMensaMap(date, db, mensaMap):
@@ -482,8 +490,9 @@ def loadEthMensaForParams(lang, basedate, dayOffset, type, dayOfWeek, db):
 
     print("Call url: " + URL)
     r = requests.get(url=URL)
-    data = r.json()
+    loadEthMensaForJson(r.json(), db, day, lang, type)
 
+def loadEthMensaForJson(data, db,  day, lang, type):
     for mensa in data:
         name = mensa["mensa"]
 
@@ -497,14 +506,6 @@ def loadEthMensaForParams(lang, basedate, dayOffset, type, dayOfWeek, db):
             category = "ETH-Hönggerberg"
         else:
             category = "unknown"
-
-        #             {
-        #    "title": "This is a test poll.",
-        #    "options": [{"mensaId":"1"},{"mensaId":"2"},{"mensaId":"3"}],
-        #    "multi": false
-        # }
-        # if(mensaCollection.count_documents({"name": name}, limit=1) == 0):
-        #     print("Found new mensa - " + str(name))
 
         mensaCollection.update_one({"name" : name}, {"$set" : {"name": name, "category": category, "openings" : hours["opening"]} }, upsert = True)
 
@@ -525,14 +526,7 @@ def loadEthMensaForParams(lang, basedate, dayOffset, type, dayOfWeek, db):
 
 
         pos = 0
-        #if(name != "Tannenbar"):
-        #    continue;
-
-        #print("mensa: " + str(name))
         for meal in meals:
-            #print("pos" + str(pos))
-            #print("meal:")
-            #print(meal)
             allergens = meal["allergens"]
             allergen_arr = []
             for allergen in allergens:
@@ -637,6 +631,27 @@ def deleteMenusBeforeGivenDate(date, db):
     print("date: " + date)
     info = db["menus"].delete_many({"date": {"$lt": date}})
     print("deleted: " + str(info.deleted_count))
+
+def addStringToMeatList(addList):
+    with open ('meatlist.pickle', 'rb') as fp:
+        meatlist = pickle.load(fp)
+
+    for item in addList:
+        meatlist.append(item.lower())
+    with open('meatlist.pickle', 'wb') as fp:
+        pickle.dump(meatlist, fp)
+
+def removeStringListFromMeatlist(removeList):
+    with open ('meatlist.pickle', 'rb') as fp:
+        meatlist = pickle.load(fp)
+
+    for item in removeList:
+        try:
+            meatlist.remove(item.lower()),
+        except:
+            print("item not found: " + item)
+    with open('meatlist.pickle', 'wb') as fp:
+        pickle.dump(meatlist, fp)
 
 class Menu:
     def __init__(self, name):
