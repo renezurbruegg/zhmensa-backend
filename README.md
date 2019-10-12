@@ -1,6 +1,6 @@
 # zhmensa-backend
 REST API for Mensa Zürich Website + App
-
+[![Build Status](https://www.travis-ci.org/renezurbruegg/zhmensa-backend.svg?branch=master)](https://www.travis-ci.org/renezurbruegg/zhmensa-backend)
 ## Install instructions
 1. Install Mongo DB
 
