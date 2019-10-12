@@ -6,3 +6,4 @@ flask-jwt-simple[asymmetric_crypto]
 requests
 feedparser
 pymongo
+pytest
