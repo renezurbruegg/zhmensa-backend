@@ -11,6 +11,7 @@ from pymongo import MongoClient
 from datetime import timedelta
 import pickle
 import re
+import json
 from pylogging import HandlerType, setup_logger
 
 logger = logging.getLogger(__name__)
@@ -134,10 +135,7 @@ class MyHTMLParser(HTMLParser):
                 elif(self.currentNutritionFact != None):
                     self.currentNutritionFact["value"] = data
                     percentage = self.parseNutritionEntryToPercentage(self.currentNutritionFact["label"], data)
-                    if(percentage is None):
-                        print("---------------------------NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOONe")
-                    else:
-                        print("percentage: " + str(percentage))
+                    if(percentage is not None):
                         self.currentNutritionFact["percentage"] = percentage
 
             #    None
@@ -159,7 +157,6 @@ class MyHTMLParser(HTMLParser):
         cleanStr = re.sub("[^\\d.]*", "", re.sub("\\(.+\\)", "", valueStr))
         try:
             amount = float(cleanStr)
-            print(label)
             if(label in DAYLI_USAGE_MAP.keys()):
                 return int(amount / DAYLI_USAGE_MAP.get(label) * 100)
             else:
@@ -502,8 +499,6 @@ def main():
     """Main entry point of the app. """
     #
 
-    loadWordLists()
-
     client = MongoClient("localhost", 27017)
     mydb = client["zhmensa"]
     today = date.today()
@@ -527,8 +522,20 @@ def loadEthMensaForParams(lang, basedate, dayOffset, type, dayOfWeek, db):
     URL = "https://www.webservices.ethz.ch/gastro/v1/RVRI/Q1E1/meals/" + lang + "/" + str(day) + "/" + type
 
     print("Call url: " + URL)
-    r = requests.get(url=URL)
-    loadEthMensaForJson(r.json(), db, day, lang, type)
+    loadTries = 0;
+    while(loadTries < 3):
+        try:
+            r = requests.get(url=URL)
+            loadEthMensaForJson(r.json(), db, day, lang, type)
+            break
+        except json.decoder.JSONDecodeError:
+            print("got JSONDEcodeError for url.")
+            print("retrying to get url (" + str(loadTries) + ")")
+            loadTries+=1
+        except requests.exceptions.ConnectionError:
+            print("got Connection Error")
+            print("retrying to get url (" + str(loadTries) + ")")
+            loadTries+=1
 
 def loadEthMensaForJson(data, db,  day, lang, type):
     for mensa in data:
