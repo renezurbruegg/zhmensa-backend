@@ -1,20 +1,35 @@
 # !/usr/bin/env python
 # -*- coding: utf-8 -*-
+# pylint: disable=C0103
 """ Loads different Menus from ETH and UZH and stores them in MongoDB"""
 import logging
-from pylogging import HandlerType, setup_logger
 from datetime import date
-import requests
 from html.parser import HTMLParser
+import requests
 import feedparser
 from pymongo import MongoClient
 from datetime import timedelta
 import pickle
+import re
+from pylogging import HandlerType, setup_logger
 
 logger = logging.getLogger(__name__)
 
 setup_logger(log_directory='./logs', file_handler_type=HandlerType.ROTATING_FILE_HANDLER, allow_console_logging = True, console_log_level  = logging.DEBUG, max_file_size_bytes = 1000000)
 
+DAYLI_USAGE_MAP = {
+    "Calories": 8700,
+    "Energie" : 8700,
+
+    "Total Fat":70,
+    "Fett":70,
+
+    "Kohlenhydrate":310,
+    "Total Carbohydrates":310,
+
+    "Eiweiss":50,
+    "Protein":50,
+    }
 
 class MensaClosedException(Exception):
    """Raised when parsing of a Uni mensa fails because it is closed"""
@@ -27,11 +42,11 @@ class MyHTMLParser(HTMLParser):
         self.h3TagReached = False
         self.inNutritionTable = False
         self.currentTag = ""
-        self.tdCounter = 0;
+        self.tdCounter = 0
         self.spanCounter = 0
         self.pCounter = 0
 
-        self.currentNutritionFact = None;
+        self.currentNutritionFact = None
 
         self.menuList = []
 
@@ -48,12 +63,12 @@ class MyHTMLParser(HTMLParser):
             self.pCounter = self.pCounter + 1
         elif(tag == "span"):
             self.spanCounter = self.spanCounter + 1
-        elif(tag=="img"):
+        elif(tag == "img"):
             for attName, attValue in attrs:
                 if(self.menu != None and attName == "alt" and (attValue == "vegetarian" or attValue == "vegan" or attValue =="vegetarisch") ):
-                    #print(self.menu.name +" : set to vegi" )
+                    # print(self.menu.name +" : set to vegi" )
                     self.menu.isVegi = True
-        elif(tag=="tr"):
+        elif(tag == "tr"):
             self.inNutritionTable = True
 
     def parseAndGetMenus(self, htmlToParse):
@@ -118,6 +133,13 @@ class MyHTMLParser(HTMLParser):
                     # -> Name of nut fact
                 elif(self.currentNutritionFact != None):
                     self.currentNutritionFact["value"] = data
+                    percentage = self.parseNutritionEntryToPercentage(self.currentNutritionFact["label"], data)
+                    if(percentage is None):
+                        print("---------------------------NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOONe")
+                    else:
+                        print("percentage: " + str(percentage))
+                        self.currentNutritionFact["percentage"] = percentage
+
             #    None
             #print("in table.")
             #print(data)
@@ -128,6 +150,22 @@ class MyHTMLParser(HTMLParser):
         else:
             return data.replace("\n", "").strip()
 
+
+    def parseNutritionEntryToPercentage(self, label, valueStr):
+        if(valueStr is None):
+            return None
+
+        # Parse 1'283 kj (120cal) to 1283
+        cleanStr = re.sub("[^\\d.]*", "", re.sub("\\(.+\\)", "", valueStr))
+        try:
+            amount = float(cleanStr)
+            print(label)
+            if(label in DAYLI_USAGE_MAP.keys()):
+                return int(amount / DAYLI_USAGE_MAP.get(label) * 100)
+            else:
+                return None
+        except:
+            return None
 
 
 
@@ -463,6 +501,8 @@ def loadAllMensasForWeek(mydb, today):
 def main():
     """Main entry point of the app. """
     #
+
+    loadWordLists()
 
     client = MongoClient("localhost", 27017)
     mydb = client["zhmensa"]

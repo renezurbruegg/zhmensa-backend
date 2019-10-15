@@ -64,16 +64,7 @@ def main():
     finally:
         pass
 
-    #
 
-def loadDayIntoMensaMap(date, db, mensaMap):
-    collection = db["menus"]
-    mensa = None
-
-    for menu in collection.find({"date":str(date)}).sort("mensaName"):
-        if(mensa is None or mensa.name != menu["mensaName"]):
-            mensa = mensaMap[menu["mensaName"]]
-        mensa.addMenuFromDb(menu, date)
 
 def loadMensaMapFromDb(db):
     today = date.today()
@@ -587,6 +578,7 @@ class Menu:
         self.isVegi = menuDbObject["isVegi"]
         self.allergene = menuDbObject["allergen"]
         self.date = menuDbObject["date"]
+        self.nutritionFacts = menuDbObject["nutritionFacts"]
 
 
 
@@ -607,7 +599,7 @@ def loadDayIntoMensaMap(date, db, mensaMap, lang):
                 mensa.addMenuFromDb(menu, date, db)
 
 
-def getEmptyMensaMapFromDb(db,category):
+def getEmptyMensaMapFromDb(db, category):
     """ creates an empty mensa map containing empty mensa objects for each menesa"""
     mensaMap = {}
     filter = {}
