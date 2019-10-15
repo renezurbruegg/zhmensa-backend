@@ -273,8 +273,6 @@ UZHConnectionDefinitions = [
 
 def insert(dictObject, db):
     #Update entry if exists
-    print("inserting: ")
-    print(dictObject)
 
     res = db["menus"].update_one(
         {
