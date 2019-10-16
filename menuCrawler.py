@@ -302,7 +302,14 @@ UZHConnectionDefinitions = [
     "category": "UZH-Oerlikon",
     "meal_openings": None,
     "opening": None
-  }
+  }, {
+     "id": 303,
+     "mensa": "PH Zürich (HB)",
+     "mealType": "lunch",
+     "category": "others",
+     "meal_openings": None,
+     "opening": None
+   }
 ]
 
 
@@ -352,9 +359,12 @@ def loadUZHMensa(baseDate, uzhConnectionInfo, db):
 
 def bruteforce():
     print("bruteforce started")
-    for i in range(0,500):
-        apiUrl = "https://zfv.ch/de/menus/rssMenuPlan?type=uzh2&menuId=" + str(i) + "&dayOfWeek=1"
-        mensaFeed = feedparser.parse(apiUrl)
+    for i in range(0,1000):
+        try:
+            apiUrl = "https://zfv.ch/de/menus/rssMenuPlan?type=uzh2&menuId=" + str(i) + "&dayOfWeek=1"
+            mensaFeed = feedparser.parse(apiUrl)
+        except ConnectionError:
+            print("error")
 
         if(len(mensaFeed.entries) != 0):
             entry = mensaFeed.entries[0]
