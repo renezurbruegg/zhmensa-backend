@@ -16,6 +16,9 @@ from checkMenuEntries import VALID_RSS_MENU_ENTRIES, VALID_JSON_MENU_ENTRIES_LUN
 
 import flask_app.server as server
 
+import menu_loader.uzh_menu_loader as uzh_loader
+
+
 TESTING_DATABASE = "zhmensa_testing"
 MENUS = "menus"
 MENSAS = "mensas"
@@ -46,7 +49,8 @@ def testReadStaticMenuUZH():
         "opening": None
       }
 
-    crawler.loadUZHMensaForUrl(UZH_CONNECTION_INFO, "./tests/rssMenuPlan.html", db, "de", "2019-10-10")
+    for menu in uzh_loader.loadUZHMensaForUrl(UZH_CONNECTION_INFO, "./tests/rssMenuPlan.html", db, "de", "2019-10-10"):
+        crawler.insert(menu, db)
 
     for entry in VALID_RSS_MENU_ENTRIES:
         record  = db[MENUS].find(entry)

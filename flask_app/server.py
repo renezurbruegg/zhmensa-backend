@@ -579,6 +579,9 @@ class Menu:
         self.allergene = menuDbObject["allergen"]
         self.date = menuDbObject["date"]
         self.nutritionFacts = menuDbObject["nutritionFacts"]
+        self.meta = {}
+        if("link" in menuDbObject):
+            self.meta["link"] = menuDbObject["link"]
 
 
 
