@@ -344,7 +344,7 @@ def getMeals(day, lang, date, mensaName):
             menuEntry = {
                 "id": meal["title"],
                 "mensaName":  mensaName,
-                "prices": [],
+                "prices": {},
                 "description":  ["Angebot: " + meal["offer"], "Standort " + meal["location"]],
                 "isVegi": True,
                 "allergen": [],
@@ -360,7 +360,7 @@ def getMeals(day, lang, date, mensaName):
             menuEntry = {
                 "id": meal["title"],
                 "mensaName":  mensaName,
-                "prices": [],
+                "prices": {},
                 "description":  ["Offer: " + meal["offer"], "Location " + meal["location"]],
                 "isVegi": True,
                 "allergen": [],
