@@ -185,6 +185,7 @@ mensaToCategoryMapping = {
 UZHConnectionDefinitions = [
     {
     "id": 148,
+    "id_en": 507,
     "mensa": "Obere Mensa B",
     "mealType": "lunch",
     "category": "UZH-Zentrum",
@@ -193,6 +194,7 @@ UZHConnectionDefinitions = [
   },
   {
     "id": 150,
+    "id_en": 508,
     "mensa": "Lichthof",
     "mealType": "lunch",
     "category": "UZH-Zentrum",
@@ -201,6 +203,7 @@ UZHConnectionDefinitions = [
   },
   {
     "id": 146,
+    "id_en":518,
     "mensa": "Tierspital",
     "mealType": "lunch",
     "category": "UZH-Irchel",
@@ -209,6 +212,7 @@ UZHConnectionDefinitions = [
   },
   {
     "id": 147,
+    "id_en":505,
     "mensa": "Untere Mensa A",
     "mealType": "lunch",
     "category": "UZH-Zentrum",
@@ -216,7 +220,8 @@ UZHConnectionDefinitions = [
     "opening": None
   },
   {
-    "id": 180,
+    "id": 142,
+    "id_en":180,
     "mensa": "Irchel",
     "mealType": "lunch",
     "category": "UZH-Irchel",
@@ -225,6 +230,7 @@ UZHConnectionDefinitions = [
   },
   {
     "id": 151,
+    "id_en":517,
     "mensa": "Zentrum Für Zahnmedizin",
     "mealType": "lunch",
     "category": "UZH-Zentrum",
@@ -233,6 +239,7 @@ UZHConnectionDefinitions = [
   },
   {
     "id": 143,
+    "id_en":520,
     "mensa": "Platte",
     "mealType": "lunch",
     "category": "UZH-Zentrum",
@@ -241,6 +248,7 @@ UZHConnectionDefinitions = [
   },
   {
     "id": 176,
+    "id_en":512,
     "mensa": "Cafeteria Atrium",
     "mealType": "all_day",
     "category": "UZH-Irchel",
@@ -249,6 +257,7 @@ UZHConnectionDefinitions = [
   },
   {
     "id": 144,
+    "id_en":519,
     "mensa": "Botanischer Garten",
     "mealType": "all_day",
     "category": "UZH-Oerlikon",
@@ -257,6 +266,7 @@ UZHConnectionDefinitions = [
   },
   {
     "id": 346,
+    "id_en":509,
     "mensa": "Rämi 59 (vegan)",
     "mealType": "lunch",
     "category": "UZH-Zentrum",
@@ -265,6 +275,7 @@ UZHConnectionDefinitions = [
   },
   {
     "id": 149,
+    "id_en":506,
     "mensa": "Untere Mensa A",
     "mealType": "dinner",
     "category": "UZH-Zentrum",
@@ -273,6 +284,7 @@ UZHConnectionDefinitions = [
   },
   {
     "id": 184,
+    "id_en":515,
     "mensa": "Binzmühle",
     "mealType": "lunch",
     "category": "UZH-Oerlikon",
@@ -281,6 +293,7 @@ UZHConnectionDefinitions = [
   },
   {
     "id": 241,
+    "id_en":513,
     "mensa": "Cafeteria Seerose",
     "mealType": "lunch",
     "category": "UZH-Irchel",
@@ -289,6 +302,7 @@ UZHConnectionDefinitions = [
   },
   {
     "id": 256,
+    "id_en":514,
     "mensa": "Cafeteria Seerose",
     "mealType": "dinner",
     "category": "UZH-Irchel",
@@ -297,6 +311,7 @@ UZHConnectionDefinitions = [
   },
   {
     "id": 391,
+    "id_en":516,
     "mensa": "Cafeteria Cityport",
     "mealType": "all_day",
     "category": "UZH-Oerlikon",
@@ -403,7 +418,10 @@ def strawpoll():
 def loadUZHMensaForDay(uzhConnectionInfo, date, day, lang, db):
     """ Loads all menus from a given uzhConnectionInfo and day and adds id to the mensa object."""
 
-    apiUrl = "https://zfv.ch/" + lang +"/menus/rssMenuPlan?type=uzh2&menuId=" + str(uzhConnectionInfo["id"]) + "&dayOfWeek="+str(day)
+    if(lang == "en" and "id_en" in uzhConnectionInfo.keys()):
+        apiUrl = "https://zfv.ch/" + lang +"/menus/rssMenuPlan?type=uzh2&menuId=" + str(uzhConnectionInfo["id_en"]) + "&dayOfWeek="+str(day)
+    else:
+        apiUrl = "https://zfv.ch/" + lang +"/menus/rssMenuPlan?type=uzh2&menuId=" + str(uzhConnectionInfo["id"]) + "&dayOfWeek="+str(day)
 
     print("Day: " + str(day) + "/5")
     print("Url: " + str(apiUrl))
