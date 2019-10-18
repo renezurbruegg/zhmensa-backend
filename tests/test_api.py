@@ -1,10 +1,11 @@
-import sys, os
+import os
+import sys
+
 myPath = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, myPath + '/../')
 
 import json
 import warnings
-import pytest
 
 from pymongo import MongoClient
 from datetime import date
@@ -17,14 +18,13 @@ from checkMenuEntries import VALID_RSS_MENU_ENTRIES, VALID_JSON_MENU_ENTRIES_LUN
 import flask_app.server as server
 
 import menu_loader.uzh_menu_loader as uzh_loader
+import menu_loader.eth_menu_loader as eth_loader
 
 
 TESTING_DATABASE = "zhmensa_testing"
 MENUS = "menus"
 MENSAS = "mensas"
 POLL_DATABASE = "zhmensa_testing_polls"
-
-crawler.loadWordLists()
 
 
 db = MongoClient("localhost", 27017)[TESTING_DATABASE]
@@ -62,13 +62,17 @@ def testReadStaticMenuETHLunch():
 
     with open('./tests/eth_lunch_2019_07_05.json', encoding="utf-8") as f:
         content = json.loads(f.read())
-        crawler.loadEthMensaForJson(content, db, "2019-07-05", "de", "lunch")
+        loader = eth_loader.Loader(db)
+        crawler.insert_all(loader.loadEthMensaForJson(content, "2019-07-05", "de", "lunch"), db)
 
     for entry in VALID_JSON_MENU_ENTRIES_LUNCH:
         if(db[MENUS].find_one(entry) is None):
             print("--------------------------")
             print("Could not find entry in db")
             print(entry)
+            print("found: ")
+            for e in db[MENUS].find({"id": str(entry['id'])}):
+                print(e)
             assert False
 
 
@@ -77,10 +81,11 @@ def testReadStaticMenuETHDinner():
 
     with open('./tests/eth_dinner_2019_07_05.json', encoding="utf-8") as f:
         content = json.loads(f.read())
-        crawler.loadEthMensaForJson(content, db, "2019-07-05", "de", "dinner")
+        loader = eth_loader.Loader(db)
+        crawler.insert_all(loader.loadEthMensaForJson(content, "2019-07-05", "de", "dinner"), db)
 
     for entry in VALID_JSON_MENU_ENTRIES_DINNER:
-        if(db[MENUS].find_one(entry) is None):
+        if db[MENUS].find_one(entry) is None:
             print("--------------------------")
             print("Could not find entry in db")
             print(entry)

@@ -1,36 +1,26 @@
 # !/usr/bin/env python
 # -*- coding: utf-8 -*-
 """Entry point for the server application."""
-import threading
-from bson.objectid import ObjectId
 import json
 import logging
-from pylogging import HandlerType, setup_logger
-import time
-from datetime import date
 import os
-import requests
-import sys
-from datetime import date
-from html.parser import HTMLParser
-import feedparser
-
-
-from flask_cors import CORS
-from pymongo import MongoClient
-from .config import CONFIG
 import traceback
-from flask import request, jsonify, current_app, Flask
-from flask_jwt_simple import (
-    JWTManager, jwt_required, create_jwt, get_jwt_identity
-)
-
-from .http_codes import Status
-from flask import make_response
-
+from datetime import date
 from datetime import timedelta, datetime
 from functools import update_wrapper
 
+from bson.objectid import ObjectId
+from flask import make_response
+from flask import request, current_app, Flask
+from flask_cors import CORS
+from flask_jwt_simple import (
+    JWTManager
+)
+from pylogging import HandlerType, setup_logger
+from pymongo import MongoClient
+
+from .config import CONFIG
+from .http_codes import Status
 
 logger = logging.getLogger(__name__)
 setup_logger(log_directory='./logs', file_handler_type=HandlerType.ROTATING_FILE_HANDLER, allow_console_logging = True, console_log_level  = logging.DEBUG, max_file_size_bytes = 1000000)
