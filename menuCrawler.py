@@ -3,7 +3,8 @@
 """ Loads different Menus from ETH and UZH and stores them in MongoDB"""
 import logging
 import pickle
-from datetime import date
+import time
+from datetime import date, datetime
 from datetime import timedelta
 
 import feedparser
@@ -13,10 +14,15 @@ from pymongo import MongoClient
 import menu_loader.eth_menu_loader as eth_loader
 import menu_loader.street_food_loader as sf_loader
 import menu_loader.uzh_menu_loader as uzh_loader
+import menu_loader.street_food_loader_html as html_streetfood_loader
+import menu_loader.custom_loader as custom_loader
+from menu_loader import meat_detector, claras_loader
 
 logger = logging.getLogger(__name__)
 setup_logger(log_directory='./logs', file_handler_type=HandlerType.ROTATING_FILE_HANDLER, allow_console_logging=True,
              console_log_level=logging.DEBUG, max_file_size_bytes=1000000)
+
+meatDetector = meat_detector.MeatDetector()
 
 
 def insert(dictObject, db):
@@ -24,11 +30,11 @@ def insert(dictObject, db):
     If an object with the current id, date, mensaName and lang allready exists, it will be updated """
 
     res = db["menus"].update_one(
-        {   "id": dictObject["id"],
-            "date": dictObject["date"],
-            "mensaName": dictObject["mensaName"],
-            "lang": dictObject["lang"]
-        }, {"$set": dictObject}, upsert=True)
+        {"id": dictObject["id"],
+         "date": dictObject["date"],
+         "mensaName": dictObject["mensaName"],
+         "lang": dictObject["lang"]
+         }, {"$set": dictObject}, upsert=True)
 
     print("modifed: id: " + str(dictObject["id"].encode('utf-8')) + " Date: " + dictObject["date"] + " lang: " +
           dictObject["lang"])
@@ -53,9 +59,11 @@ def loadUZHMensa(baseDate, uzhConnectionInfo, db):
 
     try:
         for day in range(1, 6):
-            for menu in uzh_loader.loadUZHMensaForDay(uzhConnectionInfo, baseDate + timedelta(days=day - 1), day, "de", db):
+            for menu in uzh_loader.loadUZHMensaForDay(uzhConnectionInfo, baseDate + timedelta(days=day - 1), day, "de",
+                                                      db):
                 insert(menu, db)
-            for menu in uzh_loader.loadUZHMensaForDay(uzhConnectionInfo, baseDate + timedelta(days=day - 1), day, "en", db):
+            for menu in uzh_loader.loadUZHMensaForDay(uzhConnectionInfo, baseDate + timedelta(days=day - 1), day, "en",
+                                                      db):
                 insert(menu, db)
 
         mensaCollection.update_one({"name": name}, {
@@ -67,8 +75,6 @@ def loadUZHMensa(baseDate, uzhConnectionInfo, db):
             "$set": {"name": name, "category": uzhConnectionInfo["category"], "openings": uzhConnectionInfo["opening"],
                      "isClosed": True}}, upsert=True)
         print("Got Mensa Closed exception for Mensa: " + str(name.encode('utf-8')))
-
-
 
 
 def loadAllMensasForWeek(mydb, today):
@@ -104,14 +110,76 @@ def loadAllMensasForWeek(mydb, today):
         startOfWeek = today + timedelta(days=7 - today.weekday())
 
     # ETH Mensa can be loaded for next week
-    m_eth_loader = eth_loader.Loader(mydb)
+    m_eth_loader = eth_loader.Loader(mydb, meatDetector)
     loadEthMensa(startOfWeek, mydb, m_eth_loader)
 
-    # Log matches from meat list to improve meat detection
-    m_eth_loader.meatmatch.sort()
+
+    meatList = meatDetector.getMatchedMeatWords()
+    meatList.sort()
+
     with open('meat.log', 'a+', encoding="utf-8") as fp:
-        for line in m_eth_loader.meatmatch:
-            fp.write(line + "\n");
+        for line in meatList:
+            fp.write(line + "\n")
+
+
+def loadKlaras():
+    """ Loads all menüs for Klaras Kitchen from facebook  <br>
+        THIS FUNCTION SLEEPS UNTIL KLARAS IS LOADED OR TOO MANY FAILED TRIES. """
+
+    client = MongoClient("localhost", 27017)
+    mydb = client["zhmensa"]
+    loadKlarasIntoDb(mydb)
+
+def loadKlarasIntoDb(db):
+    """ Loads all menüs for Klaras Kitchen from facebook  <br>
+        THIS FUNCTION SLEEPS UNTIL KLARAS IS LOADED OR TOO MANY FAILED TRIES. """
+
+    today = date.today()
+    if today.weekday() > 4:
+        print("Can not load klaras at weekends")
+        return
+
+    startOfWeek = date.today() - timedelta(days= today.weekday())
+    tries = 0
+    startHour = 9
+    maxTries = 12
+
+    while tries < maxTries:
+        tries += 1
+
+        print("Loading Claras (" + str(tries) + "/" + str(maxTries) + ")")
+
+        klaras_de = claras_loader.Loader(startOfWeek, "de")
+        klaras_en = claras_loader.Loader(startOfWeek, "en")
+
+        for e in klaras_de.getAvailableMensas():
+            insert_mensa(e, db)
+            insert_all([menu.toDict() for menu in klaras_de.getMenusForMensa(e)], db)
+
+        foundMenu = klaras_de.hasMenuForDay(date.today())
+
+        if foundMenu:
+            for e in klaras_en.getAvailableMensas():
+                insert_all([menu.toDict() for menu in klaras_en.getMenusForMensa(e)], db)
+            return
+
+        if datetime.now().hour < startHour:
+            print("started script before " + str(startHour) + ". Could not find any menu. Sleeping until " + str(startHour))
+
+            while datetime.now().hour < startHour:
+                time.sleep(60*5)
+        else:
+            time.sleep(60 * 20)
+
+        print("Trying again : (" + str(tries) + "/" + str(maxTries) + ")")
+
+    print("could not load claras. Stopping execution")
+
+def insert_mensa(entry: custom_loader.CustomMensaEntry, db):
+    db["mensas"].update_one({"name": entry.name},
+                            {"$set": {"name": entry.name, "category": entry.category,
+                                      "openings": entry.openings, 'isClosed': not entry.isOpen}},
+                            upsert=True)
 
 
 def loadEthStreetFoodForParams(lang, basedate, day, db):
@@ -150,10 +218,25 @@ def loadEthMensa(startOfWeek, db, m_eth_loader):
         insert_all(m_eth_loader.loadEthMensaForParams("en", startOfWeek, i, "lunch", i), db)
         insert_all(m_eth_loader.loadEthMensaForParams("en", startOfWeek, i, "dinner", i), db)
 
-        loadEthStreetFoodForParams("de", startOfWeek, i, db)
-        loadEthStreetFoodForParams("en", startOfWeek, i, db)
+    # loadEthStreetFoodForParams("de", startOfWeek, i, db)
+    # loadEthStreetFoodForParams("en", startOfWeek, i, db)
+
+    streetFoodLoader = html_streetfood_loader.Loader("de", startOfWeek, meatDetector)
+
+    for mensa in streetFoodLoader.getAvailableMensas():
+        insert_mensa(mensa, db)
+        insert_all(streetFoodLoader.getMenusForMensa(mensa), db)
+    time.sleep(5)
+
+    streetFoodLoader = html_streetfood_loader.Loader("en", startOfWeek, meatDetector)
+
+    for mensa in streetFoodLoader.getAvailableMensas():
+        insert_mensa(mensa, db)
+        insert_all(streetFoodLoader.getMenusForMensa(mensa), db)
 
     mensaNamesWithMeals = db["menus"].distinct("mensaName", {"origin": "ETH", "date": {"$gte": str(startOfWeek)}})
+    mensaNamesWithMeals.extend(
+        db["menus"].distinct("mensaName", {"origin": "ETH-Streetfood", "date": {"$gte": str(startOfWeek)}}))
     allEthMenasList = db["mensas"].distinct("name", {"category": {"$in": ["ETH-Zentrum", "ETH-Hönggerberg"]}})
 
     # Set Mensa to closed if no meals were found for the given week

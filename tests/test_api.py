@@ -13,12 +13,16 @@ from datetime import date
 from datetime import timedelta
 
 import menuCrawler as crawler
+# noinspection PyUnresolvedReferences
 from checkMenuEntries import VALID_RSS_MENU_ENTRIES, VALID_JSON_MENU_ENTRIES_LUNCH, VALID_JSON_MENU_ENTRIES_DINNER
 
 import flask_app.server as server
 
 import menu_loader.uzh_menu_loader as uzh_loader
 import menu_loader.eth_menu_loader as eth_loader
+import menu_loader.meat_detector as meat_detector
+import menu_loader.street_food_loader_html as html
+
 
 
 TESTING_DATABASE = "zhmensa_testing"
@@ -32,6 +36,21 @@ pollDb = MongoClient("localhost", 27017)[POLL_DATABASE]
 
 server.mydb = db
 server.pollsDb = pollDb
+
+"""def test_food():
+    det = meat_detector.MeatDetector()
+    basedate = date.today() - timedelta(days = date.today().weekday())
+    p = html.Loader("de", basedate, det)
+    for m in p.getAvailableMensas():
+        print("---m----")
+        for me in p.getMenusForMensa(m):
+            print(me)
+    for l in det.getMatchedMeatWords():
+        print(l)
+    print("vegi")
+    for l in det.getMatchedVegiWords():
+        print(l)
+    assert False"""
 
 
 def testReadStaticMenuUZH():
@@ -62,7 +81,7 @@ def testReadStaticMenuETHLunch():
 
     with open('./tests/eth_lunch_2019_07_05.json', encoding="utf-8") as f:
         content = json.loads(f.read())
-        loader = eth_loader.Loader(db)
+        loader = eth_loader.Loader(db, meat_detector.MeatDetector())
         crawler.insert_all(loader.loadEthMensaForJson(content, "2019-07-05", "de", "lunch"), db)
 
     for entry in VALID_JSON_MENU_ENTRIES_LUNCH:
@@ -81,7 +100,7 @@ def testReadStaticMenuETHDinner():
 
     with open('./tests/eth_dinner_2019_07_05.json', encoding="utf-8") as f:
         content = json.loads(f.read())
-        loader = eth_loader.Loader(db)
+        loader = eth_loader.Loader(db, meat_detector.MeatDetector())
         crawler.insert_all(loader.loadEthMensaForJson(content, "2019-07-05", "de", "dinner"), db)
 
     for entry in VALID_JSON_MENU_ENTRIES_DINNER:
@@ -103,7 +122,7 @@ def testReadCurrentWeek():
         for lang in ["de", "en"]:
             for mealType in  ["lunch","dinner"]:
                 for origin in ["ETH", "UZH"]:
-                    if(db[MENUS].find_one({"date":str(currDate), "lang": lang, "origin": origin, "mealType":mealType}) is None):
+                    if db[MENUS].find_one({"date":str(currDate), "lang": lang, "origin": origin, "mealType":mealType}) is None:
                         print("Could not find entry for day " + str(currDate) +" lang " + lang + " type " + mealType + " origin: " + origin)
                         assert False
 
@@ -127,7 +146,6 @@ def testGetForTimespanApi():
 
         elif(len(daysList) != 5):
             warnings.warn(UserWarning("Daylist for mensa " + mensa + " did not have length 5"))
-
 
 
 def testCreatePoll():
