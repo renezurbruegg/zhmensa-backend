@@ -1,5 +1,4 @@
 import json
-import pickle
 from datetime import timedelta
 
 import requests
@@ -18,24 +17,12 @@ mensaToCategoryMapping = {
 class Loader:
     """ Class to load Menus from ETH Web API"""
 
-    def __init__(self, db):
+    def __init__(self, db, meatDetector):
         """
         :param db: The database containing a mensas and mealtypes collection
         """
         self.db = db
-        self.loadWordLists()
-        self.vegiList_de = []
-        self.meatList_de = []
-        self.meatmatch = []
-        self.loadWordLists()
-
-    def loadWordLists(self):
-        """ Loads pickle files into meat and vegi list"""
-        with open('vegilist.pickle', 'rb') as fp:
-            self.vegiList_de = pickle.load(fp)
-
-        with open('meatlist.pickle', 'rb') as fp:
-            self.meatList_de = pickle.load(fp)
+        self.meatDetector = meatDetector
 
     def loadEthMensaForParams(self, lang, basedate, dayOffset, type, dayOfWeek):
         day = basedate + timedelta(days=dayOffset)
@@ -120,45 +107,23 @@ class Loader:
         isVegi = True  # Innocent until proven guilty ;)
 
         if "grill" in meal["label"]:
-            return False;
+            return False
 
         type = meal["type"]
-        if type != None:
+        if type is not None:
             type = type.lower()
             if "vegan" in type or "vegetarian" in type or "vegetarisch" in type:
-                return True;
+                return True
 
             if "fish" in type or "fisch" in type or "fleisch" in type or "meat" in type:
-                return False;
+                return False
 
         origins = meal["origins"]
         if len(origins) != 0:
             return False
 
         print("Vegi or not is unsure for meal: " + str(meal["label"].encode('utf-8')))
-
-        wordList = []
-        for line in meal["description"]:
-            wordList.extend(
-                line.replace("  ", " ").replace(",", " ").replace("'", "").replace('"', "").replace("&",
-                                                                                                    "").lower().split(
-                    " "))
-
-        v = 0
-        m = 0
-        for word in wordList:
-            if word == "":
-                continue
-            elif word in self.meatList_de:
-                m += 1
-                if not word in self.meatmatch:
-                    self.meatmatch.append(word)
-
-            elif word in self.vegiList_de:
-                v += 1
-        print("score: (m/v) : (" + str(m) + "/" + str(v) + ")")
-        print("deciding for: " + str(v >= m))
-        return v >= m
+        return not self.meatDetector.containsMeat(meal["description"])
 
     @staticmethod
     def hasDynamicMenuNames(mensaName):
