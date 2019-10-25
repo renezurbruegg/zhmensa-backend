@@ -276,7 +276,7 @@ class Loader(CustomLoader):
         for menu in self.parser.menus:
             if menu.mensa == mensaName:
                 menu.origin = "ETH-Streetfood"
-                menu.id = "mensa:" + mensaName + ",Menu:" + menu.name,
+                menu.id = "mensa:" + mensaName + ",Menu:" + menu.name
                 list.append(menu.toDict())
         return list
 
