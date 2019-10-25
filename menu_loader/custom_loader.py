@@ -34,11 +34,19 @@ class CustomMenu:
             "lang": self.lang,
             "link": self.link
         }
+
+
 class CustomMensaEntry:
     def __init__(self):
         self.name: str = ""
         self.isOpen: bool = True
         self.category: str = ""
+        self.openings: dict = None
+
+    def __init__(self, name, category):
+        self.name: str = name
+        self.isOpen: bool = True
+        self.category: str = category
         self.openings: dict = None
 
 
