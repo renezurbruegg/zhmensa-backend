@@ -167,7 +167,6 @@ class Loader(CustomLoader):
                 return
 
             if self.startParsingTableContent and data.strip() != "":
-                print("parse stuff " + str(data) + " " + str(self.currentColumn) + "  " + str(self.currentRow))
                 if self.currentColumn == 1:
                     self.currentDay += 1
 
