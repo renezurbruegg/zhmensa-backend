@@ -24,7 +24,7 @@ class Loader(CustomLoader):
             }
         }
         MENSAS = {
-            0: CustomMensaEntry("Streetfood Zenturm", "ETH-Zentrum"),
+            0: CustomMensaEntry("Streetfood Zentrum", "ETH-Zentrum"),
             1: CustomMensaEntry("Streetfood Höngg", "ETH-Hönggerberg")
         }
 
