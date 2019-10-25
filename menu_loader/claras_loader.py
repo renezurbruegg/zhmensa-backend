@@ -85,7 +85,7 @@ class Loader(CustomLoader):
         self.parser.feed(req.text)
 
     def getAvailableMensas(self) -> List[CustomMensaEntry]:
-        entry = CustomMensaEntry("Klaras Kitche", 'others')
+        entry = CustomMensaEntry("Klaras Kitchen", 'others')
         return [entry]
 
     def getMenusForMensa(self, mensaInformation) -> List[CustomMenu]:
