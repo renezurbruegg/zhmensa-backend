@@ -295,4 +295,3 @@ class Loader(CustomLoader):
 
         self.parser = self.MyHTMLParser(lang, basedate, "16.09", "20.12", meatDetector)
         self.parser.feed(req.text)
-        #print(req.text)
