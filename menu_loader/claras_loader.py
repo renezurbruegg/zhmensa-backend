@@ -36,8 +36,11 @@ class MyHTMLParser(HTMLParser):
             for type, value in attrs:
                 if type == "title":
                     dateStr = value.split(",")[0]
-
-                    startTimeDate = datetime.strptime(dateStr, '%d.%m.%y').date() + timedelta(days = 1)
+                    hourStr = value.split(",")[1].strip()
+                    startTimeDate = datetime.strptime(dateStr, '%d.%m.%y').date()
+                    # Somehow Facebook time is wrong. if post was posted really late (e.g. 23.20) we need to add a day
+                    if hourStr > "04:00":
+                        startTimeDate = startTimeDate + timedelta(days= 1)
                     self.postDate = str(startTimeDate)
                     return
 
