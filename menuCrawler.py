@@ -275,6 +275,19 @@ def removeStringListFromMeatlist(removeList):
     with open('meatlist.pickle', 'wb') as fp:
         pickle.dump(meatlist, fp)
 
+def removeStringListFromvegiList(removeList):
+    """ Removes a string list from the vegilist stored in the vegilist.pickle file"""
+    with open('vegilist.pickle', 'rb') as fp:
+        list = pickle.load(fp)
+
+    for item in removeList:
+        try:
+            list.remove(item.lower()),
+        except:
+            print("item not found: " + item)
+    with open('vegilist.pickle', 'wb') as fp:
+        pickle.dump(list, fp)
+
 
 def bruteforce():
     """
