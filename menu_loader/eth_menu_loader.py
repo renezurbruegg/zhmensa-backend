@@ -25,8 +25,6 @@ class Loader:
         self.meatDetector = meatDetector
         with open('menu_loader/ethLocations.json', 'r',  encoding="utf-8") as fp:
             self.locationDict = json.load(fp)
-        print("got locations")
-        print(self.locationDict)
 
 
     def loadEthMensaForParams(self, lang, basedate, dayOffset, type, dayOfWeek):
