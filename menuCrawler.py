@@ -55,7 +55,7 @@ def loadUZHMensa(baseDate, uzhConnectionInfo, db):
         print("Found new mensa - " + str(name.encode('utf-8')))
         mensaCollection.insert_one(
             {"name": name, "category": uzhConnectionInfo["category"], "openings": uzhConnectionInfo["opening"],
-             "isClosed": True})
+             "isClosed": True, "address": uzhConnectionInfo["address"], "lat": uzhConnectionInfo["lat"], "lng": uzhConnectionInfo["lng"]})
 
     try:
         for day in range(1, 6):
@@ -68,12 +68,12 @@ def loadUZHMensa(baseDate, uzhConnectionInfo, db):
 
         mensaCollection.update_one({"name": name}, {
             "$set": {"name": name, "category": uzhConnectionInfo["category"], "openings": uzhConnectionInfo["opening"],
-                     "isClosed": False}}, upsert=True)
+                     "isClosed": False,  "address": uzhConnectionInfo["address"], "lat": uzhConnectionInfo["lat"], "lng": uzhConnectionInfo["lng"]}}, upsert=True)
 
     except uzh_loader.MensaClosedException:
         mensaCollection.update_one({"name": name}, {
             "$set": {"name": name, "category": uzhConnectionInfo["category"], "openings": uzhConnectionInfo["opening"],
-                     "isClosed": True}}, upsert=True)
+                     "isClosed": True,  "address": uzhConnectionInfo["address"], "lat": uzhConnectionInfo["lat"], "lng": uzhConnectionInfo["lng"]}}, upsert=True)
         print("Got Mensa Closed exception for Mensa: " + str(name.encode('utf-8')))
 
 
@@ -154,6 +154,8 @@ def loadKlarasIntoDb(db):
 
         for e in klaras_de.getAvailableMensas():
             insert_mensa(e, db)
+            print(("found"))
+            print(e)
             insert_all([menu.toDict() for menu in klaras_de.getMenusForMensa(e)], db)
 
         foundMenu = klaras_de.hasMenuForDay(date.today())
@@ -178,7 +180,9 @@ def loadKlarasIntoDb(db):
 def insert_mensa(entry: custom_loader.CustomMensaEntry, db):
     db["mensas"].update_one({"name": entry.name},
                             {"$set": {"name": entry.name, "category": entry.category,
-                                      "openings": entry.openings, 'isClosed': not entry.isOpen}},
+                                      "openings": entry.openings, 'isClosed': not entry.isOpen,
+                                      "address": entry.address, "lat": entry.lat, "lng": entry.lng
+                                      }},
                             upsert=True)
 
 

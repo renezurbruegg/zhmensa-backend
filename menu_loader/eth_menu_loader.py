@@ -23,6 +23,11 @@ class Loader:
         """
         self.db = db
         self.meatDetector = meatDetector
+        with open('menu_loader/ethLocations.json', 'r',  encoding="utf-8") as fp:
+            self.locationDict = json.load(fp)
+        print("got locations")
+        print(self.locationDict)
+
 
     def loadEthMensaForParams(self, lang, basedate, dayOffset, type, dayOfWeek):
         day = basedate + timedelta(days=dayOffset)
@@ -59,8 +64,16 @@ class Loader:
             else:
                 category = "unknown"
 
+            locationEntry = self.getLocationEntryForMensaName(name)
             mensaCollection.update_one({"name": name},
-                                       {"$set": {"name": name, "category": category, "openings": hours["opening"]}},
+                                       {"$set":
+                                            {"name": name,
+                                             "category": category,
+                                             "openings": hours["opening"],
+                                             "address": locationEntry["address"],
+                                             "lat": locationEntry["lat"],
+                                             "lng": locationEntry["lng"],
+                                             }},
                                        upsert=True)
 
             meals = mensa["meals"]
@@ -137,3 +150,9 @@ class Loader:
             return "'uni:" + mensa + "' pos: " + str(position) + " mealtype:" + mealType.upper()
         else:
             return "mensa:" + mensa + ",Menu:" + menuName
+
+    def getLocationEntryForMensaName(self, mensaName):
+        if mensaName in self.locationDict.keys():
+            return self.locationDict[mensaName]
+        else:
+            return {"address": None, "lat": None, "lng": None}

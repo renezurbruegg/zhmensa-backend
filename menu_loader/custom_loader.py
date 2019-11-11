@@ -42,12 +42,18 @@ class CustomMensaEntry:
         self.isOpen: bool = True
         self.category: str = ""
         self.openings: dict = None
+        self.address: str = None
+        self.lat: float = None
+        self.lng: float = None
 
     def __init__(self, name, category):
         self.name: str = name
         self.isOpen: bool = True
         self.category: str = category
         self.openings: dict = None
+        self.address: str = None
+        self.lat: float = None
+        self.lng: float = None
 
 
 class CustomLoader(ABC):

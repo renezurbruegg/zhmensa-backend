@@ -91,6 +91,9 @@ class Loader(CustomLoader):
 
     def getAvailableMensas(self) -> List[CustomMensaEntry]:
         entry = CustomMensaEntry("Klaras Kitchen", 'others')
+        entry.address = "Universitätstrasse 17\n8006 Zürich"
+        entry.lat = 47.3788
+        entry.lng = 8.5479
         return [entry]
 
     def getMenusForMensa(self, mensaInformation) -> List[CustomMenu]:

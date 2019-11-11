@@ -495,6 +495,11 @@ class Mensa:
         self.openings = jsonObject["openings"]
         self.category = jsonObject["category"]
         self.isClosed = jsonObject["isClosed"]
+        self.location = {
+            "address": jsonObject.get("address"),
+            "lat": jsonObject.get("lat"),
+            "lng": jsonObject.get("lng"),
+        }
 
 
     def setWeek(self, date):
@@ -570,11 +575,9 @@ class Menu:
         self.date = menuDbObject["date"]
         self.nutritionFacts = menuDbObject["nutritionFacts"]
         self.meta = {}
-        if("link" in menuDbObject):
+
+        if "link" in menuDbObject:
             self.meta["link"] = menuDbObject["link"]
-
-
-
 
 def loadDayIntoMensaMap(date, db, mensaMap, lang):
     """Adds all Menus for the given date to the mensa Map"""

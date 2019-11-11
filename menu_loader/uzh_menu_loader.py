@@ -4,8 +4,9 @@
 """ Loads different Menus from ETH and UZH and stores them in MongoDB"""
 import re
 from datetime import timedelta
+import time
 from html.parser import HTMLParser
-
+import json
 import feedparser
 
 DAYLI_USAGE_MAP = {
@@ -174,150 +175,8 @@ mensaToCategoryMapping = {
 }
 
 """ Contains all known API Endpoints """
-UZHConnectionDefinitions = [
-    {
-        "id": 148,
-        "id_en": 507,
-        "mensa": "Obere Mensa B",
-        "mealType": "lunch",
-        "category": "UZH-Zentrum",
-        "meal_openings": None,
-        "opening": None
-    },
-    {
-        "id": 150,
-        "id_en": 508,
-        "mensa": "Lichthof",
-        "mealType": "lunch",
-        "category": "UZH-Zentrum",
-        "meal_openings": None,
-        "opening": None
-    },
-    {
-        "id": 146,
-        "id_en": 518,
-        "mensa": "Tierspital",
-        "mealType": "lunch",
-        "category": "UZH-Irchel",
-        "meal_openings": None,
-        "opening": None
-    },
-    {
-        "id": 147,
-        "id_en": 505,
-        "mensa": "Untere Mensa A",
-        "mealType": "lunch",
-        "category": "UZH-Zentrum",
-        "meal_openings": None,
-        "opening": None
-    },
-    {
-        "id": 142,
-        "id_en": 180,
-        "mensa": "Irchel",
-        "mealType": "lunch",
-        "category": "UZH-Irchel",
-        "meal_openings": None,
-        "opening": None
-    },
-    {
-        "id": 151,
-        "id_en": 517,
-        "mensa": "Zentrum Für Zahnmedizin",
-        "mealType": "lunch",
-        "category": "UZH-Zentrum",
-        "meal_openings": None,
-        "opening": None
-    },
-    {
-        "id": 143,
-        "id_en": 520,
-        "mensa": "Platte",
-        "mealType": "lunch",
-        "category": "UZH-Zentrum",
-        "meal_openings": None,
-        "opening": None
-    },
-    {
-        "id": 176,
-        "id_en": 512,
-        "mensa": "Cafeteria Atrium",
-        "mealType": "all_day",
-        "category": "UZH-Irchel",
-        "meal_openings": None,
-        "opening": None
-    },
-    {
-        "id": 144,
-        "id_en": 519,
-        "mensa": "Botanischer Garten",
-        "mealType": "all_day",
-        "category": "UZH-Oerlikon",
-        "meal_openings": None,
-        "opening": None
-    },
-    {
-        "id": 346,
-        "id_en": 509,
-        "mensa": "Rämi 59 (vegan)",
-        "mealType": "lunch",
-        "category": "UZH-Zentrum",
-        "meal_openings": None,
-        "opening": None
-    },
-    {
-        "id": 149,
-        "id_en": 506,
-        "mensa": "Untere Mensa A",
-        "mealType": "dinner",
-        "category": "UZH-Zentrum",
-        "meal_openings": None,
-        "opening": None
-    },
-    {
-        "id": 184,
-        "id_en": 515,
-        "mensa": "Binzmühle",
-        "mealType": "lunch",
-        "category": "UZH-Oerlikon",
-        "meal_openings": None,
-        "opening": None
-    },
-    {
-        "id": 241,
-        "id_en": 513,
-        "mensa": "Cafeteria Seerose",
-        "mealType": "lunch",
-        "category": "UZH-Irchel",
-        "meal_openings": None,
-        "opening": None
-    },
-    {
-        "id": 256,
-        "id_en": 514,
-        "mensa": "Cafeteria Seerose",
-        "mealType": "dinner",
-        "category": "UZH-Irchel",
-        "meal_openings": None,
-        "opening": None
-    },
-    {
-        "id": 391,
-        "id_en": 516,
-        "mensa": "Cafeteria Cityport",
-        "mealType": "all_day",
-        "category": "UZH-Oerlikon",
-        "meal_openings": None,
-        "opening": None
-    }, {
-        "id": 303,
-        "mensa": "PH Zürich (HB)",
-        "mealType": "lunch",
-        "category": "others",
-        "meal_openings": None,
-        "opening": None
-    }
-]
+with open('menu_loader/uzhConnInfo.json', 'r') as fp:
+    UZHConnectionDefinitions = json.load(fp)
 
 
 def insert(dictObject, db):
@@ -380,7 +239,7 @@ def bruteforce():
         except ConnectionError:
             print("error")
 
-        if (len(mensaFeed.entries) != 0):
+        if len(mensaFeed.entries) != 0:
             entry = mensaFeed.entries[0]
             print(str(i) + " : " + entry["title"])
         else:
@@ -424,7 +283,7 @@ def loadUZHMensaForUrl(uzhConnectionInfo, apiUrl, db, lang, date):
     )
     mensaFeed = feedparser.parse(apiUrl)
 
-    if (len(mensaFeed.entries) == 0):
+    if len(mensaFeed.entries) == 0:
         raise RuntimeError("Could not find any feed for this connection info and day")
 
     entry = mensaFeed.entries[0]
