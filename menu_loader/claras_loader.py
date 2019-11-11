@@ -18,6 +18,7 @@ class MyHTMLParser(HTMLParser):
         self.posts = {}
         self.postsContent = []
         self.postContentFound = False
+        self.checkedDates = []
 
     def handle_starttag(self, tag, attrs):
         if tag == "div":
@@ -54,7 +55,8 @@ class MyHTMLParser(HTMLParser):
                 if "geteilt." not in self.postString:
                     self.postString = self.postString.replace("....", "...")
                     self.postsContent.append(self.postString)
-                    if self.postDate is not None:
+                    if self.postDate is not None and self.postString != "" and self.postDate not in self.checkedDates:
+                        self.checkedDates.append(self.postDate)
                         self.posts[self.postDate] = self.postString
                 self.postString = ""
 
