@@ -1,1 +1,2223 @@
-[{"id":28,"daytime":"lunch","mensa":"food&lab","hours":{"opening":[{"from":"08:00","to":"15:00","type":"opening"}],"mealtime":[{"from":"11:30","to":"13:30","type":"lunch"}]},"location":{"id":1,"label":"Zentrum"},"meals":[{"id":63191,"type":"Asia","label":"East","description":["VEGI SPECIAL","Rendang","Veganes Gemüsecurry - Malaiische Art","Süsskartoffeln, Champignon, Zucchetti, Wirz","Zitronenreis","","LARGE +2"],"position":0,"prices":{"student":"8.00","staff":"9.00","extern":"12.00"},"allergens":[{"allergen_id":1,"label":"Gluten"},{"allergen_id":7,"label":"Milch/Laktose"}],"origins":[]},{"id":63192,"type":"Vegetarisch","label":"West","description":["Vegetarian Burrito","gefüllt mit Eisberg, Red Kidneys","Peperoni, Tomaten, Mais ","Cheddar-Cheese, Zwiebeln","","Pommes Frites + 2","Beilagensalat + 2"],"position":1,"prices":{"student":"8.00","staff":"9.00","extern":"11.00"},"allergens":[{"allergen_id":1,"label":"Gluten"},{"allergen_id":7,"label":"Milch/Laktose"},{"allergen_id":10,"label":"Senf"}],"origins":[]}]},{"id":4,"daytime":"lunch","mensa":"Clausiusbar","hours":{"opening":[{"from":"11:00","to":"14:00","type":"opening"}],"mealtime":[{"from":"11:00","to":"14:00","type":"lunch"}]},"location":{"id":1,"label":"Zentrum"},"meals":[{"id":63178,"type":"Asia","label":"WOK STREET","description":["PO PHI PHI","mit Hirsch,","grüne Thai Curry Sauce,","Zucchetti, Karotten, Peperoni","und Basmatireis","","Add on: Fried Rice (+1.00/1.50)"],"position":0,"prices":{"student":"12.50","staff":"13.50","extern":"14.50"},"allergens":[{"allergen_id":4,"label":"Fisch"},{"allergen_id":2,"label":"Krebstiere"},{"allergen_id":9,"label":"Sellerie"}],"origins":[{"origin_id":25,"label":"Neuseeland"}]},{"id":63179,"type":"Vegetarisch","label":"WOK GREEN","description":["GO PA","mit Valess (Milchprodukt)","grüne Thai Curry Sauce,","Zucchetti, Karotten, Peperoni","und Basmatireis","","Add on: Fried Rice (+1.00/1.50)"],"position":1,"prices":{"student":"12.50","staff":"13.50","extern":"14.50"},"allergens":[{"allergen_id":7,"label":"Milch/Laktose"}],"origins":[]},{"id":63180,"type":"Fisch","label":"DELIGHT","description":["WELIGAMA","ASC Crevetten in Panko Panade","mit Wasabi - Sojasauce,","gebratenem Reis - Kantonesischer Art","Asiagemüse und Ingwer","","Add on: XXL (+1.00/1.50)"],"position":2,"prices":{"student":"8.50","staff":"11.50","extern":"13.50"},"allergens":[{"allergen_id":3,"label":"Ei"},{"allergen_id":1,"label":"Gluten"},{"allergen_id":2,"label":"Krebstiere"},{"allergen_id":6,"label":"Soja (gen-tec frei)"}],"origins":[{"origin_id":50,"label":"Vietnam"}]},{"id":63181,"type":"Vegetarisch","label":"GARDEN","description":["DIM SUM","Gedämpfte vegetarische Dim Sum","mit Wai Wai Nudeln","scharfe Sojasauce ","Asiagemüse und Ingwer","","Add on: XXL (+1.00/1.50)"],"position":3,"prices":{"student":"8.50","staff":"11.50","extern":"13.50"},"allergens":[{"allergen_id":1,"label":"Gluten"},{"allergen_id":12,"label":"Schwefeldioxid / Sulfite"},{"allergen_id":6,"label":"Soja (gen-tec frei)"}],"origins":[]},{"id":63182,"type":null,"label":"ADD ONS","description":["Pimp up...","-XXL Portion  (+1.00/1.50)","-Fried Rice (+1.00/1.50)","side dish of the day"],"position":4,"prices":{"student":"1.00","staff":"1.00","extern":"1.00"},"allergens":[],"origins":[]}]},{"id":20,"daytime":"lunch","mensa":"food market - grill bbQ","hours":{"opening":[{"from":"06:00","to":"22:00","type":"opening"}],"mealtime":[{"from":"11:15","to":"13:30","type":"lunch"}]},"location":{"id":2,"label":"Hönggerberg"},"meals":[{"id":63311,"type":null,"label":"fire","description":["Fischknusperli","Tartarsauce","Petersilienkartoffeln","Brokkoli"],"position":0,"prices":{"student":"6.20","staff":"9.30","extern":"12.70"},"allergens":[],"origins":[]},{"id":63312,"type":"Asia","label":"grill","description":["Sonne Steinergarten","Ginger Beef aus der riesen Pfanne ","Bambus, Peperoni, Ingwer","Stangensellerie","Basmatireis"],"position":1,"prices":{"student":"9.90","staff":"12.90","extern":"16.90"},"allergens":[],"origins":[]},{"id":63313,"type":"Asia","label":"flame","description":["Flame","Sommerteller","Kebab Teller mit Salat"],"position":2,"prices":{"student":"10.30","staff":"11.30","extern":"13.30"},"allergens":[],"origins":[]}]},{"id":25,"daytime":"lunch","mensa":"BELLAVISTA","hours":{"opening":[{"from":"11:15","to":"14:00","type":"opening_lunch"}],"mealtime":[{"from":"11:15","to":"14:00","type":"lunch"}]},"location":{"id":2,"label":"Hönggerberg"},"meals":[{"id":63285,"type":null,"label":"Bellavista Tagesmenü","description":["Wir freuen uns auf Ihren Besuch. Ihr Bellavista-Team"],"position":0,"prices":{"student":"26.00","staff":"26.00","extern":"26.00"},"allergens":[],"origins":[]},{"id":63286,"type":"Suppe","label":"Tagessuppe","description":["Zucchetti-Ragout"],"position":1,"prices":{"student":"0.00","staff":"0.00","extern":"0.00"},"allergens":[],"origins":[]},{"id":63287,"type":"Salat","label":"Wochensalat","description":["Erbsen,Spinatpüree, dazu Sauerrahm und Speckcrumble"],"position":2,"prices":{"student":"0.00","staff":"0.00","extern":"0.00"},"allergens":[],"origins":[]},{"id":63288,"type":"Salat","label":"Menüesalat","description":["Bunterblattsalat"],"position":3,"prices":{"student":"0.00","staff":"0.00","extern":"0.00"},"allergens":[],"origins":[]},{"id":63289,"type":"Fisch","label":"Tageshit","description":["Gersotto alla Pescatora mit Cherrytomaten,Knoblauch,Chili"],"position":4,"prices":{"student":"0.00","staff":"0.00","extern":"0.00"},"allergens":[],"origins":[]},{"id":63290,"type":"Fleisch","label":"Wochenmenü Fleisch","description":["Edelschwein-Medaillion,Trüffelrisotto und Eierschwämmli-Sauce"],"position":5,"prices":{"student":"0.00","staff":"0.00","extern":"0.00"},"allergens":[],"origins":[]},{"id":63297,"type":"Vegetarisch","label":"Wochenmenü Vegi","description":["Linsen-Hummus,gebackene Süsskartoffel,Chicoreé und Ananas"],"position":6,"prices":{"student":"0.00","staff":"0.00","extern":"0.00"},"allergens":[],"origins":[]},{"id":63298,"type":"Fisch","label":"Wochenmenü Fisch","description":["Egli-Filet im Salbei-Teig,mediterranischen Kartoffelsalat und Basilikum Mayo"],"position":7,"prices":{"student":"0.00","staff":"0.00","extern":"0.00"},"allergens":[],"origins":[]}]},{"id":13,"daytime":"lunch","mensa":"Polysnack","hours":{"opening":[{"from":"08:30","to":"17:00","type":"opening"}],"mealtime":[{"from":"11:30","to":"14:00","type":"lunch"}]},"location":{"id":1,"label":"Zentrum"},"meals":[{"id":63154,"type":"Pasta","label":"Pasta","description":["Spaghetti alla carbonara","Spaghetti an Rahmsauce mit Speck"],"position":0,"prices":{"student":"8.90","staff":"9.90","extern":"13.90"},"allergens":[{"allergen_id":3,"label":"Ei"},{"allergen_id":1,"label":"Gluten"},{"allergen_id":7,"label":"Milch/Laktose"}],"origins":[{"origin_id":39,"label":"Schweiz"}]},{"id":63155,"type":"Pizza","label":"Hausgemachte Pizza","description":["Pizza ai tre formaggi","Ofenfrische Pizza mit Tomaten, Mozzarella, Parmesan und Gorgonzola"],"position":1,"prices":{"student":"8.50","staff":"10.50","extern":"14.50"},"allergens":[{"allergen_id":1,"label":"Gluten"},{"allergen_id":7,"label":"Milch/Laktose"}],"origins":[]},{"id":63156,"type":"Salat","label":"Insalata","description":["Insalata \"Vitale\"","Marktfrische Blattsalate mit Lollo Rosso, Randen und Fetakäse","Serviert mit einem Semmeli"],"position":2,"prices":{"student":"8.50","staff":"9.50","extern":"13.00"},"allergens":[{"allergen_id":7,"label":"Milch/Laktose"}],"origins":[]},{"id":63157,"type":"Suppe","label":"Minestra","description":["Tomaten-Dal Suppe","Indische Linsen-Tomatensuppe ","Serviert mit einem Kleinbrot"],"position":3,"prices":{"student":"5.50","staff":"6.50","extern":"7.50"},"allergens":[],"origins":[]}]},{"id":22,"daytime":"lunch","mensa":"FUSION coffee","hours":{"opening":[{"from":"07:30","to":"19:00","type":"opening"}],"mealtime":[{"from":"11:00","to":"14:00","type":"lunch"},{"from":"17:30","to":"19:00","type":"dinner"}]},"location":{"id":2,"label":"Hönggerberg"},"meals":[{"id":63655,"type":"Fleisch","label":"Tagesangebot","description":["Poulet Tandoori","Basmatireis"],"position":0,"prices":{"student":"8.50","staff":"9.50","extern":"10.50"},"allergens":[{"allergen_id":1,"label":"Gluten"},{"allergen_id":13,"label":"Lupinen"},{"allergen_id":7,"label":"Milch/Laktose"},{"allergen_id":12,"label":"Schwefeldioxid / Sulfite"},{"allergen_id":9,"label":"Sellerie"},{"allergen_id":10,"label":"Senf"}],"origins":[{"origin_id":39,"label":"Schweiz"}]},{"id":63656,"type":"Vegetarisch","label":"Vegetarisch","description":["Linsen Nuss Curry","Basmatireis"],"position":1,"prices":{"student":"7.50","staff":"8.50","extern":"9.50"},"allergens":[{"allergen_id":5,"label":"Erdnüsse"},{"allergen_id":13,"label":"Lupinen"},{"allergen_id":7,"label":"Milch/Laktose"},{"allergen_id":12,"label":"Schwefeldioxid / Sulfite"},{"allergen_id":9,"label":"Sellerie"},{"allergen_id":10,"label":"Senf"}],"origins":[]},{"id":63657,"type":"Fisch","label":"Wochenangebot","description":["Crevetten Curry","Gemüse","Basmatireis"],"position":2,"prices":{"student":"9.50","staff":"10.50","extern":"11.50"},"allergens":[{"allergen_id":13,"label":"Lupinen"},{"allergen_id":12,"label":"Schwefeldioxid / Sulfite"},{"allergen_id":9,"label":"Sellerie"},{"allergen_id":10,"label":"Senf"}],"origins":[{"origin_id":50,"label":"Vietnam"}]}]},{"id":27,"daytime":"lunch","mensa":"Rice Up!","hours":{"opening":[{"from":"10:30","to":"14:30","type":"opening_lunch"}],"mealtime":[{"from":"10:30","to":"14:30","type":"lunch"}]},"location":{"id":2,"label":"Hönggerberg"},"meals":[{"id":62993,"type":"Asia","label":"Chicken Meatballs","description":["Base","<a href=\"https://www.riceup-restaurant.com/wp-content/uploads/2019/05/RET_TO-Flyer_Apr2019_A4_RZ_Screen.pdf\">CHICKEN MEATBALLS<span class=\"icon\"></span></a>","Veggie","Sauce"],"position":0,"prices":{"student":"7.90","staff":"11.90","extern":"12.90"},"allergens":[{"allergen_id":3,"label":"Ei"}],"origins":[{"origin_id":39,"label":"Schweiz"}]},{"id":62994,"type":"Asia","label":"Tofu","description":["Base","<a href=\"https://www.riceup-restaurant.com/wp-content/uploads/2019/05/RET_TO-Flyer_Apr2019_A4_RZ_Screen.pdf\">MARINATED TOFU<span class=\"icon\"></span></a>","Veggie","Sauce"],"position":1,"prices":{"student":"8.90","staff":"12.90","extern":"13.90"},"allergens":[{"allergen_id":6,"label":"Soja (gen-tec frei)"}],"origins":[{"origin_id":39,"label":"Schweiz"}]},{"id":62995,"type":"Asia","label":"Grilled Beef","description":["Base","<a href=\"https://www.riceup-restaurant.com/wp-content/uploads/2019/05/RET_TO-Flyer_Apr2019_A4_RZ_Screen.pdf\">GRILLED BEEF<span class=\"icon\"></span></a>","Veggie","Sauce"],"position":2,"prices":{"student":"9.90","staff":"13.90","extern":"14.90"},"allergens":[{"allergen_id":6,"label":"Soja (gen-tec frei)"}],"origins":[{"origin_id":39,"label":"Schweiz"}]},{"id":62996,"type":"Asia","label":"Chicken Satay","description":["Base","<a href=\"https://www.riceup-restaurant.com/wp-content/uploads/2019/05/RET_TO-Flyer_Apr2019_A4_RZ_Screen.pdf\">CHICKEN SATAY<span class=\"icon\"></span></a>","Veggie","Sauce",""],"position":3,"prices":{"student":"10.90","staff":"14.90","extern":"15.90"},"allergens":[{"allergen_id":5,"label":"Erdnüsse"},{"allergen_id":4,"label":"Fisch"}],"origins":[{"origin_id":39,"label":"Schweiz"}]}]},{"id":21,"daytime":"lunch","mensa":"FUSION meal","hours":{"opening":[],"mealtime":[]},"location":{"id":2,"label":"Hönggerberg"},"meals":[{"id":63241,"type":"Asia","label":"veggie","description":["Free Choice","Wählen Sie aus","vielen authentischen Gerichten","Verrechnung über die Waage"],"position":3,"prices":{"student":"","staff":"","extern":""},"allergens":[],"origins":[]},{"id":63242,"type":"Asia","label":"pot&spoon","description":["Free Choice","Wählen Sie aus","vielen authentischen Gerichten","Verrechnung über die Waage"],"position":4,"prices":{"student":"","staff":"","extern":""},"allergens":[],"origins":[]},{"id":63243,"type":"Asia","label":"pasta","description":["Mezze  Free Choice","Wählen Sie aus","vielen authentischen Gerichten","Verrechnung über die Waage"],"position":2,"prices":{"student":"","staff":"9.30","extern":""},"allergens":[],"origins":[]},{"id":63244,"type":"Vegetarisch","label":"classic","description":["Spätzli mit grünem Spargel","an Käse Sauce","mit Tomatenwürfeli","Tagessalat"],"position":1,"prices":{"student":"6.20","staff":"9.30","extern":"12.70"},"allergens":[{"allergen_id":1,"label":"Gluten"},{"allergen_id":13,"label":"Lupinen"},{"allergen_id":7,"label":"Milch/Laktose"},{"allergen_id":12,"label":"Schwefeldioxid / Sulfite"},{"allergen_id":9,"label":"Sellerie"},{"allergen_id":10,"label":"Senf"}],"origins":[]},{"id":63245,"type":"Fleisch","label":"ell","description":["Gebratenes Pouletgeschnetzeltes (HU)","Salbeijus","Butternudeln","Stangensellerie"],"position":0,"prices":{"student":"7.90","staff":"11.00","extern":"14.40"},"allergens":[{"allergen_id":3,"label":"Ei"},{"allergen_id":1,"label":"Gluten"},{"allergen_id":13,"label":"Lupinen"},{"allergen_id":7,"label":"Milch/Laktose"},{"allergen_id":12,"label":"Schwefeldioxid / Sulfite"},{"allergen_id":9,"label":"Sellerie"},{"allergen_id":10,"label":"Senf"}],"origins":[{"origin_id":47,"label":"Ungarn"}]}]},{"id":11,"daytime":"lunch","mensa":"G-ESSbar","hours":{"opening":[],"mealtime":[]},"location":{"id":1,"label":"Zentrum"},"meals":[{"id":63047,"type":null,"label":"Traditional","description":["Thunfisch Steak","mit Liebstöckelsauce, Salzkartoffeln und Erbsen"],"position":0,"prices":{"student":"9.00","staff":"11.00","extern":"13.00"},"allergens":[],"origins":[]},{"id":63048,"type":null,"label":"Favorite","description":["Gemüse-Tätschli","mit Liebstöckelsauce, Salzkartoffeln und Erbsen"],"position":1,"prices":{"student":"9.00","staff":"11.00","extern":"13.00"},"allergens":[],"origins":[]},{"id":63049,"type":null,"label":"Garden","description":["Salatbuffet","Täglich frisch für Sie zubereitet.","Preis pro 100 Gramm.","","Add ons nach Tagesangebot"],"position":2,"prices":{"student":"1.80","staff":"2.00","extern":"2.20"},"allergens":[],"origins":[]}]},{"id":14,"daytime":"lunch","mensa":"Tannenbar","hours":{"opening":[],"mealtime":[]},"location":{"id":1,"label":"Zentrum"},"meals":[{"id":63058,"type":"Fleisch","label":"Burrito","description":["Grilled Chicken Burrito","mit Poulet, Grillgemüse, ","Cipollotto, Cheddar und Peperoni","Nacho Chips, Blattsalat","und Salsa Ranchera"],"position":0,"prices":{"student":"","staff":"10.50","extern":"14.50"},"allergens":[{"allergen_id":1,"label":"Gluten"},{"allergen_id":7,"label":"Milch/Laktose"},{"allergen_id":9,"label":"Sellerie"}],"origins":[{"origin_id":39,"label":"Schweiz"}]},{"id":63059,"type":"Vegetarisch","label":"Quesadilla","description":["Quesadillas","mit Paneer, Grillgemüse, ","Cipollotto, Cheddar und Peperoni","Nacho Chips, Blattsalat","und Salsa Ranchera"],"position":1,"prices":{"student":"","staff":"10.50","extern":"14.50"},"allergens":[{"allergen_id":1,"label":"Gluten"},{"allergen_id":7,"label":"Milch/Laktose"},{"allergen_id":9,"label":"Sellerie"},{"allergen_id":6,"label":"Soja (gen-tec frei)"}],"origins":[]}]},{"id":19,"daytime":"lunch","mensa":"food market - green day","hours":{"opening":[{"from":"06:00","to":"22:00","type":"opening"}],"mealtime":[{"from":"11:15","to":"13:30","type":"lunch"}]},"location":{"id":2,"label":"Hönggerberg"},"meals":[{"id":63360,"type":null,"label":"green daily","description":["Hiltl Day","Cheeseburger","Bulgur-Gemüsepatty","Emmentaler, Cocktailsauce","Salatgarnitur,","Kartoffelecken"],"position":0,"prices":{"student":"6.20","staff":"9.30","extern":"12.70"},"allergens":[],"origins":[]},{"id":63361,"type":null,"label":"green delight","description":["Choose 5","Wähle 5"],"position":1,"prices":{"student":"9.50","staff":"12.50","extern":"16.50"},"allergens":[],"origins":[]},{"id":63362,"type":null,"label":"green soup","description":["Geschlossen",""],"position":2,"prices":{"student":null,"staff":"4.70","extern":null},"allergens":[],"origins":[]},{"id":63363,"type":null,"label":"green bowl","description":["Fitness Bowl","Bowl Vegi & Vegan"],"position":3,"prices":{"student":"8.30","staff":"10.30","extern":"12.30"},"allergens":[],"origins":[]}]},{"id":12,"daytime":"lunch","mensa":"Mensa Polyterrasse","hours":{"opening":[{"from":"11:15","to":"13:30","type":"opening_lunch"},{"from":"17:30","to":"19:30","type":"opening_dinner"}],"mealtime":[{"from":"11:15","to":"13:30","type":"lunch"},{"from":"17:30","to":"19:30","type":"dinner"}]},"location":{"id":1,"label":"Zentrum"},"meals":[{"id":63080,"type":null,"label":"LOCAL","description":["Dieses Menu servieren wir Ihnen gerne bald wieder!",""],"position":0,"prices":{"student":"10.50","staff":"11.50","extern":"15.50"},"allergens":[],"origins":[]},{"id":63081,"type":"Fleisch","label":"STREET","description":["Schweins Cordon bleu Kräuterhexe","mit gefüllt mit Cantadou ","und Zigeunerschinken","Kräutermayo","Country cuts","Glasierten Bohnen","Onion Rings"],"position":1,"prices":{"student":"13.50","staff":"15.50","extern":"17.00"},"allergens":[{"allergen_id":3,"label":"Ei"},{"allergen_id":1,"label":"Gluten"},{"allergen_id":7,"label":"Milch/Laktose"},{"allergen_id":9,"label":"Sellerie"},{"allergen_id":10,"label":"Senf"}],"origins":[{"origin_id":39,"label":"Schweiz"}]},{"id":63082,"type":"Vegetarisch","label":"GARDEN","description":["Crispy Spring Rolls","mit Gemüsefüllung, Fried Rice, ","Karotten, Edamame","und süsser Chilisauce"],"position":2,"prices":{"student":"6.20","staff":"9.30","extern":"12.70"},"allergens":[{"allergen_id":1,"label":"Gluten"},{"allergen_id":6,"label":"Soja (gen-tec frei)"}],"origins":[]},{"id":63083,"type":"Pasta","label":"HOME","description":["Spaghetti Bolognese","mit Grana Padano","Tagessalat"],"position":3,"prices":{"student":"6.20","staff":"9.30","extern":"12.70"},"allergens":[{"allergen_id":1,"label":"Gluten"},{"allergen_id":7,"label":"Milch/Laktose"},{"allergen_id":9,"label":"Sellerie"},{"allergen_id":6,"label":"Soja (gen-tec frei)"}],"origins":[{"origin_id":39,"label":"Schweiz"}]},{"id":63084,"type":"Suppe","label":"SOUP","description":["Spinat-Crèmesuppe","mit Feta"],"position":4,"prices":{"student":"3.50","staff":"3.50","extern":"4.50"},"allergens":[{"allergen_id":1,"label":"Gluten"},{"allergen_id":7,"label":"Milch/Laktose"},{"allergen_id":6,"label":"Soja (gen-tec frei)"}],"origins":[]}]},{"id":18,"daytime":"lunch","mensa":"food market - pizza pasta","hours":{"opening":[{"from":"06:00","to":"22:00","type":"opening"}],"mealtime":[{"from":"11:15","to":"14:00","type":"lunch"}]},"location":{"id":2,"label":"Hönggerberg"},"meals":[{"id":63338,"type":null,"label":"pizza classica","description":["Pizza Margherita","Hausgemachte Tomatensauce, ","Mozzarella und Oregano","Topping Ananas","Saisonsalat"],"position":0,"prices":{"student":"6.20","staff":"9.30","extern":"12.70"},"allergens":[],"origins":[]},{"id":63339,"type":null,"label":"pizza bella Italia","description":["Sommerpause","Ab September wieder im Angebot"],"position":1,"prices":{"student":null,"staff":"9.50","extern":null},"allergens":[],"origins":[]},{"id":63340,"type":null,"label":"pizza mamma mia","description":["Pizza  cruda","Hausgemachte Tomatensauce, ","Trockenfleisch, Rucola,","Oliven und Grana Padano Splitter, ","Mozzarella","Saisonsalat"],"position":2,"prices":{"student":"12.50","staff":"14.50","extern":"18.50"},"allergens":[],"origins":[]},{"id":63341,"type":null,"label":"pasta classica","description":["Pasta Napoli","Tomatensauce","Kräuter","Saisonsalat"],"position":3,"prices":{"student":"6.20","staff":"9.30","extern":"12.70"},"allergens":[],"origins":[]},{"id":63342,"type":null,"label":"pasta della nonna","description":["Gnocchi e pomodori","Tomaten-Mascarponesauce, ","schwarze Oliven,","Erbsen","Saisonsalat"],"position":4,"prices":{"student":"9.50","staff":"11.50","extern":"16.50"},"allergens":[],"origins":[]},{"id":63343,"type":null,"label":"pasta deliziosa","description":["Sommerpause","Ab September wieder im Angebot"],"position":5,"prices":{"student":null,"staff":"12.50","extern":null},"allergens":[],"origins":[]}]},{"id":9,"daytime":"lunch","mensa":"Foodtrailer ETZ","hours":{"opening":[],"mealtime":[]},"location":{"id":1,"label":"Zentrum"},"meals":[{"id":63130,"type":"Fleisch","label":"Trailerburger","description":["Trailer Burger","Schweizer Rindfleisch, Brioche Bun,","Eisbergsalat, Tomaten, Essiggurke, ","Pommes frites und Trailersauce"],"position":0,"prices":{"student":"9.50","staff":"11.50","extern":"12.50"},"allergens":[{"allergen_id":1,"label":"Gluten"},{"allergen_id":7,"label":"Milch/Laktose"},{"allergen_id":12,"label":"Schwefeldioxid / Sulfite"}],"origins":[{"origin_id":39,"label":"Schweiz"}]},{"id":63131,"type":"Pasta","label":"Wochenspezial","description":["Spaghetti Bolognese","mit Grana Padano","Tagessalat"],"position":1,"prices":{"student":"9.50","staff":"11.50","extern":"12.50"},"allergens":[{"allergen_id":1,"label":"Gluten"},{"allergen_id":7,"label":"Milch/Laktose"},{"allergen_id":9,"label":"Sellerie"},{"allergen_id":6,"label":"Soja (gen-tec frei)"}],"origins":[{"origin_id":39,"label":"Schweiz"}]},{"id":63132,"type":"Vegetarisch","label":"Garden","description":["Crispy Spring Rolls","mit Gemüsefüllung, Fried Rice, ","Karotten, Edamame","und süsser Chilisauce"],"position":2,"prices":{"student":"6.20","staff":"9.30","extern":"12.70"},"allergens":[{"allergen_id":1,"label":"Gluten"},{"allergen_id":8,"label":"Schalenfrüchte"},{"allergen_id":6,"label":"Soja (gen-tec frei)"}],"origins":[]},{"id":63133,"type":"Salat","label":"Trailersalat","description":["\"Gloria Salad\"","mit Mischsalat, Fetakäse, Radieschen , Baumnüsse, Orangen und Balsamicodressing"],"position":3,"prices":{"student":"8.50","staff":"9.50","extern":"10.50"},"allergens":[{"allergen_id":7,"label":"Milch/Laktose"},{"allergen_id":8,"label":"Schalenfrüchte"},{"allergen_id":12,"label":"Schwefeldioxid / Sulfite"}],"origins":[]},{"id":63134,"type":"Suppe","label":"Suppe","description":["Spinat-Crèmesuppe","mit Feta"],"position":4,"prices":{"student":"3.50","staff":"3.50","extern":"4.50"},"allergens":[{"allergen_id":1,"label":"Gluten"},{"allergen_id":7,"label":"Milch/Laktose"},{"allergen_id":6,"label":"Soja (gen-tec frei)"}],"origins":[]}]},{"id":6,"daytime":"lunch","mensa":"Dozentenfoyer","hours":{"opening":[{"from":"09:00","to":"15:30","type":"opening_lunch"}],"mealtime":[{"from":"11:15","to":"14:00","type":"lunch"}]},"location":{"id":1,"label":"Zentrum"},"meals":[{"id":63213,"type":null,"label":"chefs world","description":["Gekochter Schinken","mit lauwarmem Gurken-Kartoffelsalat","und Körnersenf"],"position":2,"prices":{"student":null,"staff":"17.50","extern":null},"allergens":[],"origins":[]},{"id":63214,"type":null,"label":"favorite","description":["Fjord-Forellenfilet","dazu Limettensauce, Süsskartoffel-Sweetchili ","und  Asiagemüse mit Koriander"],"position":0,"prices":{"student":null,"staff":"14.50","extern":null},"allergens":[],"origins":[]},{"id":63215,"type":null,"label":"vitality","description":["Asiatisches Gemüseragout","mit Reis"],"position":1,"prices":{"student":null,"staff":"14.50","extern":null},"allergens":[],"origins":[]},{"id":63216,"type":null,"label":"hot&cold","description":["hot & cold","Tägliche warme und kalte","Spezialitäten im Angebot","","Teller klein       CHF 9.50","Teller gross     CHF14.50"],"position":3,"prices":{"student":"0.00","staff":"0.00","extern":"0.00"},"allergens":[],"origins":[]},{"id":63217,"type":null,"label":"soup world","description":["Saisonale Gemüsecreme","(Lactose, Gluten)","","",""," Klein: CHF 2.50","Gross: CHF 6.50"],"position":4,"prices":{"student":null,"staff":"7.50","extern":null},"allergens":[],"origins":[]}]}]
+[
+   {
+      "id":28,
+      "daytime":"lunch",
+      "mensa":"food&lab",
+      "hours":{
+         "opening":[
+            {
+               "from":"08:00",
+               "to":"15:00",
+               "type":"opening"
+            }
+         ],
+         "mealtime":[
+            {
+               "from":"11:30",
+               "to":"13:30",
+               "type":"lunch"
+            }
+         ]
+      },
+      "location":{
+         "id":1,
+         "label":"Zentrum"
+      },
+      "meals":[
+         {
+            "id":63191,
+            "type":"Asia",
+            "label":"East",
+            "description":[
+               "VEGI SPECIAL",
+               "Rendang",
+               "Veganes Gemüsecurry - Malaiische Art",
+               "Süsskartoffeln, Champignon, Zucchetti, Wirz",
+               "Zitronenreis",
+               "",
+               "LARGE +2"
+            ],
+            "position":0,
+            "prices":{
+               "student":"8.00",
+               "staff":"9.00",
+               "extern":"12.00"
+            },
+            "allergens":[
+               {
+                  "allergen_id":1,
+                  "label":"Gluten"
+               },
+               {
+                  "allergen_id":7,
+                  "label":"Milch/Laktose"
+               }
+            ],
+            "origins":[
+
+            ]
+         },
+         {
+            "id":63192,
+            "type":"Vegetarisch",
+            "label":"West",
+            "description":[
+               "Vegetarian Burrito",
+               "gefüllt mit Eisberg, Red Kidneys",
+               "Peperoni, Tomaten, Mais ",
+               "Cheddar-Cheese, Zwiebeln",
+               "",
+               "Pommes Frites + 2",
+               "Beilagensalat + 2"
+            ],
+            "position":1,
+            "prices":{
+               "student":"8.00",
+               "staff":"9.00",
+               "extern":"11.00"
+            },
+            "allergens":[
+               {
+                  "allergen_id":1,
+                  "label":"Gluten"
+               },
+               {
+                  "allergen_id":7,
+                  "label":"Milch/Laktose"
+               },
+               {
+                  "allergen_id":10,
+                  "label":"Senf"
+               }
+            ],
+            "origins":[
+
+            ]
+         }
+      ]
+   },
+   {
+      "id":4,
+      "daytime":"lunch",
+      "mensa":"Clausiusbar",
+      "hours":{
+         "opening":[
+            {
+               "from":"11:00",
+               "to":"14:00",
+               "type":"opening"
+            }
+         ],
+         "mealtime":[
+            {
+               "from":"11:00",
+               "to":"14:00",
+               "type":"lunch"
+            }
+         ]
+      },
+      "location":{
+         "id":1,
+         "label":"Zentrum"
+      },
+      "meals":[
+         {
+            "id":63178,
+            "type":"Asia",
+            "label":"WOK STREET",
+            "description":[
+               "PO PHI PHI",
+               "mit Hirsch,",
+               "grüne Thai Curry Sauce,",
+               "Zucchetti, Karotten, Peperoni",
+               "und Basmatireis",
+               "",
+               "Add on: Fried Rice (+1.00/1.50)"
+            ],
+            "position":0,
+            "prices":{
+               "student":"12.50",
+               "staff":"13.50",
+               "extern":"14.50"
+            },
+            "allergens":[
+               {
+                  "allergen_id":4,
+                  "label":"Fisch"
+               },
+               {
+                  "allergen_id":2,
+                  "label":"Krebstiere"
+               },
+               {
+                  "allergen_id":9,
+                  "label":"Sellerie"
+               }
+            ],
+            "origins":[
+               {
+                  "origin_id":25,
+                  "label":"Neuseeland"
+               }
+            ]
+         },
+         {
+            "id":63179,
+            "type":"Vegetarisch",
+            "label":"WOK GREEN",
+            "description":[
+               "GO PA",
+               "mit Valess (Milchprodukt)",
+               "grüne Thai Curry Sauce,",
+               "Zucchetti, Karotten, Peperoni",
+               "und Basmatireis",
+               "",
+               "Add on: Fried Rice (+1.00/1.50)"
+            ],
+            "position":1,
+            "prices":{
+               "student":"12.50",
+               "staff":"13.50",
+               "extern":"14.50"
+            },
+            "allergens":[
+               {
+                  "allergen_id":7,
+                  "label":"Milch/Laktose"
+               }
+            ],
+            "origins":[
+
+            ]
+         },
+         {
+            "id":63180,
+            "type":"Fisch",
+            "label":"DELIGHT",
+            "description":[
+               "WELIGAMA",
+               "ASC Crevetten in Panko Panade",
+               "mit Wasabi - Sojasauce,",
+               "gebratenem Reis - Kantonesischer Art",
+               "Asiagemüse und Ingwer",
+               "",
+               "Add on: XXL (+1.00/1.50)"
+            ],
+            "position":2,
+            "prices":{
+               "student":"8.50",
+               "staff":"11.50",
+               "extern":"13.50"
+            },
+            "allergens":[
+               {
+                  "allergen_id":3,
+                  "label":"Ei"
+               },
+               {
+                  "allergen_id":1,
+                  "label":"Gluten"
+               },
+               {
+                  "allergen_id":2,
+                  "label":"Krebstiere"
+               },
+               {
+                  "allergen_id":6,
+                  "label":"Soja (gen-tec frei)"
+               }
+            ],
+            "origins":[
+               {
+                  "origin_id":50,
+                  "label":"Vietnam"
+               }
+            ]
+         },
+         {
+            "id":63181,
+            "type":"Vegetarisch",
+            "label":"GARDEN",
+            "description":[
+               "DIM SUM",
+               "Gedämpfte vegetarische Dim Sum",
+               "mit Wai Wai Nudeln",
+               "scharfe Sojasauce ",
+               "Asiagemüse und Ingwer",
+               "",
+               "Add on: XXL (+1.00/1.50)"
+            ],
+            "position":3,
+            "prices":{
+               "student":"8.50",
+               "staff":"11.50",
+               "extern":"13.50"
+            },
+            "allergens":[
+               {
+                  "allergen_id":1,
+                  "label":"Gluten"
+               },
+               {
+                  "allergen_id":12,
+                  "label":"Schwefeldioxid / Sulfite"
+               },
+               {
+                  "allergen_id":6,
+                  "label":"Soja (gen-tec frei)"
+               }
+            ],
+            "origins":[
+
+            ]
+         },
+         {
+            "id":63182,
+            "type":null,
+            "label":"ADD ONS",
+            "description":[
+               "Pimp up...",
+               "-XXL Portion  (+1.00/1.50)",
+               "-Fried Rice (+1.00/1.50)",
+               "side dish of the day"
+            ],
+            "position":4,
+            "prices":{
+               "student":"1.00",
+               "staff":"1.00",
+               "extern":"1.00"
+            },
+            "allergens":[
+
+            ],
+            "origins":[
+
+            ]
+         }
+      ]
+   },
+   {
+      "id":20,
+      "daytime":"lunch",
+      "mensa":"food market - grill bbQ",
+      "hours":{
+         "opening":[
+            {
+               "from":"06:00",
+               "to":"22:00",
+               "type":"opening"
+            }
+         ],
+         "mealtime":[
+            {
+               "from":"11:15",
+               "to":"13:30",
+               "type":"lunch"
+            }
+         ]
+      },
+      "location":{
+         "id":2,
+         "label":"Hönggerberg"
+      },
+      "meals":[
+         {
+            "id":63311,
+            "type":null,
+            "label":"fire",
+            "description":[
+               "Fischknusperli",
+               "Tartarsauce",
+               "Petersilienkartoffeln",
+               "Brokkoli"
+            ],
+            "position":0,
+            "prices":{
+               "student":"6.20",
+               "staff":"9.30",
+               "extern":"12.70"
+            },
+            "allergens":[
+
+            ],
+            "origins":[
+
+            ]
+         },
+         {
+            "id":63312,
+            "type":"Asia",
+            "label":"grill",
+            "description":[
+               "Sonne Steinergarten",
+               "Ginger Beef aus der riesen Pfanne ",
+               "Bambus, Peperoni, Ingwer",
+               "Stangensellerie",
+               "Basmatireis"
+            ],
+            "position":1,
+            "prices":{
+               "student":"9.90",
+               "staff":"12.90",
+               "extern":"16.90"
+            },
+            "allergens":[
+
+            ],
+            "origins":[
+
+            ]
+         },
+         {
+            "id":63313,
+            "type":"Asia",
+            "label":"flame",
+            "description":[
+               "Flame",
+               "Sommerteller",
+               "Kebab Teller mit Salat"
+            ],
+            "position":2,
+            "prices":{
+               "student":"10.30",
+               "staff":"11.30",
+               "extern":"13.30"
+            },
+            "allergens":[
+
+            ],
+            "origins":[
+
+            ]
+         }
+      ]
+   },
+   {
+      "id":25,
+      "daytime":"lunch",
+      "mensa":"BELLAVISTA",
+      "hours":{
+         "opening":[
+            {
+               "from":"11:15",
+               "to":"14:00",
+               "type":"opening_lunch"
+            }
+         ],
+         "mealtime":[
+            {
+               "from":"11:15",
+               "to":"14:00",
+               "type":"lunch"
+            }
+         ]
+      },
+      "location":{
+         "id":2,
+         "label":"Hönggerberg"
+      },
+      "meals":[
+         {
+            "id":63285,
+            "type":null,
+            "label":"Bellavista Tagesmenü",
+            "description":[
+               "Wir freuen uns auf Ihren Besuch. Ihr Bellavista-Team"
+            ],
+            "position":0,
+            "prices":{
+               "student":"26.00",
+               "staff":"26.00",
+               "extern":"26.00"
+            },
+            "allergens":[
+
+            ],
+            "origins":[
+
+            ]
+         },
+         {
+            "id":63286,
+            "type":"Suppe",
+            "label":"Tagessuppe",
+            "description":[
+               "Zucchetti-Ragout"
+            ],
+            "position":1,
+            "prices":{
+               "student":"0.00",
+               "staff":"0.00",
+               "extern":"0.00"
+            },
+            "allergens":[
+
+            ],
+            "origins":[
+
+            ]
+         },
+         {
+            "id":63287,
+            "type":"Salat",
+            "label":"Wochensalat",
+            "description":[
+               "Erbsen,Spinatpüree, dazu Sauerrahm und Speckcrumble"
+            ],
+            "position":2,
+            "prices":{
+               "student":"0.00",
+               "staff":"0.00",
+               "extern":"0.00"
+            },
+            "allergens":[
+
+            ],
+            "origins":[
+
+            ]
+         },
+         {
+            "id":63288,
+            "type":"Salat",
+            "label":"Menüesalat",
+            "description":[
+               "Bunterblattsalat"
+            ],
+            "position":3,
+            "prices":{
+               "student":"0.00",
+               "staff":"0.00",
+               "extern":"0.00"
+            },
+            "allergens":[
+
+            ],
+            "origins":[
+
+            ]
+         },
+         {
+            "id":63289,
+            "type":"Fisch",
+            "label":"Tageshit",
+            "description":[
+               "Gersotto alla Pescatora mit Cherrytomaten,Knoblauch,Chili"
+            ],
+            "position":4,
+            "prices":{
+               "student":"0.00",
+               "staff":"0.00",
+               "extern":"0.00"
+            },
+            "allergens":[
+
+            ],
+            "origins":[
+
+            ]
+         },
+         {
+            "id":63290,
+            "type":"Fleisch",
+            "label":"Wochenmenü Fleisch",
+            "description":[
+               "Edelschwein-Medaillion,Trüffelrisotto und Eierschwämmli-Sauce"
+            ],
+            "position":5,
+            "prices":{
+               "student":"0.00",
+               "staff":"0.00",
+               "extern":"0.00"
+            },
+            "allergens":[
+
+            ],
+            "origins":[
+
+            ]
+         },
+         {
+            "id":63297,
+            "type":"Vegetarisch",
+            "label":"Wochenmenü Vegi",
+            "description":[
+               "Linsen-Hummus,gebackene Süsskartoffel,Chicoreé und Ananas"
+            ],
+            "position":6,
+            "prices":{
+               "student":"0.00",
+               "staff":"0.00",
+               "extern":"0.00"
+            },
+            "allergens":[
+
+            ],
+            "origins":[
+
+            ]
+         },
+         {
+            "id":63298,
+            "type":"Fisch",
+            "label":"Wochenmenü Fisch",
+            "description":[
+               "Egli-Filet im Salbei-Teig,mediterranischen Kartoffelsalat und Basilikum Mayo"
+            ],
+            "position":7,
+            "prices":{
+               "student":"0.00",
+               "staff":"0.00",
+               "extern":"0.00"
+            },
+            "allergens":[
+
+            ],
+            "origins":[
+
+            ]
+         }
+      ]
+   },
+   {
+      "id":13,
+      "daytime":"lunch",
+      "mensa":"Polysnack",
+      "hours":{
+         "opening":[
+            {
+               "from":"08:30",
+               "to":"17:00",
+               "type":"opening"
+            }
+         ],
+         "mealtime":[
+            {
+               "from":"11:30",
+               "to":"14:00",
+               "type":"lunch"
+            }
+         ]
+      },
+      "location":{
+         "id":1,
+         "label":"Zentrum"
+      },
+      "meals":[
+         {
+            "id":63154,
+            "type":"Pasta",
+            "label":"Pasta",
+            "description":[
+               "Spaghetti alla carbonara",
+               "Spaghetti an Rahmsauce mit Speck"
+            ],
+            "position":0,
+            "prices":{
+               "student":"8.90",
+               "staff":"9.90",
+               "extern":"13.90"
+            },
+            "allergens":[
+               {
+                  "allergen_id":3,
+                  "label":"Ei"
+               },
+               {
+                  "allergen_id":1,
+                  "label":"Gluten"
+               },
+               {
+                  "allergen_id":7,
+                  "label":"Milch/Laktose"
+               }
+            ],
+            "origins":[
+               {
+                  "origin_id":39,
+                  "label":"Schweiz"
+               }
+            ]
+         },
+         {
+            "id":63155,
+            "type":"Pizza",
+            "label":"Hausgemachte Pizza",
+            "description":[
+               "Pizza ai tre formaggi",
+               "Ofenfrische Pizza mit Tomaten, Mozzarella, Parmesan und Gorgonzola"
+            ],
+            "position":1,
+            "prices":{
+               "student":"8.50",
+               "staff":"10.50",
+               "extern":"14.50"
+            },
+            "allergens":[
+               {
+                  "allergen_id":1,
+                  "label":"Gluten"
+               },
+               {
+                  "allergen_id":7,
+                  "label":"Milch/Laktose"
+               }
+            ],
+            "origins":[
+
+            ]
+         },
+         {
+            "id":63156,
+            "type":"Salat",
+            "label":"Insalata",
+            "description":[
+               "Insalata \"Vitale\"",
+               "Marktfrische Blattsalate mit Lollo Rosso, Randen und Fetakäse",
+               "Serviert mit einem Semmeli"
+            ],
+            "position":2,
+            "prices":{
+               "student":"8.50",
+               "staff":"9.50",
+               "extern":"13.00"
+            },
+            "allergens":[
+               {
+                  "allergen_id":7,
+                  "label":"Milch/Laktose"
+               }
+            ],
+            "origins":[
+
+            ]
+         },
+         {
+            "id":63157,
+            "type":"Suppe",
+            "label":"Minestra",
+            "description":[
+               "Tomaten-Dal Suppe",
+               "Indische Linsen-Tomatensuppe ",
+               "Serviert mit einem Kleinbrot"
+            ],
+            "position":3,
+            "prices":{
+               "student":"5.50",
+               "staff":"6.50",
+               "extern":"7.50"
+            },
+            "allergens":[
+
+            ],
+            "origins":[
+
+            ]
+         }
+      ]
+   },
+   {
+      "id":22,
+      "daytime":"lunch",
+      "mensa":"FUSION coffee",
+      "hours":{
+         "opening":[
+            {
+               "from":"07:30",
+               "to":"19:00",
+               "type":"opening"
+            }
+         ],
+         "mealtime":[
+            {
+               "from":"11:00",
+               "to":"14:00",
+               "type":"lunch"
+            },
+            {
+               "from":"17:30",
+               "to":"19:00",
+               "type":"dinner"
+            }
+         ]
+      },
+      "location":{
+         "id":2,
+         "label":"Hönggerberg"
+      },
+      "meals":[
+         {
+            "id":63655,
+            "type":"Fleisch",
+            "label":"Tagesangebot",
+            "description":[
+               "Poulet Tandoori",
+               "Basmatireis"
+            ],
+            "position":0,
+            "prices":{
+               "student":"8.50",
+               "staff":"9.50",
+               "extern":"10.50"
+            },
+            "allergens":[
+               {
+                  "allergen_id":1,
+                  "label":"Gluten"
+               },
+               {
+                  "allergen_id":13,
+                  "label":"Lupinen"
+               },
+               {
+                  "allergen_id":7,
+                  "label":"Milch/Laktose"
+               },
+               {
+                  "allergen_id":12,
+                  "label":"Schwefeldioxid / Sulfite"
+               },
+               {
+                  "allergen_id":9,
+                  "label":"Sellerie"
+               },
+               {
+                  "allergen_id":10,
+                  "label":"Senf"
+               }
+            ],
+            "origins":[
+               {
+                  "origin_id":39,
+                  "label":"Schweiz"
+               }
+            ]
+         },
+         {
+            "id":63656,
+            "type":"Vegetarisch",
+            "label":"Vegetarisch",
+            "description":[
+               "Linsen Nuss Curry",
+               "Basmatireis"
+            ],
+            "position":1,
+            "prices":{
+               "student":"7.50",
+               "staff":"8.50",
+               "extern":"9.50"
+            },
+            "allergens":[
+               {
+                  "allergen_id":5,
+                  "label":"Erdnüsse"
+               },
+               {
+                  "allergen_id":13,
+                  "label":"Lupinen"
+               },
+               {
+                  "allergen_id":7,
+                  "label":"Milch/Laktose"
+               },
+               {
+                  "allergen_id":12,
+                  "label":"Schwefeldioxid / Sulfite"
+               },
+               {
+                  "allergen_id":9,
+                  "label":"Sellerie"
+               },
+               {
+                  "allergen_id":10,
+                  "label":"Senf"
+               }
+            ],
+            "origins":[
+
+            ]
+         },
+         {
+            "id":63657,
+            "type":"Fisch",
+            "label":"Wochenangebot",
+            "description":[
+               "Crevetten Curry",
+               "Gemüse",
+               "Basmatireis"
+            ],
+            "position":2,
+            "prices":{
+               "student":"9.50",
+               "staff":"10.50",
+               "extern":"11.50"
+            },
+            "allergens":[
+               {
+                  "allergen_id":13,
+                  "label":"Lupinen"
+               },
+               {
+                  "allergen_id":12,
+                  "label":"Schwefeldioxid / Sulfite"
+               },
+               {
+                  "allergen_id":9,
+                  "label":"Sellerie"
+               },
+               {
+                  "allergen_id":10,
+                  "label":"Senf"
+               }
+            ],
+            "origins":[
+               {
+                  "origin_id":50,
+                  "label":"Vietnam"
+               }
+            ]
+         }
+      ]
+   },
+   {
+      "id":27,
+      "daytime":"lunch",
+      "mensa":"Rice Up!",
+      "hours":{
+         "opening":[
+            {
+               "from":"10:30",
+               "to":"14:30",
+               "type":"opening_lunch"
+            }
+         ],
+         "mealtime":[
+            {
+               "from":"10:30",
+               "to":"14:30",
+               "type":"lunch"
+            }
+         ]
+      },
+      "location":{
+         "id":2,
+         "label":"Hönggerberg"
+      },
+      "meals":[
+         {
+            "id":62993,
+            "type":"Asia",
+            "label":"Chicken Meatballs",
+            "description":[
+               "Base",
+               "<a href=\"https://www.riceup-restaurant.com/wp-content/uploads/2019/05/RET_TO-Flyer_Apr2019_A4_RZ_Screen.pdf\">CHICKEN MEATBALLS<span class=\"icon\"></span></a>",
+               "Veggie",
+               "Sauce"
+            ],
+            "position":0,
+            "prices":{
+               "student":"7.90",
+               "staff":"11.90",
+               "extern":"12.90"
+            },
+            "allergens":[
+               {
+                  "allergen_id":3,
+                  "label":"Ei"
+               }
+            ],
+            "origins":[
+               {
+                  "origin_id":39,
+                  "label":"Schweiz"
+               }
+            ]
+         },
+         {
+            "id":62994,
+            "type":"Asia",
+            "label":"Tofu",
+            "description":[
+               "Base",
+               "<a href=\"https://www.riceup-restaurant.com/wp-content/uploads/2019/05/RET_TO-Flyer_Apr2019_A4_RZ_Screen.pdf\">MARINATED TOFU<span class=\"icon\"></span></a>",
+               "Veggie",
+               "Sauce"
+            ],
+            "position":1,
+            "prices":{
+               "student":"8.90",
+               "staff":"12.90",
+               "extern":"13.90"
+            },
+            "allergens":[
+               {
+                  "allergen_id":6,
+                  "label":"Soja (gen-tec frei)"
+               }
+            ],
+            "origins":[
+               {
+                  "origin_id":39,
+                  "label":"Schweiz"
+               }
+            ]
+         },
+         {
+            "id":62995,
+            "type":"Asia",
+            "label":"Grilled Beef",
+            "description":[
+               "Base",
+               "<a href=\"https://www.riceup-restaurant.com/wp-content/uploads/2019/05/RET_TO-Flyer_Apr2019_A4_RZ_Screen.pdf\">GRILLED BEEF<span class=\"icon\"></span></a>",
+               "Veggie",
+               "Sauce"
+            ],
+            "position":2,
+            "prices":{
+               "student":"9.90",
+               "staff":"13.90",
+               "extern":"14.90"
+            },
+            "allergens":[
+               {
+                  "allergen_id":6,
+                  "label":"Soja (gen-tec frei)"
+               }
+            ],
+            "origins":[
+               {
+                  "origin_id":39,
+                  "label":"Schweiz"
+               }
+            ]
+         },
+         {
+            "id":62996,
+            "type":"Asia",
+            "label":"Chicken Satay",
+            "description":[
+               "Base",
+               "<a href=\"https://www.riceup-restaurant.com/wp-content/uploads/2019/05/RET_TO-Flyer_Apr2019_A4_RZ_Screen.pdf\">CHICKEN SATAY<span class=\"icon\"></span></a>",
+               "Veggie",
+               "Sauce",
+               ""
+            ],
+            "position":3,
+            "prices":{
+               "student":"10.90",
+               "staff":"14.90",
+               "extern":"15.90"
+            },
+            "allergens":[
+               {
+                  "allergen_id":5,
+                  "label":"Erdnüsse"
+               },
+               {
+                  "allergen_id":4,
+                  "label":"Fisch"
+               }
+            ],
+            "origins":[
+               {
+                  "origin_id":39,
+                  "label":"Schweiz"
+               }
+            ]
+         }
+      ]
+   },
+   {
+      "id":21,
+      "daytime":"lunch",
+      "mensa":"FUSION meal",
+      "hours":{
+         "opening":[
+
+         ],
+         "mealtime":[
+
+         ]
+      },
+      "location":{
+         "id":2,
+         "label":"Hönggerberg"
+      },
+      "meals":[
+         {
+            "id":63241,
+            "type":"Asia",
+            "label":"veggie",
+            "description":[
+               "Free Choice",
+               "Wählen Sie aus",
+               "vielen authentischen Gerichten",
+               "Verrechnung über die Waage"
+            ],
+            "position":3,
+            "prices":{
+               "student":"",
+               "staff":"",
+               "extern":""
+            },
+            "allergens":[
+
+            ],
+            "origins":[
+
+            ]
+         },
+         {
+            "id":63242,
+            "type":"Asia",
+            "label":"pot&spoon",
+            "description":[
+               "Free Choice",
+               "Wählen Sie aus",
+               "vielen authentischen Gerichten",
+               "Verrechnung über die Waage"
+            ],
+            "position":4,
+            "prices":{
+               "student":"",
+               "staff":"",
+               "extern":""
+            },
+            "allergens":[
+
+            ],
+            "origins":[
+
+            ]
+         },
+         {
+            "id":63243,
+            "type":"Asia",
+            "label":"pasta",
+            "description":[
+               "Mezze  Free Choice",
+               "Wählen Sie aus",
+               "vielen authentischen Gerichten",
+               "Verrechnung über die Waage"
+            ],
+            "position":2,
+            "prices":{
+               "student":"",
+               "staff":"9.30",
+               "extern":""
+            },
+            "allergens":[
+
+            ],
+            "origins":[
+
+            ]
+         },
+         {
+            "id":63244,
+            "type":"Vegetarisch",
+            "label":"classic",
+            "description":[
+               "Spätzli mit grünem Spargel",
+               "an Käse Sauce",
+               "mit Tomatenwürfeli",
+               "Tagessalat"
+            ],
+            "position":1,
+            "prices":{
+               "student":"6.20",
+               "staff":"9.30",
+               "extern":"12.70"
+            },
+            "allergens":[
+               {
+                  "allergen_id":1,
+                  "label":"Gluten"
+               },
+               {
+                  "allergen_id":13,
+                  "label":"Lupinen"
+               },
+               {
+                  "allergen_id":7,
+                  "label":"Milch/Laktose"
+               },
+               {
+                  "allergen_id":12,
+                  "label":"Schwefeldioxid / Sulfite"
+               },
+               {
+                  "allergen_id":9,
+                  "label":"Sellerie"
+               },
+               {
+                  "allergen_id":10,
+                  "label":"Senf"
+               }
+            ],
+            "origins":[
+
+            ]
+         },
+         {
+            "id":63245,
+            "type":"Fleisch",
+            "label":"ell",
+            "description":[
+               "Gebratenes Pouletgeschnetzeltes (HU)",
+               "Salbeijus",
+               "Butternudeln",
+               "Stangensellerie"
+            ],
+            "position":0,
+            "prices":{
+               "student":"7.90",
+               "staff":"11.00",
+               "extern":"14.40"
+            },
+            "allergens":[
+               {
+                  "allergen_id":3,
+                  "label":"Ei"
+               },
+               {
+                  "allergen_id":1,
+                  "label":"Gluten"
+               },
+               {
+                  "allergen_id":13,
+                  "label":"Lupinen"
+               },
+               {
+                  "allergen_id":7,
+                  "label":"Milch/Laktose"
+               },
+               {
+                  "allergen_id":12,
+                  "label":"Schwefeldioxid / Sulfite"
+               },
+               {
+                  "allergen_id":9,
+                  "label":"Sellerie"
+               },
+               {
+                  "allergen_id":10,
+                  "label":"Senf"
+               }
+            ],
+            "origins":[
+               {
+                  "origin_id":47,
+                  "label":"Ungarn"
+               }
+            ]
+         }
+      ]
+   },
+   {
+      "id":11,
+      "daytime":"lunch",
+      "mensa":"G-ESSbar",
+      "hours":{
+         "opening":[
+
+         ],
+         "mealtime":[
+
+         ]
+      },
+      "location":{
+         "id":1,
+         "label":"Zentrum"
+      },
+      "meals":[
+         {
+            "id":63047,
+            "type":null,
+            "label":"Traditional",
+            "description":[
+               "Thunfisch Steak",
+               "mit Liebstöckelsauce, Salzkartoffeln und Erbsen"
+            ],
+            "position":0,
+            "prices":{
+               "student":"9.00",
+               "staff":"11.00",
+               "extern":"13.00"
+            },
+            "allergens":[
+
+            ],
+            "origins":[
+
+            ]
+         },
+         {
+            "id":63048,
+            "type":null,
+            "label":"Favorite",
+            "description":[
+               "Gemüse-Tätschli",
+               "mit Liebstöckelsauce, Salzkartoffeln und Erbsen"
+            ],
+            "position":1,
+            "prices":{
+               "student":"9.00",
+               "staff":"11.00",
+               "extern":"13.00"
+            },
+            "allergens":[
+
+            ],
+            "origins":[
+
+            ]
+         },
+         {
+            "id":63049,
+            "type":null,
+            "label":"Garden",
+            "description":[
+               "Salatbuffet",
+               "Täglich frisch für Sie zubereitet.",
+               "Preis pro 100 Gramm.",
+               "",
+               "Add ons nach Tagesangebot"
+            ],
+            "position":2,
+            "prices":{
+               "student":"1.80",
+               "staff":"2.00",
+               "extern":"2.20"
+            },
+            "allergens":[
+
+            ],
+            "origins":[
+
+            ]
+         }
+      ]
+   },
+   {
+      "id":14,
+      "daytime":"lunch",
+      "mensa":"Tannenbar",
+      "hours":{
+         "opening":[
+
+         ],
+         "mealtime":[
+
+         ]
+      },
+      "location":{
+         "id":1,
+         "label":"Zentrum"
+      },
+      "meals":[
+         {
+            "id":63058,
+            "type":"Fleisch",
+            "label":"Burrito",
+            "description":[
+               "Grilled Chicken Burrito",
+               "mit Poulet, Grillgemüse, ",
+               "Cipollotto, Cheddar und Peperoni",
+               "Nacho Chips, Blattsalat",
+               "und Salsa Ranchera"
+            ],
+            "position":0,
+            "prices":{
+               "student":"",
+               "staff":"10.50",
+               "extern":"14.50"
+            },
+            "allergens":[
+               {
+                  "allergen_id":1,
+                  "label":"Gluten"
+               },
+               {
+                  "allergen_id":7,
+                  "label":"Milch/Laktose"
+               },
+               {
+                  "allergen_id":9,
+                  "label":"Sellerie"
+               }
+            ],
+            "origins":[
+               {
+                  "origin_id":39,
+                  "label":"Schweiz"
+               }
+            ]
+         },
+         {
+            "id":63059,
+            "type":"Vegetarisch",
+            "label":"Quesadilla",
+            "description":[
+               "Quesadillas",
+               "mit Paneer, Grillgemüse, ",
+               "Cipollotto, Cheddar und Peperoni",
+               "Nacho Chips, Blattsalat",
+               "und Salsa Ranchera"
+            ],
+            "position":1,
+            "prices":{
+               "student":"",
+               "staff":"10.50",
+               "extern":"14.50"
+            },
+            "allergens":[
+               {
+                  "allergen_id":1,
+                  "label":"Gluten"
+               },
+               {
+                  "allergen_id":7,
+                  "label":"Milch/Laktose"
+               },
+               {
+                  "allergen_id":9,
+                  "label":"Sellerie"
+               },
+               {
+                  "allergen_id":6,
+                  "label":"Soja (gen-tec frei)"
+               }
+            ],
+            "origins":[
+
+            ]
+         }
+      ]
+   },
+   {
+      "id":19,
+      "daytime":"lunch",
+      "mensa":"food market - green day",
+      "hours":{
+         "opening":[
+            {
+               "from":"06:00",
+               "to":"22:00",
+               "type":"opening"
+            }
+         ],
+         "mealtime":[
+            {
+               "from":"11:15",
+               "to":"13:30",
+               "type":"lunch"
+            }
+         ]
+      },
+      "location":{
+         "id":2,
+         "label":"Hönggerberg"
+      },
+      "meals":[
+         {
+            "id":63360,
+            "type":null,
+            "label":"green daily",
+            "description":[
+               "Hiltl Day",
+               "Cheeseburger",
+               "Bulgur-Gemüsepatty",
+               "Emmentaler, Cocktailsauce",
+               "Salatgarnitur,",
+               "Kartoffelecken"
+            ],
+            "position":0,
+            "prices":{
+               "student":"6.20",
+               "staff":"9.30",
+               "extern":"12.70"
+            },
+            "allergens":[
+
+            ],
+            "origins":[
+
+            ]
+         },
+         {
+            "id":63361,
+            "type":null,
+            "label":"green delight",
+            "description":[
+               "Choose 5",
+               "Wähle 5"
+            ],
+            "position":1,
+            "prices":{
+               "student":"9.50",
+               "staff":"12.50",
+               "extern":"16.50"
+            },
+            "allergens":[
+
+            ],
+            "origins":[
+
+            ]
+         },
+         {
+            "id":63362,
+            "type":null,
+            "label":"green soup",
+            "description":[
+               "Geschlossen",
+               ""
+            ],
+            "position":2,
+            "prices":{
+               "student":null,
+               "staff":"4.70",
+               "extern":null
+            },
+            "allergens":[
+
+            ],
+            "origins":[
+
+            ]
+         },
+         {
+            "id":63363,
+            "type":null,
+            "label":"green bowl",
+            "description":[
+               "Fitness Bowl",
+               "Bowl Vegi & Vegan"
+            ],
+            "position":3,
+            "prices":{
+               "student":"8.30",
+               "staff":"10.30",
+               "extern":"12.30"
+            },
+            "allergens":[
+
+            ],
+            "origins":[
+
+            ]
+         }
+      ]
+   },
+   {
+      "id":12,
+      "daytime":"lunch",
+      "mensa":"Mensa Polyterrasse",
+      "hours":{
+         "opening":[
+            {
+               "from":"11:15",
+               "to":"13:30",
+               "type":"opening_lunch"
+            },
+            {
+               "from":"17:30",
+               "to":"19:30",
+               "type":"opening_dinner"
+            }
+         ],
+         "mealtime":[
+            {
+               "from":"11:15",
+               "to":"13:30",
+               "type":"lunch"
+            },
+            {
+               "from":"17:30",
+               "to":"19:30",
+               "type":"dinner"
+            }
+         ]
+      },
+      "location":{
+         "id":1,
+         "label":"Zentrum"
+      },
+      "meals":[
+         {
+            "id":63080,
+            "type":null,
+            "label":"LOCAL",
+            "description":[
+               "Dieses Menu servieren wir Ihnen gerne bald wieder!",
+               ""
+            ],
+            "position":0,
+            "prices":{
+               "student":"10.50",
+               "staff":"11.50",
+               "extern":"15.50"
+            },
+            "allergens":[
+
+            ],
+            "origins":[
+
+            ]
+         },
+         {
+            "id":63081,
+            "type":"Fleisch",
+            "label":"STREET",
+            "description":[
+               "Schweins Cordon bleu Kräuterhexe",
+               "mit gefüllt mit Cantadou ",
+               "und Zigeunerschinken",
+               "Kräutermayo",
+               "Country cuts",
+               "Glasierten Bohnen",
+               "Onion Rings"
+            ],
+            "position":1,
+            "prices":{
+               "student":"13.50",
+               "staff":"15.50",
+               "extern":"17.00"
+            },
+            "allergens":[
+               {
+                  "allergen_id":3,
+                  "label":"Ei"
+               },
+               {
+                  "allergen_id":1,
+                  "label":"Gluten"
+               },
+               {
+                  "allergen_id":7,
+                  "label":"Milch/Laktose"
+               },
+               {
+                  "allergen_id":9,
+                  "label":"Sellerie"
+               },
+               {
+                  "allergen_id":10,
+                  "label":"Senf"
+               }
+            ],
+            "origins":[
+               {
+                  "origin_id":39,
+                  "label":"Schweiz"
+               }
+            ]
+         },
+         {
+            "id":63082,
+            "type":"Vegetarisch",
+            "label":"GARDEN",
+            "description":[
+               "Crispy Spring Rolls",
+               "mit Gemüsefüllung, Fried Rice, ",
+               "Karotten, Edamame",
+               "und süsser Chilisauce"
+            ],
+            "position":2,
+            "prices":{
+               "student":"6.20",
+               "staff":"9.30",
+               "extern":"12.70"
+            },
+            "allergens":[
+               {
+                  "allergen_id":1,
+                  "label":"Gluten"
+               },
+               {
+                  "allergen_id":6,
+                  "label":"Soja (gen-tec frei)"
+               }
+            ],
+            "origins":[
+
+            ]
+         },
+         {
+            "id":63083,
+            "type":"Pasta",
+            "label":"HOME",
+            "description":[
+               "Spaghetti Bolognese",
+               "mit Grana Padano",
+               "Tagessalat"
+            ],
+            "position":3,
+            "prices":{
+               "student":"6.20",
+               "staff":"9.30",
+               "extern":"12.70"
+            },
+            "allergens":[
+               {
+                  "allergen_id":1,
+                  "label":"Gluten"
+               },
+               {
+                  "allergen_id":7,
+                  "label":"Milch/Laktose"
+               },
+               {
+                  "allergen_id":9,
+                  "label":"Sellerie"
+               },
+               {
+                  "allergen_id":6,
+                  "label":"Soja (gen-tec frei)"
+               }
+            ],
+            "origins":[
+               {
+                  "origin_id":39,
+                  "label":"Schweiz"
+               }
+            ]
+         },
+         {
+            "id":63084,
+            "type":"Suppe",
+            "label":"SOUP",
+            "description":[
+               "Spinat-Crèmesuppe",
+               "mit Feta"
+            ],
+            "position":4,
+            "prices":{
+               "student":"3.50",
+               "staff":"3.50",
+               "extern":"4.50"
+            },
+            "allergens":[
+               {
+                  "allergen_id":1,
+                  "label":"Gluten"
+               },
+               {
+                  "allergen_id":7,
+                  "label":"Milch/Laktose"
+               },
+               {
+                  "allergen_id":6,
+                  "label":"Soja (gen-tec frei)"
+               }
+            ],
+            "origins":[
+
+            ]
+         }
+      ]
+   },
+   {
+      "id":18,
+      "daytime":"lunch",
+      "mensa":"food market - pizza pasta",
+      "hours":{
+         "opening":[
+            {
+               "from":"06:00",
+               "to":"22:00",
+               "type":"opening"
+            }
+         ],
+         "mealtime":[
+            {
+               "from":"11:15",
+               "to":"14:00",
+               "type":"lunch"
+            }
+         ]
+      },
+      "location":{
+         "id":2,
+         "label":"Hönggerberg"
+      },
+      "meals":[
+         {
+            "id":63338,
+            "type":null,
+            "label":"pizza classica",
+            "description":[
+               "Pizza Margherita",
+               "Hausgemachte Tomatensauce, ",
+               "Mozzarella und Oregano",
+               "Topping Ananas",
+               "Saisonsalat"
+            ],
+            "position":0,
+            "prices":{
+               "student":"6.20",
+               "staff":"9.30",
+               "extern":"12.70"
+            },
+            "allergens":[
+
+            ],
+            "origins":[
+
+            ]
+         },
+         {
+            "id":63339,
+            "type":null,
+            "label":"pizza bella Italia",
+            "description":[
+               "Sommerpause",
+               "Ab September wieder im Angebot"
+            ],
+            "position":1,
+            "prices":{
+               "student":null,
+               "staff":"9.50",
+               "extern":null
+            },
+            "allergens":[
+
+            ],
+            "origins":[
+
+            ]
+         },
+         {
+            "id":63340,
+            "type":null,
+            "label":"pizza mamma mia",
+            "description":[
+               "Pizza  cruda",
+               "Hausgemachte Tomatensauce, ",
+               "Trockenfleisch, Rucola,",
+               "Oliven und Grana Padano Splitter, ",
+               "Mozzarella",
+               "Saisonsalat"
+            ],
+            "position":2,
+            "prices":{
+               "student":"12.50",
+               "staff":"14.50",
+               "extern":"18.50"
+            },
+            "allergens":[
+
+            ],
+            "origins":[
+
+            ]
+         },
+         {
+            "id":63341,
+            "type":null,
+            "label":"pasta classica",
+            "description":[
+               "Pasta Napoli",
+               "Tomatensauce",
+               "Kräuter",
+               "Saisonsalat"
+            ],
+            "position":3,
+            "prices":{
+               "student":"6.20",
+               "staff":"9.30",
+               "extern":"12.70"
+            },
+            "allergens":[
+
+            ],
+            "origins":[
+
+            ]
+         },
+         {
+            "id":63342,
+            "type":null,
+            "label":"pasta della nonna",
+            "description":[
+               "Gnocchi e pomodori",
+               "Tomaten-Mascarponesauce, ",
+               "schwarze Oliven,",
+               "Erbsen",
+               "Saisonsalat"
+            ],
+            "position":4,
+            "prices":{
+               "student":"9.50",
+               "staff":"11.50",
+               "extern":"16.50"
+            },
+            "allergens":[
+
+            ],
+            "origins":[
+
+            ]
+         },
+         {
+            "id":63343,
+            "type":null,
+            "label":"pasta deliziosa",
+            "description":[
+               "Sommerpause",
+               "Ab September wieder im Angebot"
+            ],
+            "position":5,
+            "prices":{
+               "student":null,
+               "staff":"12.50",
+               "extern":null
+            },
+            "allergens":[
+
+            ],
+            "origins":[
+
+            ]
+         }
+      ]
+   },
+   {
+      "id":9,
+      "daytime":"lunch",
+      "mensa":"Foodtrailer ETZ",
+      "hours":{
+         "opening":[
+
+         ],
+         "mealtime":[
+
+         ]
+      },
+      "location":{
+         "id":1,
+         "label":"Zentrum"
+      },
+      "meals":[
+         {
+            "id":63130,
+            "type":"Fleisch",
+            "label":"Trailerburger",
+            "description":[
+               "Trailer Burger",
+               "Schweizer Rindfleisch, Brioche Bun,",
+               "Eisbergsalat, Tomaten, Essiggurke, ",
+               "Pommes frites und Trailersauce"
+            ],
+            "position":0,
+            "prices":{
+               "student":"9.50",
+               "staff":"11.50",
+               "extern":"12.50"
+            },
+            "allergens":[
+               {
+                  "allergen_id":1,
+                  "label":"Gluten"
+               },
+               {
+                  "allergen_id":7,
+                  "label":"Milch/Laktose"
+               },
+               {
+                  "allergen_id":12,
+                  "label":"Schwefeldioxid / Sulfite"
+               }
+            ],
+            "origins":[
+               {
+                  "origin_id":39,
+                  "label":"Schweiz"
+               }
+            ]
+         },
+         {
+            "id":63131,
+            "type":"Pasta",
+            "label":"Wochenspezial",
+            "description":[
+               "Spaghetti Bolognese",
+               "mit Grana Padano",
+               "Tagessalat"
+            ],
+            "position":1,
+            "prices":{
+               "student":"9.50",
+               "staff":"11.50",
+               "extern":"12.50"
+            },
+            "allergens":[
+               {
+                  "allergen_id":1,
+                  "label":"Gluten"
+               },
+               {
+                  "allergen_id":7,
+                  "label":"Milch/Laktose"
+               },
+               {
+                  "allergen_id":9,
+                  "label":"Sellerie"
+               },
+               {
+                  "allergen_id":6,
+                  "label":"Soja (gen-tec frei)"
+               }
+            ],
+            "origins":[
+               {
+                  "origin_id":39,
+                  "label":"Schweiz"
+               }
+            ]
+         },
+         {
+            "id":63132,
+            "type":"Vegetarisch",
+            "label":"Garden",
+            "description":[
+               "Crispy Spring Rolls",
+               "mit Gemüsefüllung, Fried Rice, ",
+               "Karotten, Edamame",
+               "und süsser Chilisauce"
+            ],
+            "position":2,
+            "prices":{
+               "student":"6.20",
+               "staff":"9.30",
+               "extern":"12.70"
+            },
+            "allergens":[
+               {
+                  "allergen_id":1,
+                  "label":"Gluten"
+               },
+               {
+                  "allergen_id":8,
+                  "label":"Schalenfrüchte"
+               },
+               {
+                  "allergen_id":6,
+                  "label":"Soja (gen-tec frei)"
+               }
+            ],
+            "origins":[
+
+            ]
+         },
+         {
+            "id":63133,
+            "type":"Salat",
+            "label":"Trailersalat",
+            "description":[
+               "\"Gloria Salad\"",
+               "mit Mischsalat, Fetakäse, Radieschen , Baumnüsse, Orangen und Balsamicodressing"
+            ],
+            "position":3,
+            "prices":{
+               "student":"8.50",
+               "staff":"9.50",
+               "extern":"10.50"
+            },
+            "allergens":[
+               {
+                  "allergen_id":7,
+                  "label":"Milch/Laktose"
+               },
+               {
+                  "allergen_id":8,
+                  "label":"Schalenfrüchte"
+               },
+               {
+                  "allergen_id":12,
+                  "label":"Schwefeldioxid / Sulfite"
+               }
+            ],
+            "origins":[
+
+            ]
+         },
+         {
+            "id":63134,
+            "type":"Suppe",
+            "label":"Suppe",
+            "description":[
+               "Spinat-Crèmesuppe",
+               "mit Feta"
+            ],
+            "position":4,
+            "prices":{
+               "student":"3.50",
+               "staff":"3.50",
+               "extern":"4.50"
+            },
+            "allergens":[
+               {
+                  "allergen_id":1,
+                  "label":"Gluten"
+               },
+               {
+                  "allergen_id":7,
+                  "label":"Milch/Laktose"
+               },
+               {
+                  "allergen_id":6,
+                  "label":"Soja (gen-tec frei)"
+               }
+            ],
+            "origins":[
+
+            ]
+         }
+      ]
+   },
+   {
+      "id":6,
+      "daytime":"lunch",
+      "mensa":"Dozentenfoyer",
+      "hours":{
+         "opening":[
+            {
+               "from":"09:00",
+               "to":"15:30",
+               "type":"opening_lunch"
+            }
+         ],
+         "mealtime":[
+            {
+               "from":"11:15",
+               "to":"14:00",
+               "type":"lunch"
+            }
+         ]
+      },
+      "location":{
+         "id":1,
+         "label":"Zentrum"
+      },
+      "meals":[
+         {
+            "id":63213,
+            "type":null,
+            "label":"chefs world",
+            "description":[
+               "Gekochter Schinken",
+               "mit lauwarmem Gurken-Kartoffelsalat",
+               "und Körnersenf"
+            ],
+            "position":2,
+            "prices":{
+               "student":null,
+               "staff":"17.50",
+               "extern":null
+            },
+            "allergens":[
+
+            ],
+            "origins":[
+
+            ]
+         },
+         {
+            "id":63214,
+            "type":null,
+            "label":"favorite",
+            "description":[
+               "Fjord-Forellenfilet",
+               "dazu Limettensauce, Süsskartoffel-Sweetchili ",
+               "und  Asiagemüse mit Koriander"
+            ],
+            "position":0,
+            "prices":{
+               "student":null,
+               "staff":"14.50",
+               "extern":null
+            },
+            "allergens":[
+
+            ],
+            "origins":[
+
+            ]
+         },
+         {
+            "id":63215,
+            "type":null,
+            "label":"vitality",
+            "description":[
+               "Asiatisches Gemüseragout",
+               "mit Reis"
+            ],
+            "position":1,
+            "prices":{
+               "student":null,
+               "staff":"14.50",
+               "extern":null
+            },
+            "allergens":[
+
+            ],
+            "origins":[
+
+            ]
+         },
+         {
+            "id":63216,
+            "type":null,
+            "label":"hot&cold",
+            "description":[
+               "hot & cold",
+               "Tägliche warme und kalte",
+               "Spezialitäten im Angebot",
+               "",
+               "Teller klein       CHF 9.50",
+               "Teller gross     CHF14.50"
+            ],
+            "position":3,
+            "prices":{
+               "student":"0.00",
+               "staff":"0.00",
+               "extern":"0.00"
+            },
+            "allergens":[
+
+            ],
+            "origins":[
+
+            ]
+         },
+         {
+            "id":63217,
+            "type":null,
+            "label":"soup world",
+            "description":[
+               "Saisonale Gemüsecreme",
+               "(Lactose, Gluten)",
+               "",
+               "",
+               "",
+               " Klein: CHF 2.50",
+               "Gross: CHF 6.50"
+            ],
+            "position":4,
+            "prices":{
+               "student":null,
+               "staff":"7.50",
+               "extern":null
+            },
+            "allergens":[
+
+            ],
+            "origins":[
+
+            ]
+         }
+      ]
+   }
+]

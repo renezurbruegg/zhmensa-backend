@@ -76,33 +76,25 @@ class Loader:
 
             meals = mensa["meals"]
 
-            list.append(
-                {
-                    "id": "error",
-                    "mensaName": name,
-                    "prices": {},
-                    "description": "The ETH changed their meal API. \n We are working to fix it. \n Currently no menus avaiable",
-                    "isVegi": True,
-                    "allergen": [],
-                    "date": str(day),
-                    "mealType": "all_day",
-                    "menuName": "Error with API",
-                    "origin": "ETH",
-                    "nutritionFacts": [],
-                    "lang": lang
-                });
-            return list
             #    for key in hours:
+            # Dirty fix
+            """ ent = entry["mealtypes"]
+            type = ""
+            if ent is not None:
+                for e in ent:
+                    type = e['label']
+                    break
+
             for entry in hours["mealtime"]:
                 entry["mensa"] = name
                 self.db["mealtypes"].update_one(
                     {
-                        "type": entry["type"],
+                        "type": type,
                         "mensa": entry["mensa"]
                     },
                     {"$set": entry},
                     upsert=True
-                )
+                )"""
 
             pos = 0
             for meal in meals:
@@ -135,8 +127,11 @@ class Loader:
 
         if "grill" in meal["label"]:
             return False
+        # Dirty fix
+        type = ""
+        for e in meal["mealtypes"]:
+            type = e["label"]
 
-        type = meal["type"]
         if type is not None:
             type = type.lower()
             if "vegan" in type or "vegetarian" in type or "vegetarisch" in type:
