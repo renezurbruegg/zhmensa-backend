@@ -87,6 +87,7 @@ def loadAllMensasForWeek(mydb, today):
 
     print("-----------------starting script at: " + str(today) + "----------------------------")
 
+    deleteMenusBeforeGivenDate(str(today + timedelta(days = 7)), mydb)
     # Gets the start of the actual week.
     if today.weekday() < 5:
         startOfWeek = today - timedelta(days=today.weekday())
@@ -105,7 +106,6 @@ def loadAllMensasForWeek(mydb, today):
     else:
         # It is a weeked. Lets clean up old menus from the db
         lastWeek = today + timedelta(days=- today.weekday())
-        deleteMenusBeforeGivenDate(str(lastWeek), mydb)
         # It is saturday or sunday, load menus for next week.
         startOfWeek = today + timedelta(days=7 - today.weekday())
 
