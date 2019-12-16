@@ -76,6 +76,22 @@ class Loader:
 
             meals = mensa["meals"]
 
+            list.append(
+                {
+                    "id": "error",
+                    "mensaName": name,
+                    "prices": {},
+                    "description": "The ETH changed their meal API. \n We are working to fix it. \n Currently no menus avaiable",
+                    "isVegi": True,
+                    "allergen": [],
+                    "date": str(day),
+                    "mealType": "all_day",
+                    "menuName": "Error with API",
+                    "origin": "ETH",
+                    "nutritionFacts": [],
+                    "lang": lang
+                });
+            return list
             #    for key in hours:
             for entry in hours["mealtime"]:
                 entry["mensa"] = name

@@ -93,7 +93,7 @@ def loadAllMensasForWeek(mydb, today):
 
         # Load all UZH Mensas. We can not get UZH Menus for next week
         i = 1
-        mensaEntries = uzh_loader.getMensaEntries()
+        """mensaEntries = uzh_loader.getMensaEntries()
         for connDef in mensaEntries:
             print("Collecting Mensa (" + str(i) + "/" + str(len(mensaEntries)) + ") : " + str(
                 connDef["mensa"].encode('utf-8')))
@@ -101,7 +101,7 @@ def loadAllMensasForWeek(mydb, today):
             try:
                 loadUZHMensa(startOfWeek, connDef, mydb)
             except RuntimeError as e:
-                logger.error(e)
+                logger.error(e)"""
     else:
         # It is a weeked. Lets clean up old menus from the db
         lastWeek = today + timedelta(days=- today.weekday())
