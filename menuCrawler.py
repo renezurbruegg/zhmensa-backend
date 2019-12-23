@@ -223,14 +223,16 @@ def loadEthMensa(startOfWeek, db, m_eth_loader):
         insert_all(m_eth_loader.loadEthMensaForParams("en", startOfWeek, i, "lunch", i), db)
         insert_all(m_eth_loader.loadEthMensaForParams("en", startOfWeek, i, "dinner", i), db)
 
-        loadEthStreetFoodForParams("de", startOfWeek, i, db)
-        loadEthStreetFoodForParams("en", startOfWeek, i, db)
+    #loadEthStreetFoodForParams("de", startOfWeek, 0, db)
+    #loadEthStreetFoodForParams("en", startOfWeek, 0, db)"""
 
     streetFoodLoader = html_streetfood_loader.Loader("de", startOfWeek, meatDetector)
 
     for mensa in streetFoodLoader.getAvailableMensas():
         insert_mensa(mensa, db)
-        insert_all(streetFoodLoader.getMenusForMensa(mensa), db)
+        items = streetFoodLoader.getMenusForMensa(mensa)
+        print("items: " + str(len(items)))
+        insert_all(items, db)
     time.sleep(5)
 
     streetFoodLoader = html_streetfood_loader.Loader("en", startOfWeek, meatDetector)
