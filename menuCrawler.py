@@ -85,6 +85,7 @@ def loadAllMensasForWeek(mydb, today):
     :return: void
     """
 
+    deleteMenusBeforeGivenDate(str(today + timedelta(days = 7)), mydb)
     print("-----------------starting script at: " + str(today) + "----------------------------")
 
     # Gets the start of the actual week.
