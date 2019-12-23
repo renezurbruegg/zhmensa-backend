@@ -272,6 +272,18 @@ class Loader(CustomLoader):
     def getMenusForMensa(self, mensaEntry: CustomMensaEntry) -> List[CustomMenu]:
         mensaName = mensaEntry.name
         list = []
+
+        times = [{'from' : "16.09.2019", 'to':'20.12.2019'}]
+        found = False
+        todayStr = str(self.basedate)
+        for time in times:
+            if(time['from'] < todayStr and time['to'] >= todayStr):
+                found = True
+        if found:
+            print("Found semester opening that matches current date")
+        else:
+            return list
+
         for menu in self.parser.menus:
             if menu.mensa == mensaName:
                 menu.origin = "ETH-Streetfood"
@@ -295,3 +307,6 @@ class Loader(CustomLoader):
 
         self.parser = self.MyHTMLParser(lang, basedate, "16.09", "20.12", meatDetector)
         self.parser.feed(req.text)
+        self.basedate = basedate;
+        print(basedate)
+
