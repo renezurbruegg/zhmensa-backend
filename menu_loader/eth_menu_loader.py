@@ -55,7 +55,6 @@ class Loader:
     def loadEthMensaForParams(self, lang, basedate, dayOffset, type, dayOfWeek):
         list = [];
         for entry in mensas:
-            print("loading mensa: " + str(entry))
             list.extend(self. loadEthMensaForParamsWithId(lang, basedate, dayOffset, type, dayOfWeek, entry['id'], entry["cat"]))
         return list
 
