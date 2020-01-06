@@ -102,7 +102,6 @@ class Loader:
 
     def loadEthMensaForJson(self, mensa, day, lang, type, category="ETH-Zentrum"):
         list = []
-        print(mensa)
         name = mensa["mensa"]
 
         mensaCollection = self.db["mensas"]
