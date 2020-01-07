@@ -154,6 +154,10 @@ class Loader:
 
         pos = 0
         for meal in meals:
+            if meal["description"] == "" or meal["description"] == []:
+                print("description was empty. Going to skip meal")
+                continue
+
             allergens = meal["allergens"]
             allergen_arr = []
             for allergen in allergens:
