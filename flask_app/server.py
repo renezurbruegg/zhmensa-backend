@@ -16,6 +16,7 @@ from flask_cors import CORS
 from flask_jwt_simple import (
     JWTManager
 )
+import collections
 from pylogging import HandlerType, setup_logger
 from pymongo import MongoClient
 
@@ -597,12 +598,12 @@ def loadDayIntoMensaMap(date, db, mensaMap, lang):
 
 def getEmptyMensaMapFromDb(db, category):
     """ creates an empty mensa map containing empty mensa objects for each menesa"""
-    mensaMap = {}
+    mensaMap = collections.OrderedDict();
     filter = {}
     if(category != "all"):
         filter= {"category": category}
 
-    for mensa in db["mensas"].find(filter):
+    for mensa in db["mensas"].find(filter).sort( "name", 1):
         mensaMap[mensa["name"]] = Mensa(mensa)
 
     return mensaMap
@@ -650,4 +651,5 @@ def loadMensaMapForGivenDatesFromDb(db, datesList, mensaMap, lang="de", category
     for mDate in datesList:
         print("loading menus for date:" + str(mDate))
         loadDayIntoMensaMap(mDate, db, mensaMap, lang)
+
     return mensaMap
