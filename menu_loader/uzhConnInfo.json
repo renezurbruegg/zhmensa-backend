@@ -189,5 +189,15 @@
       "address":"Lagerstrasse 10, CH-8004 Z\u00fcrich",
       "lat": 47.377260,
       "lng": 8.534030
-   }
+   }, {
+     "id": 333,
+     "mensa": "ZHDK Toni-Areal",
+     "mealType": "lunch",
+     "category": "others",
+      "meal_openings":null,
+      "opening":null,
+      "address":"Pfingstweidstrasse 96, 8005 Z\u00fcrich",
+      "lat": 47.390773,
+      "lng": 8.512347
+  }
 ]
