@@ -1,0 +1,83 @@
+{
+
+   "Polysnack": {
+      "address":"Gebäude HG F 32\nRämistrasse 101\n8092 Zürich",
+      "lat": 47.37642,
+      "lng": 8.54799
+   },
+   "Clausiusbar":{
+      "address":"Gebäude CLA D 5\nTannenstrasse 3\n8092 Zürich\n",
+      "lat": 47.377725,
+      "lng": 8.546896
+   },
+   "Dozentenfoyer":{
+      "address":"Gebäude HG K 30.5\nRämistrasse 101\n8092 Zürich\n",
+      "lat": 47.37642,
+      "lng": 8.54799
+   },
+   "food&lab":{
+      "address":"Gebäude CAB H 47.3\nUniversitätsstrasse 6\n8092 Zürich\n",
+      "lat": 47.37836,
+      "lng": 8.54872
+   },
+   "Foodtrailer ETZ":{
+      "address":"Gebäude ETZ 60.0031\nGloriastrasse 35\n8092 Zürich\n",
+      "lat": 47.37743,
+      "lng": 8.5529
+   },
+   "G-ESSbar":{
+      "address":"Gebäude IFW E 31\nHaldeneggsteig 4\n8092 Zürich\n",
+      "lat": 47.38038,
+      "lng": 8.54451
+   },
+   "Mensa Polyterrasse":{
+      "address":"Gebäude MM B 79\nLeonhardstrasse 34\n8092 Zürich\n",
+      "lat": 47.37655,
+      "lng": 8.54646
+   },
+   "Tannenbar":{
+      "address":"Gebäude ML E 23\nTannenstrasse 7\n8092 Zürich\n",
+      "lat": 47.377515,
+      "lng": 8.547891
+   },
+   "Alumni quattro Lounge":{
+      "address":"Gebäude HIL D 57.2\nStefano-​Franscini-​Platz 5\n8093 Zürich\n",
+      "lat": 47.408238,
+      "lng": 8.506741
+   },
+   "BELLAVISTA":{
+      "address":"\nHönggerbergring 47\n8093 Zürich\n",
+      "lat": 47.410424,
+      "lng": 8.509706
+   },
+   "food market - green day":{
+      "address":"Gebäude HPR D 70.1\nJoseph-​von-Deschwanden-Platz 1\n8093 Zürich\n",
+      "lat": 47.407943,
+      "lng": 8.509746
+   },
+   "food market - grill bbQ":{
+      "address":"Gebäude HPR D 70.1\nJoseph-​von-Deschwanden-Platz 1\n8093 Zürich\n",
+      "lat": 47.407943,
+      "lng": 8.509746
+   },
+   "food market - pizza pasta":{
+      "address":"Gebäude HPR D 70.1\nJoseph-​von-Deschwanden-Platz 1\n8093 Zürich\n",
+      "lat": 47.407943,
+      "lng": 8.509746
+   },
+   "FUSION meal":{
+      "address":"Gebäude HCI F 5\nVladimir-​Prelog-Weg 10 1\n8093 Zürich\n",
+      "lat": 47.407687,
+      "lng": 8.507744
+   },
+   "FUSION coffee":{
+      "address":"Gebäude HCI F 5\nVladimir-​Prelog-Weg 10 1\n8093 Zürich\n",
+      "lat": 47.407687,
+      "lng": 8.507744
+   },
+   "Rice Up!":{
+      "address":"Gebäude HIT E 31\nWolfgang-​Pauli-Strasse 27\n8093 Zürich\n",
+      "lat": 47.410282,
+      "lng": 8.508394
+   }
+}

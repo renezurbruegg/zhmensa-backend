@@ -1,36 +1,27 @@
 # !/usr/bin/env python
 # -*- coding: utf-8 -*-
 """Entry point for the server application."""
-import threading
-from bson.objectid import ObjectId
 import json
 import logging
-from pylogging import HandlerType, setup_logger
-import time
-from datetime import date
 import os
-import requests
-import sys
-from datetime import date
-from html.parser import HTMLParser
-import feedparser
-
-
-from flask_cors import CORS
-from pymongo import MongoClient
-from .config import CONFIG
 import traceback
-from flask import request, jsonify, current_app, Flask
-from flask_jwt_simple import (
-    JWTManager, jwt_required, create_jwt, get_jwt_identity
-)
-
-from .http_codes import Status
-from flask import make_response
-
+from datetime import date
 from datetime import timedelta, datetime
 from functools import update_wrapper
 
+from bson.objectid import ObjectId
+from flask import make_response
+from flask import request, current_app, Flask
+from flask_cors import CORS
+from flask_jwt_simple import (
+    JWTManager
+)
+import collections
+from pylogging import HandlerType, setup_logger
+from pymongo import MongoClient
+
+from .config import CONFIG
+from .http_codes import Status
 
 logger = logging.getLogger(__name__)
 setup_logger(log_directory='./logs', file_handler_type=HandlerType.ROTATING_FILE_HANDLER, allow_console_logging = True, console_log_level  = logging.DEBUG, max_file_size_bytes = 1000000)
@@ -505,6 +496,11 @@ class Mensa:
         self.openings = jsonObject["openings"]
         self.category = jsonObject["category"]
         self.isClosed = jsonObject["isClosed"]
+        self.location = {
+            "address": jsonObject.get("address"),
+            "lat": jsonObject.get("lat"),
+            "lng": jsonObject.get("lng"),
+        }
 
 
     def setWeek(self, date):
@@ -580,11 +576,9 @@ class Menu:
         self.date = menuDbObject["date"]
         self.nutritionFacts = menuDbObject["nutritionFacts"]
         self.meta = {}
-        if("link" in menuDbObject):
+
+        if "link" in menuDbObject:
             self.meta["link"] = menuDbObject["link"]
-
-
-
 
 def loadDayIntoMensaMap(date, db, mensaMap, lang):
     """Adds all Menus for the given date to the mensa Map"""
@@ -604,12 +598,12 @@ def loadDayIntoMensaMap(date, db, mensaMap, lang):
 
 def getEmptyMensaMapFromDb(db, category):
     """ creates an empty mensa map containing empty mensa objects for each menesa"""
-    mensaMap = {}
+    mensaMap = collections.OrderedDict();
     filter = {}
     if(category != "all"):
         filter= {"category": category}
 
-    for mensa in db["mensas"].find(filter):
+    for mensa in db["mensas"].find(filter).sort( "name", 1):
         mensaMap[mensa["name"]] = Mensa(mensa)
 
     return mensaMap
@@ -657,4 +651,5 @@ def loadMensaMapForGivenDatesFromDb(db, datesList, mensaMap, lang="de", category
     for mDate in datesList:
         print("loading menus for date:" + str(mDate))
         loadDayIntoMensaMap(mDate, db, mensaMap, lang)
+
     return mensaMap
