@@ -313,7 +313,14 @@ UZHConnectionDefinitions = [
      "category": "others",
      "meal_openings": None,
      "opening": None
-   }
+  }, {
+     "id": 333,
+     "mensa": "ZHDK Toni-Areal",
+     "mealType": "lunch",
+     "category": "others",
+     "meal_openings": None,
+     "opening": None
+  }
 ]
 
 
