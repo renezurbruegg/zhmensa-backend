@@ -1,6 +1,7 @@
 # !/usr/bin/env python
 # -*- coding: utf-8 -*-
 """ Loads different Menus from ETH and UZH and stores them in MongoDB"""
+import json
 import logging
 import pickle
 import time
@@ -8,6 +9,7 @@ from datetime import date, datetime
 from datetime import timedelta
 
 import feedparser
+import requests
 from pylogging import HandlerType, setup_logger
 from pymongo import MongoClient
 
@@ -43,40 +45,6 @@ def insert(dictObject, db):
     else:
         print("res: inserted")
 
-
-def loadUZHMensa(baseDate, uzhConnectionInfo, db):
-    """ Loads all meals for all days of the given uzh connection info. <br>
-     Stores the resulting mensa in the mensaMapping object."""
-
-    name = uzhConnectionInfo["mensa"]
-    mensaCollection = db["mensas"]
-
-    if mensaCollection.count_documents({"name": name}, limit=1) == 0:
-        print("Found new mensa - " + str(name.encode('utf-8')))
-        mensaCollection.insert_one(
-            {"name": name, "category": uzhConnectionInfo["category"], "openings": uzhConnectionInfo["opening"],
-             "isClosed": True, "address": uzhConnectionInfo["address"], "lat": uzhConnectionInfo["lat"], "lng": uzhConnectionInfo["lng"]})
-
-    try:
-        for day in range(1, 6):
-            for menu in uzh_loader.loadUZHMensaForDay(uzhConnectionInfo, baseDate + timedelta(days=day - 1), day, "de",
-                                                      db):
-                insert(menu, db)
-            for menu in uzh_loader.loadUZHMensaForDay(uzhConnectionInfo, baseDate + timedelta(days=day - 1), day, "en",
-                                                      db):
-                insert(menu, db)
-
-        mensaCollection.update_one({"name": name}, {
-            "$set": {"name": name, "category": uzhConnectionInfo["category"], "openings": uzhConnectionInfo["opening"],
-                     "isClosed": False,  "address": uzhConnectionInfo["address"], "lat": uzhConnectionInfo["lat"], "lng": uzhConnectionInfo["lng"]}}, upsert=True)
-
-    except uzh_loader.MensaClosedException:
-        mensaCollection.update_one({"name": name}, {
-            "$set": {"name": name, "category": uzhConnectionInfo["category"], "openings": uzhConnectionInfo["opening"],
-                     "isClosed": True,  "address": uzhConnectionInfo["address"], "lat": uzhConnectionInfo["lat"], "lng": uzhConnectionInfo["lng"]}}, upsert=True)
-        print("Got Mensa Closed exception for Mensa: " + str(name.encode('utf-8')))
-
-
 def loadAllMensasForWeek(mydb, today):
     """
     Loads all Mensas for the current week (or next week if day is saturday / sunday) and stores it into the mensas, menus collection from the provided db
@@ -100,7 +68,7 @@ def loadAllMensasForWeek(mydb, today):
                 connDef["mensa"].encode('utf-8')))
             i = i + 1
             try:
-                loadUZHMensa(startOfWeek, connDef, mydb)
+                uzh_loader.loadUZHMensa(startOfWeek, connDef, mydb)
             except RuntimeError as e:
                 logger.error(e)
     else:
@@ -302,19 +270,12 @@ def bruteforce():
     :return: void
     """
     print("bruteforce started")
-    for i in range(0, 1000):
+    for i in range(0, 100):
         try:
-            apiUrl = "https://zfv.ch/de/menus/rssMenuPlan?type=uzh2&menuId=" + str(i) + "&dayOfWeek=1"
-            mensaFeed = feedparser.parse(apiUrl)
+            None;
         except ConnectionError:
             print("error")
             continue
-
-        if 0 != len(mensaFeed.entries):
-            entry = mensaFeed.entries[0]
-            print(str(i) + " : " + entry["title"])
-        else:
-            print(str(i) + " : - - -")
 
 
 def main():
