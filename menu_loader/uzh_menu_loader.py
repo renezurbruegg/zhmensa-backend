@@ -208,13 +208,17 @@ def loadUZHMensa(baseDate, uzhConnectionInfo, db):
     name = uzhConnectionInfo["mensa"]
 
     mensaCollection = db["mensas"]
-    opening = uzhConnectionInfo["opening"]
-    opening['type'] = "opening"
+    open = uzhConnectionInfo["opening"]
+    open['type'] = "opening"
+
+    opening = [open]
+
 
     if (mensaCollection.count_documents({"name": name}, limit=1) == 0):
         print("Found new mensa - " + str(name.encode('utf-8')))
+        print("opemning:" + str(opening))
         mensaCollection.insert_one(
-            {"name": name, "category": uzhConnectionInfo["category"], "openings": [opening],
+            {"name": name, "category": uzhConnectionInfo["category"], "openings": opening,
              "isClosed": True})
 
     try:
