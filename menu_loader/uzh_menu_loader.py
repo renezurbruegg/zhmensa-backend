@@ -208,10 +208,13 @@ def loadUZHMensa(baseDate, uzhConnectionInfo, db):
     name = uzhConnectionInfo["mensa"]
 
     mensaCollection = db["mensas"]
+    opening = uzhConnectionInfo["opening"]
+    opening['type'] = "opening"
+
     if (mensaCollection.count_documents({"name": name}, limit=1) == 0):
         print("Found new mensa - " + str(name.encode('utf-8')))
         mensaCollection.insert_one(
-            {"name": name, "category": uzhConnectionInfo["category"], "openings": uzhConnectionInfo["opening"],
+            {"name": name, "category": uzhConnectionInfo["category"], "openings": opening,
              "isClosed": True})
 
     try:
@@ -220,12 +223,12 @@ def loadUZHMensa(baseDate, uzhConnectionInfo, db):
             loadUZHMensaForDay(uzhConnectionInfo, baseDate + timedelta(days=day - 1), day, "en", db)
 
         mensaCollection.update_one({"name": name}, {
-            "$set": {"name": name, "category": uzhConnectionInfo["category"], "openings": uzhConnectionInfo["opening"],
+            "$set": {"name": name, "category": uzhConnectionInfo["category"], "openings": opening,
                      "isClosed": False}}, upsert=True)
 
     except MensaClosedException:
         mensaCollection.update_one({"name": name}, {
-            "$set": {"name": name, "category": uzhConnectionInfo["category"], "openings": uzhConnectionInfo["opening"],
+            "$set": {"name": name, "category": uzhConnectionInfo["category"], "openings": opening,
                      "isClosed": True}}, upsert=True)
         print("Got Mensa Closed exception for Mensa: " + str(name.encode('utf-8')))
 
@@ -267,10 +270,10 @@ def loadUZHMensaForUrl(uzhConnectionInfo, apiUrl, db, lang, date):
     mealType = uzhConnectionInfo["mealType"]
 
     entry = uzhConnectionInfo["meal_openings"]
+    if entry is None:
+        entry = {"from": None, "to": None}
 
-    if (entry == None):
-        entry = {"from": None, "to": None, "type": mealType}
-
+    entry['type'] = mealType
     entry["mensa"] = mensaName
 
     db["mealtypes"].update_one(
