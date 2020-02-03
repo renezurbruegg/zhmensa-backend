@@ -213,7 +213,7 @@ def loadUZHMensa(baseDate, uzhConnectionInfo, db):
 
     if open is not None:
         open['type'] = 'opening'
-        opening = open
+        opening = [open]
     else:
         opening = None
 
