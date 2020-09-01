@@ -205,35 +205,42 @@ def insert(dictObject, db):
 def loadUZHMensa(baseDate, uzhConnectionInfo, db):
     """ Loads all meals for all days of the given uzh connection info. <br>
      Stores the resulting mensa in the mensaMapping object."""
+
     name = uzhConnectionInfo["mensa"]
-
     mensaCollection = db["mensas"]
+
     open = uzhConnectionInfo["opening"]
-    open['type'] = "opening"
 
-    opening = [open]
+    if open is not None:
+        open['type'] = 'opening'
+        opening = [open]
+    else:
+        opening = None
 
 
-    if (mensaCollection.count_documents({"name": name}, limit=1) == 0):
+    if mensaCollection.count_documents({"name": name}, limit=1) == 0:
         print("Found new mensa - " + str(name.encode('utf-8')))
-        print("opemning:" + str(opening))
         mensaCollection.insert_one(
             {"name": name, "category": uzhConnectionInfo["category"], "openings": opening,
-             "isClosed": True})
+             "isClosed": True, "address": uzhConnectionInfo["address"], "lat": uzhConnectionInfo["lat"], "lng": uzhConnectionInfo["lng"]})
 
     try:
         for day in range(1, 6):
-            loadUZHMensaForDay(uzhConnectionInfo, baseDate + timedelta(days=day - 1), day, "de", db)
-            loadUZHMensaForDay(uzhConnectionInfo, baseDate + timedelta(days=day - 1), day, "en", db)
+            for menu in loadUZHMensaForDay(uzhConnectionInfo, baseDate + timedelta(days=day - 1), day, "de",
+                                                      db):
+                insert(menu, db)
+            for menu in loadUZHMensaForDay(uzhConnectionInfo, baseDate + timedelta(days=day - 1), day, "en",
+                                                      db):
+                insert(menu, db)
 
         mensaCollection.update_one({"name": name}, {
             "$set": {"name": name, "category": uzhConnectionInfo["category"], "openings": opening,
-                     "isClosed": False}}, upsert=True)
+                     "isClosed": False,  "address": uzhConnectionInfo["address"], "lat": uzhConnectionInfo["lat"], "lng": uzhConnectionInfo["lng"]}}, upsert=True)
 
     except MensaClosedException:
         mensaCollection.update_one({"name": name}, {
             "$set": {"name": name, "category": uzhConnectionInfo["category"], "openings": opening,
-                     "isClosed": True}}, upsert=True)
+                     "isClosed": True,  "address": uzhConnectionInfo["address"], "lat": uzhConnectionInfo["lat"], "lng": uzhConnectionInfo["lng"]}}, upsert=True)
         print("Got Mensa Closed exception for Mensa: " + str(name.encode('utf-8')))
 
 

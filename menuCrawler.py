@@ -45,6 +45,40 @@ def insert(dictObject, db):
     else:
         print("res: inserted")
 
+
+def loadUZHMensa(baseDate, uzhConnectionInfo, db):
+    """ Loads all meals for all days of the given uzh connection info. <br>
+     Stores the resulting mensa in the mensaMapping object."""
+
+    name = uzhConnectionInfo["mensa"]
+    mensaCollection = db["mensas"]
+
+    if mensaCollection.count_documents({"name": name}, limit=1) == 0:
+        print("Found new mensa - " + str(name.encode('utf-8')))
+        mensaCollection.insert_one(
+            {"name": name, "category": uzhConnectionInfo["category"], "openings": uzhConnectionInfo["opening"],
+             "isClosed": True, "address": uzhConnectionInfo["address"], "lat": uzhConnectionInfo["lat"], "lng": uzhConnectionInfo["lng"]})
+
+    try:
+        for day in range(1, 6):
+            for menu in uzh_loader.loadUZHMensaForDay(uzhConnectionInfo, baseDate + timedelta(days=day - 1), day, "de",
+                                                      db):
+                insert(menu, db)
+            for menu in uzh_loader.loadUZHMensaForDay(uzhConnectionInfo, baseDate + timedelta(days=day - 1), day, "en",
+                                                      db):
+                insert(menu, db)
+
+        mensaCollection.update_one({"name": name}, {
+            "$set": {"name": name, "category": uzhConnectionInfo["category"], "openings": uzhConnectionInfo["opening"],
+                     "isClosed": False,  "address": uzhConnectionInfo["address"], "lat": uzhConnectionInfo["lat"], "lng": uzhConnectionInfo["lng"]}}, upsert=True)
+
+    except uzh_loader.MensaClosedException:
+        mensaCollection.update_one({"name": name}, {
+            "$set": {"name": name, "category": uzhConnectionInfo["category"], "openings": uzhConnectionInfo["opening"],
+                     "isClosed": True,  "address": uzhConnectionInfo["address"], "lat": uzhConnectionInfo["lat"], "lng": uzhConnectionInfo["lng"]}}, upsert=True)
+        print("Got Mensa Closed exception for Mensa: " + str(name.encode('utf-8')))
+
+
 def loadAllMensasForWeek(mydb, today):
     """
     Loads all Mensas for the current week (or next week if day is saturday / sunday) and stores it into the mensas, menus collection from the provided db
